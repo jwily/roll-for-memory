@@ -29,7 +29,10 @@ function LoginFormPage() {
     return (
         <form onSubmit={handleSubmit}>
             <ul>
-                {/* What's the idx doing here? */}
+                {/*
+                What's the idx doing here?
+                Oh cool, you can access the element index like that.
+                */}
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}
             </ul>
             <label>
