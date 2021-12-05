@@ -17,6 +17,7 @@ function SignupFormPage() {
     if (sessionUser) return <Redirect to="/" />;
 
     const handleSubmit = (e) => {
+        // This needs to change to accomodate other errors
         e.preventDefault();
         if (password === confirmPassword) {
             setErrors([]);
