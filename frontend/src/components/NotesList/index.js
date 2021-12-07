@@ -17,7 +17,6 @@ const NotesList = () => {
         dispatch(getNotes())
     }, [dispatch])
 
-
     // Make the NavLink in here its own component
     return (
         <div className='notes-list'>
