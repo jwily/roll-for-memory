@@ -1,5 +1,6 @@
 import React from 'react';
 import './SideNav.css'
+import { Route } from 'react-router';
 
 const SideNav = () => {
     return (

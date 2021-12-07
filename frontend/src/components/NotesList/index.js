@@ -1,21 +1,17 @@
 import React, { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { getNotes } from '../../store/notes';
+// import { getNotes } from '../../store/notes';
 
 import './NotesList.css';
 
 const NotesList = () => {
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
     // const user = useSelector(state => state.session.user);
     const notes = useSelector(state => state.notes);
     // console.log(user);
     console.log(notes);
-
-    useEffect(() => {
-        dispatch(getNotes())
-    }, [dispatch])
 
     // Make the NavLink in here its own component
     return (

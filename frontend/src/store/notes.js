@@ -16,7 +16,7 @@ export const getNotes = () => async (dispatch) => {
 
 const sortByUpdated = (list) => {
     return list.sort((noteA, noteB) => {
-        return noteB.updatedAt - noteA.updateAt;
+        return new Date(noteB.updatedAt) - new Date(noteA.updatedAt);
     }).map((note) => note.id);
 }
 
