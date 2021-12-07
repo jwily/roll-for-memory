@@ -8,10 +8,7 @@ import './NotesList.css';
 const NotesList = () => {
     const dispatch = useDispatch();
 
-    // const user = useSelector(state => state.session.user);
     const notes = useSelector(state => state.notes);
-    // console.log(user);
-    console.log(notes);
 
     useEffect(() => {
         dispatch(getNotes())
