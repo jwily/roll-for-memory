@@ -23,11 +23,11 @@ if (process.env.NODE_ENV !== 'production') {
 
 function Root() {
   return (
-    <Provider store={store}>
-      <BrowserRouter>
-        <App />
+    <Provider store={store} className='height-100'>
+      <BrowserRouter className='height-100'>
+        <App className='height-100' />
       </BrowserRouter>
-    </Provider>
+    </Provider >
   )
 }
 
