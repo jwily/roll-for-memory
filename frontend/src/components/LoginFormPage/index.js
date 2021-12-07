@@ -27,34 +27,37 @@ function LoginFormPage() {
     }
 
     return (
-        <form onSubmit={handleSubmit} className='centered'>
-            <ul>
-                {/*
+        <div className='centered'>
+            <h2 className='title'>Roll For Memory</h2>
+            <form onSubmit={handleSubmit} className='login-form'>
+                <ul>
+                    {/*
                 What's the idx doing here?
                 Oh cool, you can access the element index like that.
                 */}
-                {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-            </ul>
-            <label>
-                Username or Email
-                <input
-                    type="text"
-                    value={credential}
-                    onChange={(e) => setCredential(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                Password
-                <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
-            </label>
-            <button type="submit">Log In</button>
-        </form>
+                    {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                </ul>
+                <label>
+                    Username or Email
+                    <input
+                        type="text"
+                        value={credential}
+                        onChange={(e) => setCredential(e.target.value)}
+                        required
+                    />
+                </label>
+                <label>
+                    Password
+                    <input
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
+                </label>
+                <button type="submit">Log In</button>
+            </form>
+        </div>
     );
 }
 
