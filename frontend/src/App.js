@@ -23,14 +23,13 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
-          <Route path="/login">
-            <LoginFormPage />
+          {/* Below will be the main display  */}
+          <Route exact path='/'>
+            {sessionUser ? <HomePage /> : <LoginFormPage />}
           </Route>
           <Route path="/signup">
             <SignupFormPage />
           </Route>
-          {/* Below will be the main display  */}
-          {sessionUser && <HomePage />}
         </Switch>
       )}
     </>
