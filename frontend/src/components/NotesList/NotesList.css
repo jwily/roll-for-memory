@@ -1,0 +1,4 @@
+.notesList {
+    display: flex;
+    flex-direction: column;
+}

@@ -1,11 +1,17 @@
 import React from 'react';
-// import { useSelector } from 'react-redux';
-// import
+import './HomePage.css'
 
-export const HomePage = () => {
+import SideNav from '../SideNav';
+import NotesList from '../NotesList';
+
+const HomePage = () => {
     return (
         <div className='homePage'>
+            <SideNav />
+            <NotesList />
             <h1>I'm Working!</h1>
         </div>
     )
 };
+
+export default HomePage;
