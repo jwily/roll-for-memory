@@ -6,7 +6,7 @@ import NotesList from '../NotesList';
 
 const HomePage = () => {
     return (
-        <div className='home-page'>
+        <div className='home-page centered' >
             <SideNav />
             <NotesList />
             <h1>I'm Working!</h1>

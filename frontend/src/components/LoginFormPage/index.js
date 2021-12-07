@@ -27,7 +27,7 @@ function LoginFormPage() {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className='centered'>
             <ul>
                 {/*
                 What's the idx doing here?

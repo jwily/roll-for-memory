@@ -23,9 +23,9 @@ if (process.env.NODE_ENV !== 'production') {
 
 function Root() {
   return (
-    <Provider store={store} className='height-100'>
-      <BrowserRouter className='height-100'>
-        <App className='height-100' />
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
       </BrowserRouter>
     </Provider >
   )
