@@ -4,15 +4,16 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 // import TitleInput from './TitleInput';
 
-const NoteDisplay = () => {
-    const notes = useSelector(state => state.notes);
+import './NoteDisplay.css';
 
-    const { bookId, noteId } = useParams('');
+const NoteDisplay = ({ notes }) => {
+    // const notes = useSelector(state => state.notes);
 
-    const [title, setTitle] = useState();
-    const [content, setContent] = useState();
-
+    const { noteId } = useParams('');
     const note = notes[noteId];
+
+    const [title, setTitle] = useState('');
+    const [content, setContent] = useState('');
 
     useEffect(() => {
         if (note) setTitle(note.name);
@@ -23,16 +24,16 @@ const NoteDisplay = () => {
     }, [note])
 
     return (
-        <div>
+        <div className='note-display'>
             <input
                 value={title}
-                id='note-title'
+                className='note-title'
                 onChange={(e) => setTitle(e.target.value)}
                 type='text'
             />
             <textarea
                 value={content}
-                id='note-content'
+                className='note-content'
                 onChange={(e) => setContent(e.target.value)}
             />
         </div>

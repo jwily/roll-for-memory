@@ -1,7 +1,8 @@
 import React from 'react';
-import './SideNav.css'
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+
+import './SideNav.css'
 
 const SideNav = () => {
 
