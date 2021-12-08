@@ -23,11 +23,6 @@ const HomePage = () => {
         dispatch(getNotebooks());
     }, [dispatch])
 
-    const notes = useSelector(state => state.notes);
-    const books = useSelector((state) => state.books);
-
-    console.log(notes, books);
-
     return (
         <div className='home-page centered'>
             <SideNav />
