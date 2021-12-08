@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as sessionActions from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -12,6 +12,13 @@ function LoginFormPage() {
     const [credential, setCredential] = useState('');
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState([]);
+    const [imgNum, setImgNum] = useState(0);
+
+    useEffect(() => {
+        setImgNum(Math.floor(Math.random() * 3));
+    }, [])
+
+    const images = ['grid', 'uldah', 'limsa'];
 
     if (sessionUser) return (
         <Redirect to="/" />
@@ -30,7 +37,7 @@ function LoginFormPage() {
     return (
         <div className='login-main centered'>
             <h2 className='title'>roll for memory</h2>
-            <div className='login-banner'></div>
+            <div className={`login-banner ${images[imgNum]}`}></div>
             <form onSubmit={handleSubmit} className='login-form'>
                 <ul>
                     {/*

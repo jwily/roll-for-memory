@@ -36,7 +36,19 @@
 .login-banner {
     height: 20em;
     width: 100%;
-    background-image: url('./images/limsa.jpg');
+    /* background-image: url('./images/limsa.jpg'); */
     background-position: 50% 40%;
     margin: 2.5em;
+}
+
+.limsa {
+    background-image: url('./images/limsa.jpg');
+}
+
+.uldah {
+    background-image: url('./images/grid.jpg');
+}
+
+.grid {
+    background-image: url('./images/uldah.jpg');
 }

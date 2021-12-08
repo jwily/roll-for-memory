@@ -11,6 +11,7 @@ import SideNav from '../SideNav';
 import NotesList from '../NotesList';
 import HomeNotesList from '../HomeNotesList';
 import NoteDisplay from '../NoteDisplay';
+import Navigation from '../Navigation';
 
 const HomePage = () => {
     const dispatch = useDispatch();
@@ -24,34 +25,37 @@ const HomePage = () => {
     }, [dispatch])
 
     return (
-        <div className='home-page centered'>
-            <SideNav />
-            <Switch>
-                <Route path='/notebooks/:bookId'>
-                    <NotesList />
-                </Route>
-                <Route path='/'>
-                    <HomeNotesList />
-                </Route>
-            </Switch>
-            <Switch>
-                <Route path='/notebooks/:bookId/notes/:noteId'>
-                    {<NoteDisplay />}
-                </Route>
-            </Switch>
-            <Switch>
-                <Route path='/notebooks/:bookId/'>
-                    <div>
-                        <p>Notebook</p>
-                    </div>
-                </Route>
-                <Route path='/'>
-                    <div>
-                        <p>Home</p>
-                    </div>
-                </Route>
-            </Switch>
-        </div>
+        <>
+            <Navigation />
+            <div className='home-page centered'>
+                <SideNav />
+                <Switch>
+                    <Route path='/notebooks/:bookId'>
+                        <NotesList />
+                    </Route>
+                    <Route path='/'>
+                        <HomeNotesList />
+                    </Route>
+                </Switch>
+                <Switch>
+                    <Route path='/notebooks/:bookId/notes/:noteId'>
+                        {<NoteDisplay />}
+                    </Route>
+                </Switch>
+                <Switch>
+                    <Route path='/notebooks/:bookId/'>
+                        <div>
+                            <p>Notebook</p>
+                        </div>
+                    </Route>
+                    <Route path='/'>
+                        <div>
+                            <p>Home</p>
+                        </div>
+                    </Route>
+                </Switch>
+            </div>
+        </>
     )
 };
 
