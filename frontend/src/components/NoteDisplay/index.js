@@ -1,20 +1,37 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
 // import TitleInput from './TitleInput';
 
-const NoteDisplay = () => {
-    const { bookId, noteId } = useParams();
+const NoteDisplay = ({ notes }) => {
+    const { bookId, noteId } = useParams('');
 
-    const [title, setTitle] = useState('');
+    const [title, setTitle] = useState();
+    const [content, setContent] = useState();
 
-    const notes = useSelector(state => state.notes);
     const note = notes[noteId];
+
+    useEffect(() => {
+        if (note) setTitle(note.name);
+    }, [note])
+
+    useEffect(() => {
+        if (note) setContent(note.content);
+    }, [note])
 
     return (
         <div>
-            <input />
+            <input
+                value={title}
+                id='note-title'
+                onChange={(e) => setTitle(e.target.value)}
+                type='text'
+            />
+            <textarea
+                value={content}
+                id='note-content'
+                onChange={(e) => setContent(e.target.value)}
+            />
         </div>
     )
 }

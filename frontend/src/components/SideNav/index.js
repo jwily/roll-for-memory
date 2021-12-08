@@ -3,13 +3,7 @@ import './SideNav.css'
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
-const SideNav = () => {
-
-    const books = useSelector((state) => state.books);
-
-    // if (!books.length) return null;
-
-    // console.log(books);
+const SideNav = ({ books }) => {
 
     return (
         <div className='side-nav'>
