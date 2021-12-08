@@ -16,11 +16,17 @@ const NoteDisplay = ({ notes }) => {
     const [content, setContent] = useState('');
 
     useEffect(() => {
-        if (note) setTitle(note.name);
+        if (note) {
+            if (note.name) setTitle(note.name);
+            else setTitle('Untitled');
+        }
     }, [note])
 
     useEffect(() => {
-        if (note) setContent(note.content);
+        if (note) {
+            if (note.content) setContent(note.content);
+            else setContent('Let your thoughts flow...');
+        }
     }, [note])
 
     return (
