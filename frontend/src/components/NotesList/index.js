@@ -13,9 +13,9 @@ const NotesList = () => {
 
     const { bookId } = useParams();
 
-    useEffect(() => {
-        if (!books[bookId]) history.push('/')
-    }, [bookId, books, history])
+    // useEffect(() => {
+    //     if (books && !books[bookId]) history.push('/')
+    // }, [bookId, books, history])
 
     // if (!notes) return null;
 

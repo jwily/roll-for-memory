@@ -17,9 +17,9 @@ const NoteDisplay = () => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
 
-    useEffect(() => {
-        if (!notes[noteId]) history.push('/')
-    }, [notes, noteId, history])
+    // useEffect(() => {
+    //     if (notes && !notes[noteId]) history.push('/')
+    // }, [notes, noteId, history])
 
     useEffect(() => {
         if (note) {

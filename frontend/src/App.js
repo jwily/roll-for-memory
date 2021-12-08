@@ -26,7 +26,6 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
-          {/* Below will be the main display  */}
           <Route path='/'>
             {sessionUser ? <HomePage /> : <LoginFormPage />}
           </Route>
