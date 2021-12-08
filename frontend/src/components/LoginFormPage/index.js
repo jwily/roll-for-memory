@@ -28,8 +28,9 @@ function LoginFormPage() {
     }
 
     return (
-        <div className='centered login-main'>
+        <div className='login-main centered'>
             <h2 className='title'>roll for memory</h2>
+            <div className='login-banner'></div>
             <form onSubmit={handleSubmit} className='login-form'>
                 <ul>
                     {/*
@@ -38,27 +39,33 @@ function LoginFormPage() {
                 */}
                     {errors.map((error, idx) => <li key={idx}>{error}</li>)}
                 </ul>
-                <label>
+                <label htmlFor='username'
+                    className='login-text'>
                     Username or Email
-                    <input
-                        type="text"
-                        value={credential}
-                        onChange={(e) => setCredential(e.target.value)}
-                        required
-                    />
                 </label>
-                <label>
+                <input
+                    className='login-input'
+                    id='username'
+                    type="text"
+                    value={credential}
+                    onChange={(e) => setCredential(e.target.value)}
+                    required
+                />
+                <label htmlFor='password'
+                    className='login-text'>
                     Password
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
                 </label>
-                <button type="submit">Log In</button>
+                <input
+                    className='login-input'
+                    id='password'
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                />
+                <button type="submit" className='login-button'>Log In</button>
             </form>
-        </div>
+        </div >
     );
 }
 

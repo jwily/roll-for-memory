@@ -1,13 +1,42 @@
 .title {
     display: flex;
     justify-content: center;
+    font-weight: bold;
+    color: whitesmoke;
+    font-family: 'Cormorant', serif;
+    font-size: 2.5em;
+}
+
+.login-text {
+    color: rgb(196, 196, 196);
+    margin: .5em;
+    font-weight: bold;
+}
+
+.login-input {
+    border: none;
+    text-align: center;
+    height: 2em;
 }
 
 .login-main {
-
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .login-form {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    width: 25%;
+}
+
+.login-banner {
+    height: 20em;
+    width: 100%;
+    background-image: url('./images/limsa.jpg');
+    background-position: 50% 40%;
+    margin: 2.5em;
 }

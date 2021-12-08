@@ -4,12 +4,13 @@
 
 * {
     box-sizing: border-box;
-    border: 1px solid rgb(151, 151, 151);
+    /* border: 1px solid rgb(151, 151, 151); */
     margin: 0;
 }
 
 body {
     font-family: 'M PLUS 2', sans-serif;
+    background-color: rgb(51, 48, 47);
 }
 
 /* h1, h2, h3, h4, h5, h6, a, ol, li, ul, div, span,

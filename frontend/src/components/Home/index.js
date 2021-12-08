@@ -38,13 +38,20 @@ const HomePage = () => {
                 <Route path='/notebooks/:bookId/notes/:noteId'>
                     {<NoteDisplay />}
                 </Route>
+            </Switch>
+            <Switch>
+                <Route path='/notebooks/:bookId/'>
+                    <div>
+                        <p>Notebook</p>
+                    </div>
+                </Route>
                 <Route path='/'>
                     <div>
-                        <p>Main</p>
+                        <p>Home</p>
                     </div>
                 </Route>
             </Switch>
-        </div >
+        </div>
     )
 };
 
