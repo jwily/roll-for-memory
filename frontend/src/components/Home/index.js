@@ -30,18 +30,18 @@ const HomePage = () => {
 
     return (
         <div className='home-page centered'>
-            <SideNav books={books} />
+            <SideNav />
             <Switch>
                 <Route path='/notebooks/:bookId'>
-                    <NotesList notes={notes} />
+                    <NotesList />
                 </Route>
                 <Route path='/'>
-                    <HomeNotesList notes={notes} />
+                    <HomeNotesList />
                 </Route>
             </Switch>
             <Switch>
                 <Route path='/notebooks/:bookId/notes/:noteId'>
-                    <NoteDisplay notes={notes} />
+                    <NoteDisplay />
                 </Route>
                 <Route path='/'>
                     <div>

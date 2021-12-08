@@ -4,9 +4,13 @@ import { useSelector } from 'react-redux';
 
 import './NotesList.css';
 
-const NotesList = ({ notes }) => {
+const NotesList = () => {
+
+    const notes = useSelector(state => state.notes);
 
     const { bookId } = useParams();
+
+    // if (!notes) return null;
 
     let filtered = bookId ? notes.notesOrder.filter(id => {
         return notes[id].notebookId === parseInt(bookId, 10);
