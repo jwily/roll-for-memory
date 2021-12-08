@@ -5,10 +5,12 @@ import { useDispatch } from 'react-redux';
 import { getNotes } from '../../store/notes';
 import { getNotebooks } from '../../store/notebooks';
 import { Switch, Route } from 'react-router-dom';
+// import { useState } from 'react';
 
 import SideNav from '../SideNav';
 import NotesList from '../NotesList';
 import HomeNotesList from '../HomeNotesList';
+import NoteDisplay from '../NoteDisplay';
 
 const HomePage = () => {
     const dispatch = useDispatch();
@@ -32,8 +34,17 @@ const HomePage = () => {
                     <HomeNotesList />
                 </Route>
             </Switch>
-            <h1>I'm Working!</h1>
-        </div>
+            <Switch>
+                <Route path='/notebooks/:bookId/notes/:noteId'>
+                    <NoteDisplay />
+                </Route>
+                <Route path='/'>
+                    <div>
+                        <p>Main</p>
+                    </div>
+                </Route>
+            </Switch>
+        </div >
     )
 };
 

@@ -10,6 +10,8 @@ const NotesList = () => {
 
     const notes = useSelector(state => state.notes);
 
+    // if (!notes.length) return null;
+
     let filtered = bookId ? notes.notesOrder.filter(id => {
         return notes[id].notebookId === parseInt(bookId, 10);
     }) : notes.notesOrder;
