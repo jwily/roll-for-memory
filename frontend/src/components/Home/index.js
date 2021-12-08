@@ -1,7 +1,7 @@
 import React from 'react';
 import './HomePage.css'
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { getNotes } from '../../store/notes';
 import { getNotebooks } from '../../store/notebooks';
 import { Switch, Route } from 'react-router-dom';
@@ -11,8 +11,9 @@ import SideNav from '../SideNav';
 import NotesList from '../NotesList';
 import HomeNotesList from '../HomeNotesList';
 import NoteDisplay from '../NoteDisplay';
+import Navigation from '../Navigation';
 
-const HomePage = () => {
+const HomePage = ({ isLoaded }) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -24,27 +25,35 @@ const HomePage = () => {
     }, [dispatch])
 
     return (
-        <div className='home-page centered'>
-            <SideNav />
-            <Switch>
-                <Route path='/notebooks/:bookId'>
-                    <NotesList />
-                </Route>
-                <Route path='/'>
-                    <HomeNotesList />
-                </Route>
-            </Switch>
-            <Switch>
-                <Route path='/notebooks/:bookId/notes/:noteId'>
-                    {<NoteDisplay />}
-                </Route>
-                <Route path='/'>
-                    <div>
-                        <p>Main</p>
-                    </div>
-                </Route>
-            </Switch>
-        </div >
+        <>
+            <Navigation isLoaded={isLoaded} />
+            <div className='home-page centered'>
+                <SideNav />
+                <Switch>
+                    <Route path='/notebooks/:bookId'>
+                        <NotesList />
+                    </Route>
+                    <Route path='/'>
+                        <HomeNotesList />
+                    </Route>
+                </Switch>
+                <Switch>
+                    <Route path='/notebooks/:bookId/notes/:noteId'>
+                        <NoteDisplay />
+                    </Route>
+                    <Route path='/notebooks/:bookId/'>
+                        <div>
+                            <p>Notebook</p>
+                        </div>
+                    </Route>
+                    <Route path='/'>
+                        <div>
+                            <p>Home</p>
+                        </div>
+                    </Route>
+                </Switch>
+            </div>
+        </>
     )
 };
 

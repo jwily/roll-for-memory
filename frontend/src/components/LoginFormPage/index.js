@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as sessionActions from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -12,6 +12,14 @@ function LoginFormPage() {
     const [credential, setCredential] = useState('');
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState([]);
+    const [imgNum, setImgNum] = useState(0);
+    const [errorsLoaded, setErrorsLoaded] = useState(false)
+
+    useEffect(() => {
+        setImgNum(Math.floor(Math.random() * 3));
+    }, [])
+
+    const images = ['grid', 'uldah', 'limsa'];
 
     if (sessionUser) return (
         <Redirect to="/" />
@@ -24,41 +32,48 @@ function LoginFormPage() {
             .catch(async (res) => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors);
+                setErrorsLoaded(true);
             });
     }
 
     return (
-        <div className='centered'>
-            <h2 className='title'>Roll For Memory</h2>
+        <div className='login-main centered'>
+            <h2 className='title'>roll for memory</h2>
+            <div className='sub-holder'>
+                {!errorsLoaded ?
+                    <span className='sub-title'>Dream your world. Plan your sessions. Roll for initiative.</span> :
+                    <span className='sub-title sub-error'>The provided credentials were invalid.</span>
+                }
+            </div>
+            <div className={`login-banner ${images[imgNum]}`}></div>
             <form onSubmit={handleSubmit} className='login-form'>
-                <ul>
-                    {/*
-                What's the idx doing here?
-                Oh cool, you can access the element index like that.
-                */}
-                    {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-                </ul>
-                <label>
+                <label htmlFor='username'
+                    className='login-text'>
                     Username or Email
-                    <input
-                        type="text"
-                        value={credential}
-                        onChange={(e) => setCredential(e.target.value)}
-                        required
-                    />
                 </label>
-                <label>
+                <input
+                    className='login-input'
+                    id='username'
+                    type="text"
+                    value={credential}
+                    onChange={(e) => setCredential(e.target.value)}
+                    required
+                />
+                <label htmlFor='password'
+                    className='login-text'>
                     Password
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
                 </label>
-                <button type="submit">Log In</button>
+                <input
+                    className='login-input'
+                    id='password'
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                />
+                <button type="submit" className='login-button'>Log In</button>
             </form>
-        </div>
+        </div >
     );
 }
 

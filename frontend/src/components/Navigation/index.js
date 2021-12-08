@@ -23,9 +23,9 @@ function Navigation({ isLoaded }) {
 
     return (
         <div className='navigation'>
-            <NavLink exact to="/" activeClassName="nav-home">Roll For Memory</NavLink>
+            <NavLink exact to="/" activeClassName="nav-home">roll for memory</NavLink>
             {isLoaded && (
-                sessionUser ? <ProfileButton user={sessionUser} /> : <NavLink to='/signup'> Sign Up!</NavLink>
+                sessionUser ? <ProfileButton user={sessionUser} /> : <NavLink to='/signup' activeClassName='nav-signup'>sign up</NavLink>
             )}
         </div>
     );

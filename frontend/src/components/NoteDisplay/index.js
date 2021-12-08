@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import './NoteDisplay.css';
 
 const NoteDisplay = () => {
+
     const notes = useSelector(state => state.notes);
 
     const { noteId } = useParams('');
@@ -14,6 +15,10 @@ const NoteDisplay = () => {
 
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
+
+    // useEffect(() => {
+    //     if (notes && !notes[noteId]) history.push('/')
+    // }, [notes, noteId, history])
 
     useEffect(() => {
         if (note) {

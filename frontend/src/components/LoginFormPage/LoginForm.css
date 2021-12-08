@@ -1,9 +1,94 @@
 .title {
     display: flex;
     justify-content: center;
+    font-weight: bold;
+    color: whitesmoke;
+    font-family: 'Cormorant', serif;
+    font-size: 2.75rem;
+    /* margin-bottom: .5rem; */
+    border-bottom: whitesmoke solid 1px;
+}
+
+.login-text {
+    color: rgb(196, 196, 196);
+    margin-bottom: .5rem;
+    font-weight: bold;
+}
+
+.login-input {
+    border: none;
+    text-align: center;
+    height: 2rem;
+    width: 12.5rem;
+    margin-bottom: .75rem;
+}
+
+.login-main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .login-form {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    width: 25%;
+}
+
+.sub-title {
+    font-family: 'Merriweather', serif;
+    /* font-size: 1rem; */
+}
+
+.sub-error {
+    color: rgb(236, 52, 19)
+}
+
+.sub-holder {
+    margin-top: .5rem;
+}
+
+.login-banner {
+    height: 20rem;
+    width: 100%;
+    /* background-image: url('./images/limsa.jpg'); */
+    background-position: 50% 40%;
+    margin-top: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.login-button {
+    background-color: rgb(51, 48, 47);
+    border: 2px solid rgb(200, 200, 200);
+    border-radius: 5px;
+    color: rgb(200, 200, 200);
+    height: 2.5rem;
+    margin-top: 1rem;
+    width: 5rem;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.login-button:hover {
+    filter: invert(.25);
+    cursor: pointer;
+}
+
+.login-button:active {
+    filter: invert(.75);
+    cursor: pointer;
+}
+
+.limsa {
+    background-image: url('./images/limsa.jpg');
+}
+
+.uldah {
+    background-image: url('./images/grid.jpg');
+}
+
+.grid {
+    background-image: url('./images/uldah.jpg');
 }
