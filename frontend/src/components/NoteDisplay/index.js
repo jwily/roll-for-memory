@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 // import TitleInput from './TitleInput';
@@ -7,7 +7,6 @@ import { useSelector } from 'react-redux';
 import './NoteDisplay.css';
 
 const NoteDisplay = () => {
-    const history = useHistory();
 
     const notes = useSelector(state => state.notes);
 

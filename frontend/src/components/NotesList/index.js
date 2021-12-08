@@ -1,15 +1,12 @@
 import React from 'react';
-import { NavLink, useParams, useHistory } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
 
 import './NotesList.css';
 
 const NotesList = () => {
-    const history = useHistory();
 
     const notes = useSelector(state => state.notes);
-    const books = useSelector(state => state.books);
 
     const { bookId } = useParams();
 

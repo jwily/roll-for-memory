@@ -3,6 +3,10 @@
     justify-content: center;
 }
 
+.login-main {
+
+}
+
 .login-form {
     display: flex;
     flex-direction: column;
