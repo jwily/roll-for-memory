@@ -29,7 +29,7 @@ function LoginFormPage() {
 
     return (
         <div className='centered'>
-            <h2 className='title'>Roll For Memory</h2>
+            <h2 className='title'>roll for memory</h2>
             <form onSubmit={handleSubmit} className='login-form'>
                 <ul>
                     {/*
