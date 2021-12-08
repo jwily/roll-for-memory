@@ -41,7 +41,7 @@ const HomePage = () => {
             </Switch>
             <Switch>
                 <Route path='/notebooks/:bookId/notes/:noteId'>
-                    {<NoteDisplay notes={notes} />}
+                    {<NoteDisplay />}
                 </Route>
                 <Route path='/'>
                     <div>

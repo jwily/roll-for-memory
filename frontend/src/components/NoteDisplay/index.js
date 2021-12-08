@@ -6,8 +6,8 @@ import { useSelector } from 'react-redux';
 
 import './NoteDisplay.css';
 
-const NoteDisplay = ({ notes }) => {
-    // const notes = useSelector(state => state.notes);
+const NoteDisplay = () => {
+    const notes = useSelector(state => state.notes);
 
     const { noteId } = useParams('');
     const note = notes[noteId];
