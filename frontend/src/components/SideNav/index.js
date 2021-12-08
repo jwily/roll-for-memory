@@ -1,14 +1,22 @@
 import React from 'react';
 import './SideNav.css'
+import { useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 
 const SideNav = () => {
+
+    const books = useSelector((state) => state.books);
+
     return (
         <div className='side-nav'>
             <h2>SideNav</h2>
-            <p>Link 1</p>
-            <p>Link 2</p>
-            <p>Link 3</p>
-        </div>
+            <NavLink exact to='/'>Home</NavLink>
+            {
+                books.booksOrder.map((id, idx) => {
+                    return <NavLink key={idx} to={`/notebooks/${id}`}>{books[id].name}</NavLink>
+                })
+            }
+        </div >
     )
 }
 

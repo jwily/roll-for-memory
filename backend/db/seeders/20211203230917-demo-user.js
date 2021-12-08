@@ -1,5 +1,5 @@
 'use strict';
-const faker = require('faker');
+// const faker = require('faker');
 const bcrypt = require('bcryptjs');
 
 module.exports = {
@@ -8,15 +8,26 @@ module.exports = {
       {
         email: 'liberi@fatali.com',
         username: 'SquallLeonhart',
-        hashedPassword: bcrypt.hashSync('whatever')
+        hashedPassword: bcrypt.hashSync('whatever'),
+        createdAt: new Date(),
+        updatedAt: new Date()
       }
     ], {});
 
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+
     await queryInterface.bulkInsert('Notebooks', [
-      { name: 'The First Notebook', userId: 1, createdAt: new Date(), updatedAt: new Date() }
+      { name: 'The First Notebook', userId: 1, createdAt: new Date(), updatedAt: new Date() },
+      { name: 'Sessions', userId: 1, createdAt: new Date(), updatedAt: tomorrow }
     ], {})
 
     return await queryInterface.bulkInsert('Notes', [
+      { name: 'Next Session', content: null, userId: 1, notebookId: 2, createdAt: yesterday, updatedAt: yesterday },
+      { name: 'Last Session', content: 'What fun!', userId: 1, notebookId: 2, createdAt: yesterday, updatedAt: tomorrow },
       { name: null, content: null, userId: 1, notebookId: 1, createdAt: new Date(), updatedAt: new Date() }
     ], {})
   },
