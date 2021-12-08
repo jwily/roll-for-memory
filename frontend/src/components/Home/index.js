@@ -13,7 +13,7 @@ import HomeNotesList from '../HomeNotesList';
 import NoteDisplay from '../NoteDisplay';
 import Navigation from '../Navigation';
 
-const HomePage = () => {
+const HomePage = ({ isLoaded }) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -26,7 +26,7 @@ const HomePage = () => {
 
     return (
         <>
-            <Navigation />
+            <Navigation isLoaded={isLoaded} />
             <div className='home-page centered'>
                 <SideNav />
                 <Switch>
@@ -39,10 +39,8 @@ const HomePage = () => {
                 </Switch>
                 <Switch>
                     <Route path='/notebooks/:bookId/notes/:noteId'>
-                        {<NoteDisplay />}
+                        <NoteDisplay />
                     </Route>
-                </Switch>
-                <Switch>
                     <Route path='/notebooks/:bookId/'>
                         <div>
                             <p>Notebook</p>
