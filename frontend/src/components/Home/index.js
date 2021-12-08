@@ -1,7 +1,7 @@
 import React from 'react';
 import './HomePage.css'
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { getNotes } from '../../store/notes';
 import { getNotebooks } from '../../store/notebooks';
 import { Switch, Route } from 'react-router-dom';

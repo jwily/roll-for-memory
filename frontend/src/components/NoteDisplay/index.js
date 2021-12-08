@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 // import TitleInput from './TitleInput';
@@ -7,6 +7,8 @@ import { useSelector } from 'react-redux';
 import './NoteDisplay.css';
 
 const NoteDisplay = () => {
+    const history = useHistory();
+
     const notes = useSelector(state => state.notes);
 
     const { noteId } = useParams('');
@@ -14,6 +16,10 @@ const NoteDisplay = () => {
 
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
+
+    useEffect(() => {
+        if (!notes[noteId]) history.push('/')
+    }, [notes, noteId, history])
 
     useEffect(() => {
         if (note) {
