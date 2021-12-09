@@ -33,34 +33,41 @@ const NoteDisplay = () => {
         }
     }, [note])
 
-    const titleSave = (e) => {
+    const titleSave = () => {
         const payload = { noteId: note.id, name: title };
         dispatch(editNote(payload))
     }
 
     const contentSave = (e) => {
-        const payload = { noteId: note.id, content };
+        const payload = { noteId: note.id, content: e.target.value };
         dispatch(editNote(payload))
     }
+
+    const delay = (ms) => {
+        return new Promise((resolve, reject) => {
+            setTimeout(resolve, ms);
+        })
+    };
 
     const autoSave = (e) => {
         setSaving(true);
         console.log('Saving...')
         if (!saving) {
-            setTimeout(() => {
-                setSaving(false);
-                console.log('Saved!');
-            }, 3000)
+            delay(2500).then(() => {
+                setSaving(false)
+                contentSave(e)
+                console.log('Saved!')
+            })
         }
     }
 
-    const contentChange = (e) => {
-        setContent(e.target.value);
-    }
+    // const contentChange = (e) => {
+    //     setContent(e.target.value);
+    // }
 
     const handleContentChange = (e) => {
         setContent(e.target.value);
-        autoSave();
+        autoSave(e);
         return;
     }
 
@@ -83,7 +90,7 @@ const NoteDisplay = () => {
                     <textarea
                         value={content}
                         className='note-content'
-                        onChange={contentChange}
+                        onChange={handleContentChange}
                     />
                 </div>
             </>
