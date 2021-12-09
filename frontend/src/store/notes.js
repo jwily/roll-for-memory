@@ -23,7 +23,6 @@ export const getNotes = () => async (dispatch) => {
 }
 
 export const editNote = (payload) => async (dispatch) => {
-    console.log(payload);
 
     const response = await csrfFetch(`/api/notes/${payload.noteId}`, {
         method: 'PUT',
@@ -37,19 +36,7 @@ export const editNote = (payload) => async (dispatch) => {
     }
 }
 
-const sortByUpdated = (list) => {
-    return list.sort((noteA, noteB) => {
-        return new Date(noteB.updatedAt) - new Date(noteA.updatedAt);
-    }).map((note) => note.id);
-}
-
-const sortOnEdit = (obj, list) => {
-    return list.sort((idA, idB) => {
-        return new Date(obj[idB].updatedAt) - new Date(obj[idA].updatedAt);
-    });
-}
-
-const initialState = { notesOrder: [] };
+const initialState = {};
 
 const notesReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -61,7 +48,6 @@ const notesReducer = (state = initialState, action) => {
             return {
                 ...allNotes,
                 ...state,
-                notesOrder: sortByUpdated(action.list)
             };
         case ADD_ONE:
             if (!state[action.note.id]) {
@@ -71,9 +57,6 @@ const notesReducer = (state = initialState, action) => {
                         ...action.note
                     }
                 }
-                const newOrder = [...newState.notesOrder];
-                newOrder.push(action.note.id);
-                newState.notesOrder = sortOnEdit(newState, newOrder);
                 return newState;
             }
             return {

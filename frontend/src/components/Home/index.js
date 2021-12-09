@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getNotes } from '../../store/notes';
 import { getNotebooks } from '../../store/notebooks';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import { useState } from 'react';
 
 import SideNav from '../SideNav';
@@ -32,23 +32,23 @@ const HomePage = ({ user, isLoaded }) => {
             <Navigation isLoaded={isLoaded} />
             <div className='home-page centered'>
                 <div className='hold-25'>
-                    <SideNav booksLoaded={booksLoaded} />
+                    {booksLoaded && <SideNav booksLoaded={booksLoaded} />}
                 </div>
                 <Switch>
                     <Route path='/notebooks/:bookId'>
                         <div className='hold-25'>
-                            <NotesList notesLoaded={notesLoaded} />
+                            {notesLoaded && <NotesList notesLoaded={notesLoaded} />}
                         </div>
                     </Route>
                     <Route path='/'>
                         <div className='hold-25'>
-                            <HomeNotesList notesLoaded={notesLoaded} />
+                            {notesLoaded && <HomeNotesList notesLoaded={notesLoaded} />}
                         </div>
                     </Route>
                 </Switch>
                 <Switch>
                     <Route path='/notebooks/:bookId/notes/:noteId'>
-                        <NoteDisplay notesLoaded={notesLoaded} />
+                        {notesLoaded && <NoteDisplay notesLoaded={notesLoaded} />}
                     </Route>
                     <Route path='/notebooks/:bookId/'>
                         <div className='note-display'>

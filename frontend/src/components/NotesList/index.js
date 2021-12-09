@@ -1,24 +1,27 @@
 import React from 'react';
-import { NavLink, useParams, Redirect } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+// import { useEffect } from 'react';
 
 import './NotesList.css';
 
-const NotesList = ({ notesLoaded }) => {
+const NotesList = () => {
+    // const history = useHistory();
 
     const notes = useSelector(state => state.notes);
+    // const books = useSelector(state => state.books);
 
     const { bookId } = useParams();
 
-    let filtered = bookId ? notes.notesOrder.filter(id => {
-        return notes[id].notebookId === parseInt(bookId, 10);
-    }) : notes.notesOrder;
+    const order = Object.values(notes).sort((noteA, noteB) => {
+        return new Date(noteB.updatedAt) - new Date(noteA.updatedAt);
+    }).map((note) => note.id);
 
     // Make the NavLink in here its own component
     return (
         <div className='notes-list'>
-            <h2>NOTES</h2>
-            {notesLoaded && filtered.map((id, idx) => {
+            <h2>Notes List</h2>
+            {order.map((id, idx) => {
                 return <NavLink key={idx} to={`/notebooks/${bookId}/notes/${id}`}>{notes[id].name || `Untitled`}</NavLink>
             })}
         </div>

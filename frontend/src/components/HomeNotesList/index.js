@@ -6,11 +6,15 @@ const HomeNotesList = ({ notesLoaded }) => {
 
     const notes = useSelector(state => state.notes);
 
+    const order = Object.values(notes).sort((noteA, noteB) => {
+        return new Date(noteB.updatedAt) - new Date(noteA.updatedAt);
+    }).map((note) => note.id);
+
     // Make the NavLink in here its own component
     return (
         <div className='notes-list'>
             <h2>NOTES</h2>
-            {notesLoaded && notes.notesOrder.map((id, idx) => {
+            {notesLoaded && order.map((id, idx) => {
                 const note = notes[id];
                 return <NavLink key={idx} to={`/notebooks/${note.notebookId}/notes/${id}`}>{note.name || `Untitled`}</NavLink>
             })}
