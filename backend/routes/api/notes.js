@@ -60,4 +60,15 @@ router.post(
     })
 );
 
+router.delete(
+    '/:id(\\d+)',
+    requireAuth,
+    asyncHandler(async (req, res) => {
+        const noteId = parseInt(req.params.id, 10);
+        const note = await Note.findByPk(noteId);
+        await Note.destroy(note);
+        res.json({ message: 'Note successfully deleted.' })
+    })
+)
+
 module.exports = router;
