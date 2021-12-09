@@ -9,10 +9,10 @@ const NotesList = () => {
     // const history = useHistory();
 
     const notes = useSelector(state => state.notes);
-    const books = useSelector(state => state.books);
+    // const books = useSelector(state => state.books);
 
     const { bookId } = useParams();
-    const bookName = books[bookId].name;
+    // const bookName = books[bookId].name;
 
     const notesArray = Object.values(notes).sort((noteA, noteB) => {
         return new Date(noteB.updatedAt) - new Date(noteA.updatedAt);
@@ -27,7 +27,6 @@ const NotesList = () => {
     // Make the NavLink in here its own component
     return (
         <div className='notes-list'>
-            <h2>{bookName.toUpperCase()}</h2>
             {order.map((id, idx) => {
                 return <NavLink key={idx} to={`/notebooks/${bookId}/notes/${id}`}>{notes[id].name || `Untitled`}</NavLink>
             })}

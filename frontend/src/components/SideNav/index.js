@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 
 import './SideNav.css'
 
-const SideNav = ({ booksLoaded }) => {
+const SideNav = () => {
 
     const books = useSelector(state => state.books);
 
@@ -12,7 +12,7 @@ const SideNav = ({ booksLoaded }) => {
         <div className='side-nav'>
             <h2>NOTEBOOKS</h2>
             <NavLink exact to='/'>Home</NavLink>
-            {booksLoaded &&
+            {
                 books.booksOrder.map((id, idx) => {
                     return <NavLink key={idx} to={`/notebooks/${id}`}>{books[id].name}</NavLink>
                 })
