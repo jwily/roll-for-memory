@@ -49,7 +49,7 @@ router.post(
             bookId
         } = req.body;
 
-        const note = Note.create({
+        const note = await Note.create({
             userId: req.user.id,
             notebookId: bookId,
             content: '',
