@@ -11,8 +11,6 @@ const SideNavDisplay = () => {
     const { bookId } = useParams();
     const book = useSelector((state) => state.books)[bookId];
 
-    console.log(book);
-
     const clickHandler = async () => {
         const note = await dispatch(createNote(book.id));
         history.push(`/notebooks/${book.id}/notes/${note.id}`);
