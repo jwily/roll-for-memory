@@ -37,7 +37,8 @@ const NoteDisplay = () => {
     }
 
     const contentSave = (e) => {
-
+        const payload = { noteId: note.id, content };
+        dispatch(editNote(payload))
     }
 
     return (
@@ -48,6 +49,7 @@ const NoteDisplay = () => {
                         value={title}
                         className='note-title'
                         onChange={(e) => setTitle(e.target.value)}
+                        onBlur={titleSave}
                         type='text'
                     />
                     <div className='note-buttons'>
