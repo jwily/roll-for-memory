@@ -34,26 +34,26 @@ const HomePage = ({ isLoaded }) => {
             <Navigation isLoaded={isLoaded} />
             <div className='home-page centered'>
                 <div className='hold-width'>
-                    {booksLoaded && <SideNav booksLoaded={booksLoaded} />}
+                    {booksLoaded && <SideNav />}
                 </div>
                 <Switch>
                     <Route path='/notebooks/:bookId'>
                         <div className='hold-width'>
-                            {booksLoaded && notesLoaded && <NotesList notesLoaded={notesLoaded} />}
+                            {notesLoaded && <NotesList />}
                         </div>
                     </Route>
                     <Route path='/'>
                         <div className='hold-width'>
-                            {notesLoaded && <HomeNotesList notesLoaded={notesLoaded} />}
+                            {notesLoaded && <HomeNotesList />}
                         </div>
                     </Route>
                 </Switch>
                 <Switch>
                     <Route path='/notebooks/:bookId/notes/:noteId'>
-                        {notesLoaded && <NoteDisplay notesLoaded={notesLoaded} />}
+                        {notesLoaded && <NoteDisplay />}
                     </Route>
                     <Route path='/notebooks/:bookId/'>
-                        {booksLoaded && <SideNavDisplay />}
+                        <SideNavDisplay />
                     </Route>
                     <Route path='/'>
                         <div className='note-display'>

@@ -36,6 +36,10 @@ function LoginFormPage() {
             });
     }
 
+    const demoLogin = (e) => {
+        dispatch(sessionActions.login({ credential: 'SquallLeonhart', password: 'whatever' }))
+    }
+
     return (
         <div className='login-main centered'>
             <h2 className='title'>roll for memory</h2>
@@ -46,7 +50,7 @@ function LoginFormPage() {
                 }
             </div>
             <div className={`login-banner ${images[imgNum]}`}></div>
-            <form onSubmit={handleSubmit} className='login-form'>
+            <form onSubmit={handleSubmit} className='login-form' id='login-form'>
                 <label htmlFor='username'
                     className='login-text'>
                     Username or Email
@@ -71,8 +75,11 @@ function LoginFormPage() {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                 />
-                <button type="submit" className='login-button'>Log In</button>
             </form>
+            <div className='login-buttons'>
+                <button type="submit" form='login-form' className='login-button'>Log In</button>
+                <button type="button" className='login-button' onClick={demoLogin}>Demo</button>
+            </div>
         </div >
     );
 }
