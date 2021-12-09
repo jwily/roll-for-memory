@@ -42,13 +42,13 @@ const HomePage = ({ isLoaded }) => {
                         <NoteDisplay />
                     </Route>
                     <Route path='/notebooks/:bookId/'>
-                        <div>
-                            <p>Notebook</p>
+                        <div className='note-display'>
+                            <span>Notebook</span>
                         </div>
                     </Route>
                     <Route path='/'>
-                        <div>
-                            <p>Home</p>
+                        <div className='note-display'>
+                            <span>Home</span>
                         </div>
                     </Route>
                 </Switch>
