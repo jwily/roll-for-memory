@@ -53,8 +53,8 @@ const NoteDisplay = () => {
         dispatch(editNote(payload))
     }
 
-    const contentSave = (text) => {
-        const payload = { noteId: note.id, content: text };
+    const contentSave = () => {
+        const payload = { noteId: note.id, content };
         dispatch(editNote(payload))
     }
 
@@ -124,9 +124,8 @@ const NoteDisplay = () => {
                             <button type='button' onClick={cancelDelete}>Nope</button>
                         </div> :
                         <div className='note-buttons'>
-                            <button type='button' onClick={titleSave}>Save Title</button>
                             <button type='button' onClick={contentSave}>Save Content</button>
-                            <button type='button' onClick={autoSave}>Auto Save</button>
+                            <button type='button' onClick={autoSave}>Auto Save Test</button>
                             <button type='button' onClick={deleteToggle}>Delete</button>
                         </div>}
 
