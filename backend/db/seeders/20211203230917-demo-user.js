@@ -26,9 +26,9 @@ module.exports = {
     ], {})
 
     return await queryInterface.bulkInsert('Notes', [
-      { name: 'Next Session', content: null, userId: 1, notebookId: 2, createdAt: yesterday, updatedAt: yesterday },
+      { name: 'Next Session', content: '', userId: 1, notebookId: 2, createdAt: yesterday, updatedAt: yesterday },
       { name: 'Last Session', content: 'What fun!', userId: 1, notebookId: 2, createdAt: yesterday, updatedAt: tomorrow },
-      { name: null, content: null, userId: 1, notebookId: 1, createdAt: new Date(), updatedAt: new Date() }
+      { name: '', content: '', userId: 1, notebookId: 1, createdAt: new Date(), updatedAt: new Date() }
     ], {})
   },
 

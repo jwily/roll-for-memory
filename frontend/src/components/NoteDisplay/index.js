@@ -32,8 +32,8 @@ const NoteDisplay = () => {
     }, [note])
 
     const titleSave = (e) => {
-        const payload = { name: title };
-        dispatch(editNote(note.id, payload))
+        const payload = { noteId: note.id, name: title };
+        dispatch(editNote(payload))
     }
 
     const contentSave = (e) => {

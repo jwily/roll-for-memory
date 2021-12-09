@@ -22,8 +22,10 @@ export const getNotes = () => async (dispatch) => {
     }
 }
 
-export const editNote = (noteId, payload) => async (dispatch) => {
-    const response = await csrfFetch(`/api/notes/${noteId}`, {
+export const editNote = (payload) => async (dispatch) => {
+    console.log(payload);
+
+    const response = await csrfFetch(`/api/notes/${payload.noteId}`, {
         method: 'PUT',
         body: JSON.stringify(payload)
     });

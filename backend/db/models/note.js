@@ -2,10 +2,12 @@
 module.exports = (sequelize, DataTypes) => {
   const Note = sequelize.define('Note', {
     name: {
-      type: DataTypes.STRING(255)
+      type: DataTypes.STRING(255),
+      allowNull: false
     },
     content: {
-      type: DataTypes.TEXT
+      type: DataTypes.TEXT,
+      allowNull: false
     },
     userId: {
       type: DataTypes.INTEGER,
