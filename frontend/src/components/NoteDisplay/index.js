@@ -11,6 +11,7 @@ const NoteDisplay = () => {
 
     const notes = useSelector(state => state.notes);
 
+    // Will this be a problem for bad urls?
     const { noteId } = useParams('');
     const note = notes[noteId];
 
@@ -44,14 +45,17 @@ const NoteDisplay = () => {
 
     const autoSave = (e) => {
         setSaving(true);
+        console.log('Saving...')
         if (!saving) {
             setTimeout(() => {
                 setSaving(false);
                 console.log('Saved!');
-                const payload = { noteId: note.id, content };
-                dispatch(editNote(payload))
             }, 3000)
         }
+    }
+
+    const contentChange = (e) => {
+        setContent(e.target.value);
     }
 
     const handleContentChange = (e) => {
@@ -79,7 +83,7 @@ const NoteDisplay = () => {
                     <textarea
                         value={content}
                         className='note-content'
-                        onChange={(e) => setContent(e.target.value)}
+                        onChange={contentChange}
                     />
                 </div>
             </>
