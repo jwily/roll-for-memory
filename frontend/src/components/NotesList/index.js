@@ -13,9 +13,15 @@ const NotesList = () => {
 
     const { bookId } = useParams();
 
-    const order = Object.values(notes).sort((noteA, noteB) => {
+    const notesArray = Object.values(notes).sort((noteA, noteB) => {
         return new Date(noteB.updatedAt) - new Date(noteA.updatedAt);
-    }).map((note) => note.id);
+    })
+
+    const filtered = notesArray.filter((note) => {
+        return note.notebookId === parseInt(bookId, 10);
+    })
+
+    const order = filtered.map(note => note.id)
 
     // Make the NavLink in here its own component
     return (

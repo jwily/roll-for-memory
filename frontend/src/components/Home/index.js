@@ -38,7 +38,7 @@ const HomePage = ({ isLoaded }) => {
                 <Switch>
                     <Route path='/notebooks/:bookId'>
                         <div className='hold-25'>
-                            {notesLoaded && <NotesList notesLoaded={notesLoaded} />}
+                            {booksLoaded && notesLoaded && <NotesList notesLoaded={notesLoaded} />}
                         </div>
                     </Route>
                     <Route path='/'>
