@@ -8,8 +8,6 @@ const SideNav = () => {
 
     const books = useSelector(state => state.books);
 
-    // if (!books) return null;
-
     return (
         <div className='side-nav'>
             <h2>NOTEBOOKS</h2>

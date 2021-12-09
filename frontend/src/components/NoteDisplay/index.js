@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-// import TitleInput from './TitleInput';
 
 import './NoteDisplay.css';
 
@@ -15,10 +14,6 @@ const NoteDisplay = () => {
 
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
-
-    // useEffect(() => {
-    //     if (notes && !notes[noteId]) history.push('/')
-    // }, [notes, noteId, history])
 
     useEffect(() => {
         if (note) {

@@ -10,12 +10,6 @@ const NotesList = () => {
 
     const { bookId } = useParams();
 
-    // useEffect(() => {
-    //     if (books && !books[bookId]) history.push('/')
-    // }, [bookId, books, history])
-
-    // if (!notes) return null;
-
     let filtered = bookId ? notes.notesOrder.filter(id => {
         return notes[id].notebookId === parseInt(bookId, 10);
     }) : notes.notesOrder;
