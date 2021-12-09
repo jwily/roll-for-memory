@@ -53,7 +53,7 @@ const HomePage = ({ isLoaded }) => {
                         {notesLoaded && <NoteDisplay />}
                     </Route>
                     <Route path='/notebooks/:bookId/'>
-                        {booksLoaded && <SideNavDisplay />}
+                        <SideNavDisplay />
                     </Route>
                     <Route path='/'>
                         <div className='note-display'>
