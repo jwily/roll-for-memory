@@ -8,6 +8,7 @@ import { Switch, Route } from 'react-router-dom';
 import { useState } from 'react';
 
 import SideNav from '../SideNav';
+import SideNavDisplay from '../SideNav/SideNavDisplay';
 import NotesList from '../NotesList';
 import HomeNotesList from '../HomeNotesList';
 import NoteDisplay from '../NoteDisplay';
@@ -32,17 +33,17 @@ const HomePage = ({ isLoaded }) => {
         <>
             <Navigation isLoaded={isLoaded} />
             <div className='home-page centered'>
-                <div className='hold-25'>
+                <div className='hold-width'>
                     {booksLoaded && <SideNav booksLoaded={booksLoaded} />}
                 </div>
                 <Switch>
                     <Route path='/notebooks/:bookId'>
-                        <div className='hold-25'>
+                        <div className='hold-width'>
                             {booksLoaded && notesLoaded && <NotesList notesLoaded={notesLoaded} />}
                         </div>
                     </Route>
                     <Route path='/'>
-                        <div className='hold-25'>
+                        <div className='hold-width'>
                             {notesLoaded && <HomeNotesList notesLoaded={notesLoaded} />}
                         </div>
                     </Route>
@@ -52,9 +53,7 @@ const HomePage = ({ isLoaded }) => {
                         {notesLoaded && <NoteDisplay notesLoaded={notesLoaded} />}
                     </Route>
                     <Route path='/notebooks/:bookId/'>
-                        <div className='note-display'>
-                            <span>Notebook</span>
-                        </div>
+                        {booksLoaded && <SideNavDisplay />}
                     </Route>
                     <Route path='/'>
                         <div className='note-display'>

@@ -39,6 +39,36 @@ router.put(
         await note.update({ content, name });
         return res.json(note);
     })
+);
+
+router.post(
+    '/',
+    requireAuth,
+    asyncHandler(async (req, res) => {
+        const {
+            bookId
+        } = req.body;
+
+        const note = await Note.create({
+            userId: req.user.id,
+            notebookId: bookId,
+            content: '',
+            name: ''
+        })
+
+        return res.json(note);
+    })
+);
+
+router.delete(
+    '/:id(\\d+)',
+    requireAuth,
+    asyncHandler(async (req, res) => {
+        const noteId = parseInt(req.params.id, 10);
+        const note = await Note.findByPk(noteId);
+        await note.destroy();
+        res.json({ message: 'Note successfully deleted.' })
+    })
 )
 
 module.exports = router;

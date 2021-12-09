@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { editNote } from '../../store/notes';
+import { editNote, removeNote } from '../../store/notes';
 
 import './NoteDisplay.css';
 
 const NoteDisplay = () => {
+    const history = useHistory();
     const dispatch = useDispatch();
 
     const notes = useSelector(state => state.notes);
@@ -14,10 +15,12 @@ const NoteDisplay = () => {
     // Will this be a problem for bad urls?
     const { noteId } = useParams('');
     const note = notes[noteId];
+    const bookId = note.notebookId;
 
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [saving, setSaving] = useState(false);
+    const [showDelete, setShowDelete] = useState(false);
 
     useEffect(() => {
         if (note) {
@@ -33,24 +36,43 @@ const NoteDisplay = () => {
         }
     }, [note])
 
-    const titleSave = (e) => {
+    // useEffect(() => {
+    //     setSaving(true);
+    //     console.log('Saving...')
+    //     if (!saving) {
+    //         setTimeout(() => {
+    //             setSaving(false);
+    //             const text = document.getElementById('content').value
+    //             contentSave(text);
+    //         }, 500)
+    //     }
+    // }, [content])
+
+    const titleSave = () => {
         const payload = { noteId: note.id, name: title };
         dispatch(editNote(payload))
     }
 
-    const contentSave = (e) => {
+    const contentSave = () => {
         const payload = { noteId: note.id, content };
         dispatch(editNote(payload))
     }
+
+    const delay = (ms) => {
+        return new Promise((resolve, reject) => {
+            setTimeout(resolve, ms);
+        })
+    };
 
     const autoSave = (e) => {
         setSaving(true);
         console.log('Saving...')
         if (!saving) {
-            setTimeout(() => {
-                setSaving(false);
-                console.log('Saved!');
-            }, 3000)
+            delay(3000).then(() => {
+                setSaving(false)
+                contentSave(e)
+                console.log('Saved!')
+            })
         }
     }
 
@@ -58,10 +80,30 @@ const NoteDisplay = () => {
         setContent(e.target.value);
     }
 
-    const handleContentChange = (e) => {
-        setContent(e.target.value);
-        autoSave();
-        return;
+    // const handleContentChange = (e) => {
+    //     setContent(e.target.value);
+    //     autoSave(e);
+    //     return;
+    // }
+
+    // const keySave = (e) => {
+    //     if (e.ctrlKey && e.key === 83) {
+    //         e.preventDefault();
+    //         console.log('Saved!');
+    //     }
+    // }
+
+    const deleteToggle = (e) => {
+        setShowDelete(true);
+    }
+
+    const cancelDelete = (e) => {
+        setShowDelete(false);
+    }
+
+    const remove = (e) => {
+        dispatch(removeNote(note.id))
+        history.push(`/notebooks/${bookId}`)
     }
 
     return (
@@ -75,15 +117,23 @@ const NoteDisplay = () => {
                         onBlur={titleSave}
                         type='text'
                     />
-                    <div className='note-buttons'>
-                        <button type='button' onClick={titleSave}>Save Title</button>
-                        <button type='button' onClick={contentSave}>Save Content</button>
-                        <button type='button' onClick={autoSave}>Auto Save</button>
-                    </div>
+                    {showDelete ?
+                        <div className='note-buttons'>
+                            <span>Are you sure you want to delete this note?</span>
+                            <button type='button' onClick={remove}>Yup</button>
+                            <button type='button' onClick={cancelDelete}>Nope</button>
+                        </div> :
+                        <div className='note-buttons'>
+                            <button type='button' onClick={contentSave}>Save Content</button>
+                            <button type='button' onClick={autoSave}>Auto Save Test</button>
+                            <button type='button' onClick={deleteToggle}>Delete</button>
+                        </div>}
+
                     <textarea
                         value={content}
                         className='note-content'
                         onChange={contentChange}
+                        id='content'
                     />
                 </div>
             </>
