@@ -66,7 +66,7 @@ router.delete(
     asyncHandler(async (req, res) => {
         const noteId = parseInt(req.params.id, 10);
         const note = await Note.findByPk(noteId);
-        await Note.destroy(note);
+        await note.destroy();
         res.json({ message: 'Note successfully deleted.' })
     })
 )

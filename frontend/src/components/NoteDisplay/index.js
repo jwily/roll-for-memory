@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { editNote } from '../../store/notes';
+import { editNote, removeNote } from '../../store/notes';
 
 import './NoteDisplay.css';
 
 const NoteDisplay = () => {
+    const history = useHistory();
     const dispatch = useDispatch();
 
     const notes = useSelector(state => state.notes);
@@ -14,6 +15,7 @@ const NoteDisplay = () => {
     // Will this be a problem for bad urls?
     const { noteId } = useParams('');
     const note = notes[noteId];
+    const bookId = note.notebookId;
 
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
@@ -90,6 +92,11 @@ const NoteDisplay = () => {
     //     }
     // }
 
+    const remove = () => {
+        dispatch(removeNote(note.id))
+        history.push(`/notebooks/${bookId}`)
+    }
+
     return (
         <>
             <>
@@ -105,6 +112,7 @@ const NoteDisplay = () => {
                         <button type='button' onClick={titleSave}>Save Title</button>
                         <button type='button' onClick={contentSave}>Save Content</button>
                         <button type='button' onClick={autoSave}>Auto Save</button>
+                        <button type='button' onClick={remove}>Delete</button>
                     </div>
                     <textarea
                         value={content}
