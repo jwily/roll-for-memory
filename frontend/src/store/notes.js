@@ -1,12 +1,20 @@
+import { csrfFetch } from "./csrf";
+
 const LOAD = 'notes/LOAD';
+const ADD_ONE = 'notes/ADD_ONE';
 
 const load = list => ({
     type: LOAD,
     list
 })
 
+const addOne = note => ({
+    type: ADD_ONE,
+    note
+})
+
 export const getNotes = () => async (dispatch) => {
-    const response = await fetch(`/api/notes`);
+    const response = await csrfFetch(`/api/notes`);
 
     if (response.ok) {
         const list = await response.json();
@@ -14,13 +22,21 @@ export const getNotes = () => async (dispatch) => {
     }
 }
 
-const sortByUpdated = (list) => {
-    return list.sort((noteA, noteB) => {
-        return new Date(noteB.updatedAt) - new Date(noteA.updatedAt);
-    }).map((note) => note.id);
+export const editNote = (payload) => async (dispatch) => {
+
+    const response = await csrfFetch(`/api/notes/${payload.noteId}`, {
+        method: 'PUT',
+        body: JSON.stringify(payload)
+    });
+
+    if (response.ok) {
+        const note = await response.json();
+        dispatch(addOne(note));
+        return note;
+    }
 }
 
-const initialState = { notesOrder: [] };
+const initialState = {};
 
 const notesReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -32,8 +48,23 @@ const notesReducer = (state = initialState, action) => {
             return {
                 ...allNotes,
                 ...state,
-                notesOrder: sortByUpdated(action.list)
+            };
+        case ADD_ONE:
+            if (!state[action.note.id]) {
+                const newState = {
+                    ...state,
+                    [action.note.id]: {
+                        ...action.note
+                    }
+                }
+                return newState;
             }
+            return {
+                ...state,
+                [action.note.id]: {
+                    ...action.note
+                }
+            };
         default:
             return state;
     }

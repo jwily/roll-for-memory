@@ -9,8 +9,9 @@ import * as sessionActions from "./store/session";
 function App() {
   const dispatch = useDispatch();
 
-  // This checks to see if a user was checked for
+  // This checks to see if a user was checked for at all
   const [isLoaded, setIsLoaded] = useState(false);
+
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
@@ -26,7 +27,7 @@ function App() {
             <SignupFormPage />
           </Route>
           <Route path='/'>
-            {sessionUser ? <HomePage isLoaded={isLoaded} /> : <LoginFormPage />}
+            {sessionUser ? <HomePage isLoaded={isLoaded} user={sessionUser} /> : <LoginFormPage />}
           </Route>
         </Switch>
       )}

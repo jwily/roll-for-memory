@@ -1,24 +1,23 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
-// import TitleInput from './TitleInput';
+import { useDispatch, useSelector } from 'react-redux';
+import { editNote } from '../../store/notes';
 
 import './NoteDisplay.css';
 
 const NoteDisplay = () => {
+    const dispatch = useDispatch();
 
     const notes = useSelector(state => state.notes);
 
+    // Will this be a problem for bad urls?
     const { noteId } = useParams('');
     const note = notes[noteId];
 
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
-
-    // useEffect(() => {
-    //     if (notes && !notes[noteId]) history.push('/')
-    // }, [notes, noteId, history])
+    const [saving, setSaving] = useState(false);
 
     useEffect(() => {
         if (note) {
@@ -34,20 +33,61 @@ const NoteDisplay = () => {
         }
     }, [note])
 
+    const titleSave = (e) => {
+        const payload = { noteId: note.id, name: title };
+        dispatch(editNote(payload))
+    }
+
+    const contentSave = (e) => {
+        const payload = { noteId: note.id, content };
+        dispatch(editNote(payload))
+    }
+
+    const autoSave = (e) => {
+        setSaving(true);
+        console.log('Saving...')
+        if (!saving) {
+            setTimeout(() => {
+                setSaving(false);
+                console.log('Saved!');
+            }, 3000)
+        }
+    }
+
+    const contentChange = (e) => {
+        setContent(e.target.value);
+    }
+
+    const handleContentChange = (e) => {
+        setContent(e.target.value);
+        autoSave();
+        return;
+    }
+
     return (
-        <div className='note-display'>
-            <input
-                value={title}
-                className='note-title'
-                onChange={(e) => setTitle(e.target.value)}
-                type='text'
-            />
-            <textarea
-                value={content}
-                className='note-content'
-                onChange={(e) => setContent(e.target.value)}
-            />
-        </div>
+        <>
+            <>
+                <div className='note-display'>
+                    <input
+                        value={title}
+                        className='note-title'
+                        onChange={(e) => setTitle(e.target.value)}
+                        onBlur={titleSave}
+                        type='text'
+                    />
+                    <div className='note-buttons'>
+                        <button type='button' onClick={titleSave}>Save Title</button>
+                        <button type='button' onClick={contentSave}>Save Content</button>
+                        <button type='button' onClick={autoSave}>Auto Save</button>
+                    </div>
+                    <textarea
+                        value={content}
+                        className='note-content'
+                        onChange={contentChange}
+                    />
+                </div>
+            </>
+        </>
     )
 }
 

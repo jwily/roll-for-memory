@@ -7,6 +7,7 @@ import { Redirect } from 'react-router-dom';
 import './LoginForm.css';
 
 function LoginFormPage() {
+
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
     const [credential, setCredential] = useState('');
