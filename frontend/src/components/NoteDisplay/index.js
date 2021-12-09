@@ -16,6 +16,7 @@ const NoteDisplay = () => {
 
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
+    const [saving, setSaving] = useState(false);
 
     useEffect(() => {
         if (note) {
@@ -41,6 +42,24 @@ const NoteDisplay = () => {
         dispatch(editNote(payload))
     }
 
+    const autoSave = (e) => {
+        setSaving(true);
+        if (!saving) {
+            setTimeout(() => {
+                setSaving(false);
+                console.log('Saved!');
+                const payload = { noteId: note.id, content };
+                dispatch(editNote(payload))
+            }, 3000)
+        }
+    }
+
+    const handleContentChange = (e) => {
+        setContent(e.target.value);
+        autoSave();
+        return;
+    }
+
     return (
         <>
             <>
@@ -55,6 +74,7 @@ const NoteDisplay = () => {
                     <div className='note-buttons'>
                         <button type='button' onClick={titleSave}>Save Title</button>
                         <button type='button' onClick={contentSave}>Save Content</button>
+                        <button type='button' onClick={autoSave}>Auto Save</button>
                     </div>
                     <textarea
                         value={content}
