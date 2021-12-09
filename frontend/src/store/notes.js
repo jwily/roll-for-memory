@@ -43,6 +43,12 @@ const sortByUpdated = (list) => {
     }).map((note) => note.id);
 }
 
+const sortOnEdit = (obj, list) => {
+    return list.sort((idA, idB) => {
+        return new Date(obj[idB].updatedAt) - new Date(obj[idA].updatedAt);
+    });
+}
+
 const initialState = { notesOrder: [] };
 
 const notesReducer = (state = initialState, action) => {
@@ -65,8 +71,9 @@ const notesReducer = (state = initialState, action) => {
                         ...action.note
                     }
                 }
-                newState.notesOrder.push(action.note.id);
-                sortByUpdated(newState.notesOrder);
+                const newOrder = [...newState.notesOrder];
+                newOrder.push(action.note.id);
+                newState.notesOrder = sortOnEdit(newState, newOrder);
                 return newState;
             }
             return {
