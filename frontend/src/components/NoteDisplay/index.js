@@ -20,6 +20,7 @@ const NoteDisplay = () => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [saving, setSaving] = useState(false);
+    const [showDelete, setShowDelete] = useState(false);
 
     useEffect(() => {
         if (note) {
@@ -92,7 +93,15 @@ const NoteDisplay = () => {
     //     }
     // }
 
-    const remove = () => {
+    const deleteToggle = (e) => {
+        setShowDelete(true);
+    }
+
+    const cancelDelete = (e) => {
+        setShowDelete(false);
+    }
+
+    const remove = (e) => {
         dispatch(removeNote(note.id))
         history.push(`/notebooks/${bookId}`)
     }
@@ -108,12 +117,19 @@ const NoteDisplay = () => {
                         onBlur={titleSave}
                         type='text'
                     />
-                    <div className='note-buttons'>
-                        <button type='button' onClick={titleSave}>Save Title</button>
-                        <button type='button' onClick={contentSave}>Save Content</button>
-                        <button type='button' onClick={autoSave}>Auto Save</button>
-                        <button type='button' onClick={remove}>Delete</button>
-                    </div>
+                    {showDelete ?
+                        <div className='note-buttons'>
+                            <span>Are you sure you want to delete this note?</span>
+                            <button type='button' onClick={remove}>Yup</button>
+                            <button type='button' onClick={cancelDelete}>Nope</button>
+                        </div> :
+                        <div className='note-buttons'>
+                            <button type='button' onClick={titleSave}>Save Title</button>
+                            <button type='button' onClick={contentSave}>Save Content</button>
+                            <button type='button' onClick={autoSave}>Auto Save</button>
+                            <button type='button' onClick={deleteToggle}>Delete</button>
+                        </div>}
+
                     <textarea
                         value={content}
                         className='note-content'
