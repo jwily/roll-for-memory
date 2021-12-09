@@ -8,6 +8,7 @@ import { Switch, Route } from 'react-router-dom';
 import { useState } from 'react';
 
 import SideNav from '../SideNav';
+import SideNavDisplay from '../SideNav/SideNavDisplay';
 import NotesList from '../NotesList';
 import HomeNotesList from '../HomeNotesList';
 import NoteDisplay from '../NoteDisplay';
@@ -52,9 +53,7 @@ const HomePage = ({ isLoaded }) => {
                         {notesLoaded && <NoteDisplay notesLoaded={notesLoaded} />}
                     </Route>
                     <Route path='/notebooks/:bookId/'>
-                        <div className='note-display'>
-                            <span>Notebook</span>
-                        </div>
+                        {booksLoaded && <SideNavDisplay />}
                     </Route>
                     <Route path='/'>
                         <div className='note-display'>

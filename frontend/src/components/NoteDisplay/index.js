@@ -33,13 +33,25 @@ const NoteDisplay = () => {
         }
     }, [note])
 
+    // useEffect(() => {
+    //     setSaving(true);
+    //     console.log('Saving...')
+    //     if (!saving) {
+    //         setTimeout(() => {
+    //             setSaving(false);
+    //             const text = document.getElementById('content').value
+    //             contentSave(text);
+    //         }, 500)
+    //     }
+    // }, [content])
+
     const titleSave = () => {
         const payload = { noteId: note.id, name: title };
         dispatch(editNote(payload))
     }
 
-    const contentSave = (e) => {
-        const payload = { noteId: note.id, content: e.target.value };
+    const contentSave = (text) => {
+        const payload = { noteId: note.id, content: text };
         dispatch(editNote(payload))
     }
 
@@ -53,7 +65,7 @@ const NoteDisplay = () => {
         setSaving(true);
         console.log('Saving...')
         if (!saving) {
-            delay(2500).then(() => {
+            delay(3000).then(() => {
                 setSaving(false)
                 contentSave(e)
                 console.log('Saved!')
@@ -61,15 +73,22 @@ const NoteDisplay = () => {
         }
     }
 
-    // const contentChange = (e) => {
+    const contentChange = (e) => {
+        setContent(e.target.value);
+    }
+
+    // const handleContentChange = (e) => {
     //     setContent(e.target.value);
+    //     autoSave(e);
+    //     return;
     // }
 
-    const handleContentChange = (e) => {
-        setContent(e.target.value);
-        autoSave(e);
-        return;
-    }
+    // const keySave = (e) => {
+    //     if (e.ctrlKey && e.key === 83) {
+    //         e.preventDefault();
+    //         console.log('Saved!');
+    //     }
+    // }
 
     return (
         <>
@@ -90,7 +109,8 @@ const NoteDisplay = () => {
                     <textarea
                         value={content}
                         className='note-content'
-                        onChange={handleContentChange}
+                        onChange={contentChange}
+                        id='content'
                     />
                 </div>
             </>

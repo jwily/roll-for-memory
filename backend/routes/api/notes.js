@@ -39,6 +39,25 @@ router.put(
         await note.update({ content, name });
         return res.json(note);
     })
-)
+);
+
+router.post(
+    '/',
+    requireAuth,
+    asyncHandler(async (req, res) => {
+        const {
+            bookId
+        } = req.body;
+
+        const note = Note.create({
+            userId: req.user.id,
+            notebookId: bookId,
+            content: '',
+            name: ''
+        })
+
+        return res.json(note);
+    })
+);
 
 module.exports = router;
