@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { editNote } from '../../store/notes';
 
 import './NoteDisplay.css';
 
 const NoteDisplay = () => {
+    const dispatch = useDispatch();
 
     const notes = useSelector(state => state.notes);
 
@@ -29,20 +31,37 @@ const NoteDisplay = () => {
         }
     }, [note])
 
+    const titleSave = (e) => {
+        const payload = { name: title };
+        dispatch(editNote(note.id, payload))
+    }
+
+    const contentSave = (e) => {
+
+    }
+
     return (
-        <div className='note-display'>
-            <input
-                value={title}
-                className='note-title'
-                onChange={(e) => setTitle(e.target.value)}
-                type='text'
-            />
-            <textarea
-                value={content}
-                className='note-content'
-                onChange={(e) => setContent(e.target.value)}
-            />
-        </div>
+        <>
+            <>
+                <div className='note-display'>
+                    <input
+                        value={title}
+                        className='note-title'
+                        onChange={(e) => setTitle(e.target.value)}
+                        type='text'
+                    />
+                    <div className='note-buttons'>
+                        <button type='button' onClick={titleSave}>Save Title</button>
+                        <button type='button' onClick={contentSave}>Save Content</button>
+                    </div>
+                    <textarea
+                        value={content}
+                        className='note-content'
+                        onChange={(e) => setContent(e.target.value)}
+                    />
+                </div>
+            </>
+        </>
     )
 }
 

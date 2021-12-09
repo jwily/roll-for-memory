@@ -27,4 +27,18 @@ router.get(
     })
 );
 
+router.put(
+    '/:id(\\d+)',
+    requireAuth,
+    asyncHandler(async (req, res) => {
+        const {
+            noteId, content, name
+        } = req.body;
+
+        const note = await Note.findByPk(noteId);
+        await note.update({ content, name });
+        return res.json(note);
+    })
+)
+
 module.exports = router;

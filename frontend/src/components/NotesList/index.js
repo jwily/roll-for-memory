@@ -1,10 +1,10 @@
 import React from 'react';
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink, useParams, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import './NotesList.css';
 
-const NotesList = () => {
+const NotesList = ({ notesLoaded }) => {
 
     const notes = useSelector(state => state.notes);
 
@@ -18,7 +18,7 @@ const NotesList = () => {
     return (
         <div className='notes-list'>
             <h2>NOTES</h2>
-            {filtered.map((id, idx) => {
+            {notesLoaded && filtered.map((id, idx) => {
                 return <NavLink key={idx} to={`/notebooks/${bookId}/notes/${id}`}>{notes[id].name || `Untitled`}</NavLink>
             })}
         </div>

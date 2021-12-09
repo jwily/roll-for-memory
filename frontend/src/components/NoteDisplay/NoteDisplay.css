@@ -21,11 +21,16 @@
     font-size: 2rem;
 }
 
+.note-buttons {
+    height: 5%;
+    padding: .5rem;
+}
+
 .note-display > textarea {
     background-color: rgb(70, 70, 70);
     color: whitesmoke;
     font-size: 1rem;
-    height: 90%;
+    height: 85%;
     resize: none;
     padding: 1rem;
 }

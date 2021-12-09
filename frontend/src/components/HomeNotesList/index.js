@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-const HomeNotesList = () => {
+const HomeNotesList = ({ notesLoaded }) => {
 
     const notes = useSelector(state => state.notes);
 
@@ -10,7 +10,7 @@ const HomeNotesList = () => {
     return (
         <div className='notes-list'>
             <h2>NOTES</h2>
-            {notes.notesOrder.map((id, idx) => {
+            {notesLoaded && notes.notesOrder.map((id, idx) => {
                 const note = notes[id];
                 return <NavLink key={idx} to={`/notebooks/${note.notebookId}/notes/${id}`}>{note.name || `Untitled`}</NavLink>
             })}
