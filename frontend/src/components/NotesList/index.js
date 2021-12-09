@@ -23,7 +23,7 @@ const NotesList = () => {
     // Make the NavLink in here its own component
     return (
         <div className='notes-list'>
-            <h2>Notes List</h2>
+            <h2>NOTES</h2>
             {filtered.map((id, idx) => {
                 return <NavLink key={idx} to={`/notebooks/${bookId}/notes/${id}`}>{notes[id].name || `Untitled`}</NavLink>
             })}

@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { getNotes } from '../../store/notes';
 import { getNotebooks } from '../../store/notebooks';
 import { Switch, Route } from 'react-router-dom';
-// import { useState } from 'react';
+import { useState } from 'react';
 
 import SideNav from '../SideNav';
 import NotesList from '../NotesList';
@@ -16,25 +16,34 @@ import Navigation from '../Navigation';
 const HomePage = ({ isLoaded }) => {
     const dispatch = useDispatch();
 
+    const [notesLoaded, setNotesLoaded] = useState(false);
+    const [booksLoaded, setBooksLoaded] = useState(false);
+
     useEffect(() => {
-        dispatch(getNotes());
+        dispatch(getNotebooks()).then(() => setBooksLoaded(true));
     }, [dispatch])
 
     useEffect(() => {
-        dispatch(getNotebooks());
+        dispatch(getNotes()).then(() => setNotesLoaded(true));
     }, [dispatch])
 
     return (
         <>
             <Navigation isLoaded={isLoaded} />
             <div className='home-page centered'>
-                <SideNav />
+                <div className='hold-25'>
+                    {booksLoaded && <SideNav />}
+                </div>
                 <Switch>
                     <Route path='/notebooks/:bookId'>
-                        <NotesList />
+                        <div className='hold-25'>
+                            <NotesList />
+                        </div>
                     </Route>
                     <Route path='/'>
-                        <HomeNotesList />
+                        <div className='hold-25'>
+                            <HomeNotesList />
+                        </div>
                     </Route>
                 </Switch>
                 <Switch>

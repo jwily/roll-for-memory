@@ -6,6 +6,10 @@
     background-color: grey;
 }
 
+.hold-25 {
+    min-width: 15%;
+}
+
 /* .centered {
     position: absolute;
     left: 50%;

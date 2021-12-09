@@ -12,7 +12,7 @@ const SideNav = () => {
 
     return (
         <div className='side-nav'>
-            <h2>SideNav</h2>
+            <h2>NOTEBOOKS</h2>
             <NavLink exact to='/'>Home</NavLink>
             {
                 books.booksOrder.map((id, idx) => {
