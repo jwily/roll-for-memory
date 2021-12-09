@@ -1,4 +1,5 @@
 .note-display {
     display: flex;
     flex-direction: column;
+    background-color: grey;
 }
