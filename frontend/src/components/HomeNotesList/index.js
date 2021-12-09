@@ -13,7 +13,7 @@ const HomeNotesList = ({ notesLoaded }) => {
     // Make the NavLink in here its own component
     return (
         <div className='notes-list'>
-            <h2>NOTES</h2>
+            <h2>ALL NOTES</h2>
             {notesLoaded && order.map((id, idx) => {
                 const note = notes[id];
                 return <NavLink key={idx} to={`/notebooks/${note.notebookId}/notes/${id}`}>{note.name || `Untitled`}</NavLink>
