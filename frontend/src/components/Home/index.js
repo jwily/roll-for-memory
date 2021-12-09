@@ -13,7 +13,8 @@ import HomeNotesList from '../HomeNotesList';
 import NoteDisplay from '../NoteDisplay';
 import Navigation from '../Navigation';
 
-const HomePage = ({ user, isLoaded }) => {
+const HomePage = ({ isLoaded }) => {
+
     const dispatch = useDispatch();
 
     const [notesLoaded, setNotesLoaded] = useState(false);
