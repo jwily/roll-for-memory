@@ -2,14 +2,60 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: black;
+    background-color: rgb(10, 10, 10);
     height: 5vh;
 }
 
-.profile-dropdown{
-    z-index: 10;
+.profile-button {
+    margin-right: 1rem;
+    background-color: rgb(10, 10, 10);
+    border: 1px solid rgb(200, 200, 200);
+    height: 1.75rem;
+    width: 2rem;
+    color: rgb(200, 200, 200);
+    border-radius: 2px;
+}
+
+.profile-dropdown {
+    background-color: rgba(51, 48, 47, 0.95);
+    /* font-size: .75rem; */
+    /* border-left: 1px solid rgba(200, 200, 200, .95);
+    border-bottom: 1px solid rgba(200, 200, 200, .95); */
+    border-bottom-left-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    height: 10rem;
+    justify-content: space-evenly;
+    padding: 1.5rem;
     position: absolute;
-    top: 0px;
     right: 0px;
-    background-color: black;
+    top: 0px;
+    width: 15rem;
+    z-index: 10;
+}
+
+.profile-dropdown > li {
+    font-weight: bold;
+}
+
+.logo-top {
+    margin-left: 1rem;
+    font-family: 'Cormorant', serif;
+    font-weight: 600;
+    font-size: 1.25rem;
+    cursor: default;
+}
+
+.sign-out-button {
+    opacity: 1;
+}
+
+.nav-button:hover {
+    filter: invert(.25);
+    cursor: pointer;
+}
+
+.nav-button:active {
+    filter: invert(.75);
+    cursor: pointer;
 }

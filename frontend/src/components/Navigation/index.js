@@ -1,5 +1,4 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
@@ -23,9 +22,9 @@ function Navigation({ isLoaded }) {
 
     return (
         <div className='navigation'>
-            <NavLink exact to="/" activeClassName="nav-home">roll for memory</NavLink>
+            <span className='logo-top'>roll for memory</span>
             {isLoaded && (
-                sessionUser ? <ProfileButton user={sessionUser} /> : <NavLink to='/signup' activeClassName='nav-signup'>sign up</NavLink>
+                sessionUser && <ProfileButton user={sessionUser} />
             )}
         </div>
     );
