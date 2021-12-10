@@ -59,7 +59,15 @@ const SideNav = () => {
                 <NavLink exact to='/'>Home</NavLink>
                 {
                     sorted.map((id, idx) => {
-                        return <NavLink key={idx} to={`/notebooks/${id}`}>{books[id].name}</NavLink>
+                        return (
+                            <div className='book-link-div'>
+                                <NavLink key={idx} to={`/notebooks/${id}`}>{books[id].name}</NavLink>
+                                <div className='book-link-btns'>
+                                    <button type='button'>Edit</button>
+                                    <button type='button'>Delete</button>
+                                </div>
+                            </div>
+                        )
                     })
                 }
             </div>

@@ -22,11 +22,28 @@
 
 }
 
+.home-banner {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 5vh;
+    background-color: rgb(10, 10, 10);
+    opacity: .85;
+}
+
+.home-banner > span {
+    color: whitesmoke;
+    font-size: 1rem;
+    font-weight: 300;
+    font-family: 'Merriweather', serif;
+}
+
 .note-create-btn > span {
     color: whitesmoke;
-    font-size: 1.25rem;
-    font-weight: 600;
-    font-family: 'Cormorant', serif;
+    font-size: 1rem;
+    font-weight: 300;
+    font-family: 'Merriweather', serif;
     transition: opacity .35s;
 }
 

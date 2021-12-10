@@ -31,6 +31,7 @@ const NoteDisplay = () => {
             }
             else {
                 setTitle('Untitled');
+                setSavedTitle('Untitled');
             }
         }
     }, [note])
@@ -43,6 +44,7 @@ const NoteDisplay = () => {
             }
             else {
                 setContent('Let your thoughts flow...');
+                setSavedContent('Let your thoughts flow...');
             }
         }
     }, [note])
