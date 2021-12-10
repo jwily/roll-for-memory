@@ -71,27 +71,26 @@ ul, ol, li {
     background-image: url('./images/grid.jpg');
 }
 
-div[class*='notes-list'][class*='limsa'] {
+div[class*='list-img'][class*='limsa'] {
+    background-position: 40% 50%;
+}
+
+div[class*='list-img'][class*='uldah'] {
     background-position: 45% 50%;
 }
 
-div[class*='notes-list'][class*='uldah'] {
-    background-position: 15% 50%;
-    border: 1px solid red;
-}
-
-div[class*='notes-list'][class*='grid'] {
-    background-position: 50% 50%;
+div[class*='list-img'][class*='grid'] {
+    background-position: 72.5% 50%;
 }
 
 div[class*='login-banner'][class*='limsa'] {
-    background-position: 50% 40%;
+    background-position: 50% 32.5%;
 }
 
 div[class*='login-banner'][class*='uldah'] {
-    background-position: 50% 70%;
+    background-position: 50% 75%;
 }
 
 div[class*='login-banner'][class*='grid'] {
-    background-position: 50% 65%;
+    background-position: 50% 50%;
 }

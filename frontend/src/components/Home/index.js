@@ -33,17 +33,17 @@ const HomePage = ({ isLoaded }) => {
         <>
             <Navigation isLoaded={isLoaded} />
             <div className='home-page centered'>
-                <div className='hold-width'>
+                <div className='books-width'>
                     {booksLoaded && <SideNav />}
                 </div>
                 <Switch>
                     <Route path='/notebooks/:bookId'>
-                        <div className='hold-width'>
+                        <div className='notes-width'>
                             {notesLoaded && <NotesList />}
                         </div>
                     </Route>
                     <Route path='/'>
-                        <div className='hold-width'>
+                        <div className='notes-width'>
                             {notesLoaded && <HomeNotesList />}
                         </div>
                     </Route>

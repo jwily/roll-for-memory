@@ -15,6 +15,7 @@ const NotesList = () => {
     const books = useSelector(state => state.books);
 
     const { bookId } = useParams();
+    const images = ['grid', 'uldah', 'limsa'];
     // const bookName = books[bookId].name;
 
     if (!(bookId in books)) return <Redirect to='/' />
@@ -37,12 +38,14 @@ const NotesList = () => {
 
     // Make the NavLink in here its own component
     return (
-        <div className='notes-list limsa'>
-            <button type='button' onClick={clickHandler}>Create New Note</button>
-            {order.map((id, idx) => {
-                return <NavLink key={idx} to={`/notebooks/${bookId}/notes/${id}`}>{notes[id].name || `Untitled`}</NavLink>
-            })}
-        </div>
+        <div className={`list-img ${images[bookId % 3]}`} >
+            <div className='notes-list'>
+                <button type='button' onClick={clickHandler}>Create New Note</button>
+                {order.map((id, idx) => {
+                    return <NavLink key={idx} to={`/notebooks/${bookId}/notes/${id}`}>{notes[id].name || `Untitled`}</NavLink>
+                })}
+            </div>
+        </div >
     )
 }
 

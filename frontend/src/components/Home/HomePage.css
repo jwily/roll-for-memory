@@ -6,8 +6,12 @@
     background-color: grey;
 }
 
-.hold-width {
+.books-width{
     min-width: 15%;
+}
+
+.notes-width {
+    min-width: 20%;
 }
 
 /* .centered {

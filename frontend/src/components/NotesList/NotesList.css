@@ -2,8 +2,13 @@
     display: flex;
     flex-direction: column;
     /* background-color: darkslategrey; */
-    background-size: cover;
     min-width: 100%;
     min-height: 100%;
     padding: 1rem;
+}
+
+.list-img {
+    min-width: 100%;
+    min-height: 100%;
+    background-size: cover;
 }

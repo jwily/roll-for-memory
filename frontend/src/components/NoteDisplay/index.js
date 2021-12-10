@@ -110,37 +110,33 @@ const NoteDisplay = () => {
     }
 
     return (
-        <>
-            <>
-                <div className='note-display'>
-                    <input
-                        value={title}
-                        className='note-title'
-                        onChange={(e) => setTitle(e.target.value)}
-                        onBlur={titleSave}
-                        type='text'
-                    />
-                    {showDelete ?
-                        <div className='note-buttons'>
-                            <span>Are you sure you want to delete this note?</span>
-                            <button type='button' onClick={remove}>Yup</button>
-                            <button type='button' onClick={cancelDelete}>Nope</button>
-                        </div> :
-                        <div className='note-buttons'>
-                            <button type='button' onClick={contentSave}>Save Content</button>
-                            <button type='button' onClick={autoSave}>Auto Save Test</button>
-                            <button type='button' onClick={deleteToggle}>Delete</button>
-                        </div>}
+        <div className='note-display'>
+            <input
+                value={title}
+                className='note-title'
+                onChange={(e) => setTitle(e.target.value)}
+                onBlur={titleSave}
+                type='text'
+            />
+            {showDelete ?
+                <div className='note-buttons'>
+                    <span>Are you sure you want to delete this note?</span>
+                    <button type='button' onClick={remove}>Yup</button>
+                    <button type='button' onClick={cancelDelete}>Nope</button>
+                </div> :
+                <div className='note-buttons'>
+                    <button type='button' onClick={contentSave}>Save Content</button>
+                    <button type='button' onClick={autoSave}>Auto Save Test</button>
+                    <button type='button' onClick={deleteToggle}>Delete</button>
+                </div>}
 
-                    <textarea
-                        value={content}
-                        className='note-content'
-                        onChange={contentChange}
-                        id='content'
-                    />
-                </div>
-            </>
-        </>
+            <textarea
+                value={content}
+                className='note-content'
+                onChange={contentChange}
+                id='content'
+            />
+        </div>
     )
 }
 
