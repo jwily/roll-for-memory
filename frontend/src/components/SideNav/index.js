@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { NavLink } from 'react-router-dom';
-import { createBook } from '../../store/notebooks';
+import { NavLink, useHistory } from 'react-router-dom';
+import { createBook, removeBook } from '../../store/notebooks';
+import { removeBookNotes } from '../../store/notes';
 
 import './SideNav.css'
 
 const SideNav = () => {
+
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const [newBookName, setNewBookName] = useState('Create Notebook');
 
@@ -42,6 +45,11 @@ const SideNav = () => {
         }
     }
 
+    const handleDelete = (bookId) => {
+        dispatch(removeBookNotes(bookId)).then(() => dispatch(removeBook(bookId)));
+        history.push('/');
+    }
+
     return (
         <div className='side-nav'>
             <div className='side-top'>
@@ -69,7 +77,7 @@ const SideNav = () => {
                                 </NavLink>
                                 <div key={`book-${id}-btns`} className='book-link-btns'>
                                     <button key={`book-${id}-edit`} type='button'>Edit</button>
-                                    <button key={`book-${id}-del`} type='button'>Del</button>
+                                    <button key={`book-${id}-del`} type='button' onClick={(e) => handleDelete(id)}>Del</button>
                                 </div>
                             </div>
                         )
