@@ -70,17 +70,17 @@ router.put(
             return res.json(book);
         } else {
             const errors = valErrors.array().map(error => error.msg);
-            return res.json(errors)
+            return res.json({ errors })
         }
     })
 )
 
 router.post(
-    '/:id(\\d+)',
+    '/',
     requireAuth,
     validateNotebook,
     asyncHandler(async (req, res) => {
-        const { bookId, name } = req.body;
+        const { name } = req.body;
 
         const valErrors = validationResult(req);
 
@@ -103,7 +103,7 @@ router.post(
             return res.json(book);
         } else {
             const errors = valErrors.array().map(error => error.msg);
-            return res.json(errors)
+            return res.json({ errors })
         }
     })
 )
