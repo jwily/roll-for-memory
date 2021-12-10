@@ -10,7 +10,7 @@
 }
 
 .login-text {
-    color: rgb(196, 196, 196);
+    color: rgb(200, 200, 200);
     margin-bottom: .5rem;
     font-weight: bold;
 }
@@ -45,6 +45,7 @@
 
 .sub-title {
     font-family: 'Merriweather', serif;
+    font-weight: 300;
     /* font-size: 1rem; */
 }
 
