@@ -53,7 +53,7 @@ router.put(
 
         const valErrors = validationResult(req);
 
-        const dupCheck = await Book.findOne({
+        const dupCheck = await Notebook.findOne({
             where: {
                 userId: req.user.id,
                 name
@@ -61,7 +61,7 @@ router.put(
         });
 
         if (dupCheck) {
-            valErrors.push({ msg: 'Another notebook already has that name.' })
+            valErrors.errors.push({ msg: 'Another notebook already has that name.' })
         }
 
         if (valErrors.isEmpty()) {
@@ -84,7 +84,7 @@ router.post(
 
         const valErrors = validationResult(req);
 
-        const dupCheck = await Book.findOne({
+        const dupCheck = await Notebook.findOne({
             where: {
                 userId: req.user.id,
                 name
@@ -92,7 +92,7 @@ router.post(
         });
 
         if (dupCheck) {
-            valErrors.push({ msg: 'Another notebook already has that name.' })
+            valErrors.errors.push({ msg: 'Another notebook already has that name.' })
         }
 
         if (valErrors.isEmpty()) {

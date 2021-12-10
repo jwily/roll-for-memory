@@ -68,15 +68,15 @@ export const removeNote = (bookId) => async (dispatch) => {
     }
 }
 
-const sortByName = (list) => {
-    return list.sort((bookA, bookB) => {
-        if (bookA.name < bookB.name) return -1;
-        if (bookA.name > bookB.name) return 1;
-        return 0;
-    }).map((book) => book.id);
-}
+// const sortByName = (list) => {
+//     return list.sort((bookA, bookB) => {
+//         if (bookA.name < bookB.name) return -1;
+//         if (bookA.name > bookB.name) return 1;
+//         return 0;
+//     }).map((book) => book.id);
+// }
 
-const initialState = { booksOrder: [] };
+const initialState = {};
 
 const notebooksReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -87,8 +87,7 @@ const notebooksReducer = (state = initialState, action) => {
             })
             return {
                 ...allBooks,
-                ...state,
-                booksOrder: sortByName(action.list)
+                ...state
             }
         case ADD_ONE:
             if (!state[action.book.id]) {
