@@ -27,20 +27,27 @@ const SideNav = () => {
         const response = await dispatch(createBook(newBookName));
         if ('errors' in response) {
             console.log(response.errors);
-        } else return response;
+        } else {
+            setNewBookName('');
+            return response;
+        }
     }
 
     return (
         <div className='side-nav'>
             {/* Let's try this input with a post request onBlur */}
-            <input type='text' placeholder='Create a notebook' value={newBookName} onChange={(e) => setNewBookName(e.target.value)} />
-            <button type='button' onClick={handleCreate}>Submit</button>
-            <NavLink exact to='/'>Home</NavLink>
-            {
-                sorted.map((id, idx) => {
-                    return <NavLink key={idx} to={`/notebooks/${id}`}>{books[id].name}</NavLink>
-                })
-            }
+            <div className='book-create-div'>
+                <input type='text' placeholder='Create a notebook' value={newBookName} onChange={(e) => setNewBookName(e.target.value)} />
+                <button type='button' onClick={handleCreate}>Submit</button>
+            </div>
+            <div className='books-list'>
+                <NavLink exact to='/'>Home</NavLink>
+                {
+                    sorted.map((id, idx) => {
+                        return <NavLink key={idx} to={`/notebooks/${id}`}>{books[id].name}</NavLink>
+                    })
+                }
+            </div>
         </div >
     )
 }

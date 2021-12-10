@@ -4,6 +4,29 @@
     background-color: rgb(51, 48, 47);
     min-width: 100%;
     min-height: 100%;
-    padding: 1rem;
     overflow: auto;
+}
+
+.book-create-div {
+    min-height: 5vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(107, 95, 92);
+}
+
+.book-create-div > * {
+    border: 0;
+    background-color: transparent;
+    color: whitesmoke;
+}
+
+.book-create-div > input {
+    color: whitesmoke;
+}
+
+.books-list {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
 }

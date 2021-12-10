@@ -52,13 +52,27 @@ const NoteDisplay = () => {
     // }, [content])
 
     const titleSave = () => {
-        const payload = { noteId: note.id, name: title };
-        dispatch(editNote(payload))
+        if (title) {
+            const payload = { noteId: note.id, name: title };
+            dispatch(editNote(payload))
+        }
     }
 
     const contentSave = () => {
         const payload = { noteId: note.id, content };
         dispatch(editNote(payload))
+    }
+
+    const titleFocus = () => {
+        if (title === 'Untitled') {
+            setTitle('');
+        }
+    }
+
+    const contentFocus = () => {
+        if (content === 'Let your thoughts flow...') {
+            setContent('');
+        }
     }
 
     const delay = (ms) => {
@@ -117,6 +131,7 @@ const NoteDisplay = () => {
                 onChange={(e) => setTitle(e.target.value)}
                 onBlur={titleSave}
                 type='text'
+                onFocus={titleFocus}
             />
             {showDelete ?
                 <div className='note-buttons'>
@@ -135,6 +150,7 @@ const NoteDisplay = () => {
                 className='note-content'
                 onChange={contentChange}
                 id='content'
+                onFocus={contentFocus}
             />
         </div>
     )
