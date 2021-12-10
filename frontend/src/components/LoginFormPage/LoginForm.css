@@ -94,6 +94,7 @@
     font-size: 1.1rem;
     color: rgb(200, 200, 200);
     font-family: 'Merriweather', serif;
+    transition: all .15s;
 }
 
 .sign-up-link:hover {

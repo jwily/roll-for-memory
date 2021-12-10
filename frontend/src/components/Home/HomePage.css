@@ -7,10 +7,12 @@
 
 .books-width{
     min-width: 15%;
+    max-width: 15%;
 }
 
 .notes-width {
     min-width: 20%;
+    max-width: 20%;
 }
 
 /* .centered {
