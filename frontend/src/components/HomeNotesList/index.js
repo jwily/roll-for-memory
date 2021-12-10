@@ -12,12 +12,14 @@ const HomeNotesList = () => {
 
     // Make the NavLink in here its own component
     return (
-        <div className='notes-list'>
-            <h2>ALL NOTES</h2>
-            {order.map((id, idx) => {
-                const note = notes[id];
-                return <NavLink key={idx} to={`/notebooks/${note.notebookId}/notes/${id}`}>{note.name || `Untitled`}</NavLink>
-            })}
+        <div className='list-img home-img'>
+            <div className='notes-list'>
+                <h2>ALL NOTES</h2>
+                {order.map((id, idx) => {
+                    const note = notes[id];
+                    return <NavLink key={idx} to={`/notebooks/${note.notebookId}/notes/${id}`}>{note.name || `Untitled`}</NavLink>
+                })}
+            </div>
         </div>
     )
 }

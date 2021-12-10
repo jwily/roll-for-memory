@@ -10,9 +10,9 @@
 }
 
 .login-text {
-    color: rgb(196, 196, 196);
+    color: rgb(200, 200, 200);
     margin-bottom: .5rem;
-    font-weight: bold;
+    font-weight: 500;
 }
 
 .login-input {
@@ -45,6 +45,7 @@
 
 .sub-title {
     font-family: 'Merriweather', serif;
+    font-weight: 300;
     /* font-size: 1rem; */
 }
 
@@ -86,4 +87,17 @@
 .login-button:active {
     filter: invert(.75);
     cursor: pointer;
+}
+
+.sign-up-link {
+    margin-top: 1.5rem;
+    font-size: 1.1rem;
+    color: rgb(200, 200, 200);
+    font-family: 'Merriweather', serif;
+}
+
+.sign-up-link:hover {
+    /* text-decoration: underline; */
+    color: whitesmoke;
+    text-shadow: 0px 0px 10px rgb(233, 225, 189);
 }

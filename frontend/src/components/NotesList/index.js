@@ -36,6 +36,7 @@ const NotesList = () => {
         history.push(`/notebooks/${bookId}/notes/${note.id}`);
     }
 
+    // ${images[bookId % 3]}
     // Make the NavLink in here its own component
     return (
         <div className={`list-img ${images[bookId % 3]}`} >

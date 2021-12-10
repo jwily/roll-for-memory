@@ -32,7 +32,7 @@ const HomePage = ({ isLoaded }) => {
     return (
         <>
             <Navigation isLoaded={isLoaded} />
-            <div className='home-page centered'>
+            <div className='home-page'>
                 <div className='books-width'>
                     {booksLoaded && <SideNav />}
                 </div>
