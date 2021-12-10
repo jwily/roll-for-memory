@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
 import { createBook, removeBook } from '../../store/notebooks';
@@ -31,8 +31,8 @@ const SideNav = () => {
         setNewBookName('');
     }
 
-    const unsorted = Object.keys(books);
-    const sorted = sortByName(unsorted)
+    const order = Object.keys(books);
+    sortByName(order);
 
     const handleCreate = async (e) => {
         e.preventDefault();
@@ -46,7 +46,7 @@ const SideNav = () => {
     }
 
     const handleDelete = (bookId) => {
-        dispatch(removeBookNotes(bookId)).then(() => dispatch(removeBook(bookId)));
+        dispatch(removeBook(bookId)).then(() => dispatch(removeBookNotes(bookId)));
         history.push('/');
     }
 
@@ -69,7 +69,7 @@ const SideNav = () => {
                     <NavLink exact to='/'>ALL NOTES</NavLink>
                 </div>
                 {
-                    sorted.map((id, idx) => {
+                    order.map((id, idx) => {
                         return (
                             <div key={`book-${idx}-div`} className='book-link-div'>
                                 <NavLink key={idx} to={`/notebooks/${id}`}>

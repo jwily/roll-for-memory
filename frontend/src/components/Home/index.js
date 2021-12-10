@@ -30,8 +30,6 @@ const HomePage = ({ isLoaded }) => {
         dispatch(getNotes()).then(() => setNotesLoaded(true));
     }, [dispatch])
 
-    console.log(window.location.pathname);
-
     return (
         <>
             <Navigation isLoaded={isLoaded} />

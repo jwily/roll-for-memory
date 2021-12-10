@@ -20,7 +20,7 @@ const remove = noteId => ({
     noteId
 })
 
-const removeBook = bookId => ({
+export const removeBookNotes = bookId => ({
     type: REMOVE_BOOK,
     bookId
 })
@@ -73,16 +73,16 @@ export const removeNote = (noteId) => async (dispatch) => {
     }
 }
 
-export const removeBookNotes = (bookId) => async (dispatch) => {
+// export const removeBookNotes = (bookId) => async (dispatch) => {
 
-    const response = await csrfFetch(`/api/notebooks/${bookId}`, {
-        method: 'DELETE',
-    })
+//     const response = await csrfFetch(`/api/notebooks/${bookId}`, {
+//         method: 'DELETE',
+//     })
 
-    if (response.ok) {
-        dispatch(removeBook(bookId));
-    }
-}
+//     if (response.ok) {
+//         dispatch(removeBook(bookId));
+//     }
+// }
 
 const initialState = {};
 
@@ -113,20 +113,18 @@ const notesReducer = (state = initialState, action) => {
                     ...action.note
                 }
             };
-        case REMOVE: {
-            const newState = { ...state };
-            delete newState[action.noteId];
-            return newState;
-        }
-        case REMOVE_BOOK: {
-            const newState = { ...state };
-            for (let id in newState) {
-                if (newState[id].notebookId === action.bookId) {
-                    delete newState[id];
+        case REMOVE:
+            const removeOne = { ...state };
+            delete removeOne[action.noteId];
+            return removeOne;
+        case REMOVE_BOOK:
+            const removeMany = { ...state };
+            for (let id in removeMany) {
+                if (removeMany[id].notebookId === action.bookId) {
+                    delete removeMany[id];
                 }
             }
-            return newState;
-        }
+            return removeMany;
         default:
             return state;
     }

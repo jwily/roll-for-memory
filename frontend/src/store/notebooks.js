@@ -58,7 +58,7 @@ export const editBook = (payload) => async (dispatch) => {
 
 export const removeBook = (bookId) => async (dispatch) => {
 
-    const response = await csrfFetch(`/api/notes/${bookId}`, {
+    const response = await csrfFetch(`/api/notebooks/${bookId}`, {
         method: 'DELETE'
     });
 
