@@ -41,7 +41,9 @@ const NoteDisplay = () => {
                 setContent(note.content);
                 setSavedContent(note.content);
             }
-            else setContent('Let your thoughts flow...');
+            else {
+                setContent('Let your thoughts flow...');
+            }
         }
     }, [note])
 
@@ -63,6 +65,7 @@ const NoteDisplay = () => {
 
     const titleSave = () => {
         if (title && title !== savedTitle) {
+            setSavedTitle(title);
             const payload = { noteId: note.id, name: title };
             dispatch(editNote(payload))
         }

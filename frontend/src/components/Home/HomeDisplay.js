@@ -2,8 +2,10 @@ import React from 'react';
 
 const HomeDisplay = () => {
     return (
-        <div>
-
+        <div className='display'>
+            <div className='display-banner'></div>
+            <div className='display-body'>
+            </div>
         </div>
     )
 };

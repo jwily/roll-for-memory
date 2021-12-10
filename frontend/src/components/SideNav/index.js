@@ -36,7 +36,7 @@ const SideNav = () => {
     return (
         <div className='side-nav'>
             {/* Let's try this input with a post request onBlur */}
-            <div className='book-create-div'>
+            <div className='book-create-div display-banner'>
                 <input type='text' placeholder='Create a notebook' value={newBookName} onChange={(e) => setNewBookName(e.target.value)} />
                 <button type='button' onClick={handleCreate}>Submit</button>
             </div>
