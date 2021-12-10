@@ -1,7 +1,7 @@
 const express = require('express')
 const asyncHandler = require('express-async-handler');
 
-const { check } = require('express-validator');
+const { check, validationResult } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { requireAuth } = require('../../utils/auth');
 
@@ -12,8 +12,7 @@ const router = express.Router();
 const validateNotebook = [
     check('name')
         .exists({ checkFalsy: true })
-        .withMessage('Your new notebook needs a name.'),
-    handleValidationErrors
+        .withMessage('Your new notebook needs a name.')
 ]
 
 router.get(
@@ -42,6 +41,70 @@ router.delete(
         const book = await Notebook.findByPk(bookId);
         await book.destroy();
         res.json({ message: 'Notebook successfully deleted.' })
+    })
+)
+
+router.put(
+    '/:id(\\d+)',
+    requireAuth,
+    validateNotebook,
+    asyncHandler(async (req, res) => {
+        const { bookId, name } = req.body;
+
+        const valErrors = validationResult(req);
+
+        const dupCheck = await Book.findOne({
+            where: {
+                userId: req.user.id,
+                name
+            }
+        });
+
+        if (dupCheck) {
+            valErrors.push({ msg: 'Another notebook already has that name.' })
+        }
+
+        if (valErrors.isEmpty()) {
+            const book = await Notebook.findByPk(bookId);
+            await book.update({ name });
+            return res.json(book);
+        } else {
+            const errors = valErrors.array().map(error => error.msg);
+            return res.json(errors)
+        }
+    })
+)
+
+router.post(
+    '/:id(\\d+)',
+    requireAuth,
+    validateNotebook,
+    asyncHandler(async (req, res) => {
+        const { bookId, name } = req.body;
+
+        const valErrors = validationResult(req);
+
+        const dupCheck = await Book.findOne({
+            where: {
+                userId: req.user.id,
+                name
+            }
+        });
+
+        if (dupCheck) {
+            valErrors.push({ msg: 'Another notebook already has that name.' })
+        }
+
+        if (valErrors.isEmpty()) {
+            const book = await Notebook.create({
+                userId: req.user.id,
+                name
+            })
+            return res.json(book);
+        } else {
+            const errors = valErrors.array().map(error => error.msg);
+            return res.json(errors)
+        }
     })
 )
 
