@@ -39,6 +39,18 @@
     font-family: 'Merriweather', serif;
 }
 
+.sign-out-button {
+    opacity: .5;
+}
+
+.sign-out-button:hover {
+    opacity: 1;
+}
+
+.sign-out-button:active {
+    opacity: 1;
+}
+
 .logo-top {
     margin-left: 1rem;
     font-family: 'Cormorant', serif;
