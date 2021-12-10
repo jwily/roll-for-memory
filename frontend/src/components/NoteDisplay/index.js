@@ -17,20 +17,30 @@ const NoteDisplay = () => {
     const note = notes[noteId];
 
     const [title, setTitle] = useState('');
+    const [savedTitle, setSavedTitle] = useState('');
     const [content, setContent] = useState('');
+    const [savedContent, setSavedContent] = useState('');
     const [saving, setSaving] = useState(false);
     const [showDelete, setShowDelete] = useState(false);
 
     useEffect(() => {
         if (note) {
-            if (note.name) setTitle(note.name);
-            else setTitle('Untitled');
+            if (note.name) {
+                setTitle(note.name);
+                setSavedTitle(note.name);
+            }
+            else {
+                setTitle('Untitled');
+            }
         }
     }, [note])
 
     useEffect(() => {
         if (note) {
-            if (note.content) setContent(note.content);
+            if (note.content) {
+                setContent(note.content);
+                setSavedContent(note.content);
+            }
             else setContent('Let your thoughts flow...');
         }
     }, [note])
@@ -52,7 +62,7 @@ const NoteDisplay = () => {
     // }, [content])
 
     const titleSave = () => {
-        if (title) {
+        if (title && title !== savedTitle) {
             const payload = { noteId: note.id, name: title };
             dispatch(editNote(payload))
         }
