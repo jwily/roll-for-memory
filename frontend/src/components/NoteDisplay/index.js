@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory, Redirect } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { editNote, removeNote } from '../../store/notes';
@@ -13,9 +13,8 @@ const NoteDisplay = () => {
     const notes = useSelector(state => state.notes);
 
     // Will this be a problem for bad urls?
-    const { noteId } = useParams('');
+    const { bookId, noteId } = useParams('');
     const note = notes[noteId];
-    const bookId = note.notebookId;
 
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
@@ -35,6 +34,10 @@ const NoteDisplay = () => {
             else setContent('Let your thoughts flow...');
         }
     }, [note])
+
+    if (!(noteId in notes)
+        || notes[noteId].notebookId.toString() !== bookId
+    ) return <Redirect to='/' />
 
     // useEffect(() => {
     //     setSaving(true);
@@ -107,37 +110,33 @@ const NoteDisplay = () => {
     }
 
     return (
-        <>
-            <>
-                <div className='note-display'>
-                    <input
-                        value={title}
-                        className='note-title'
-                        onChange={(e) => setTitle(e.target.value)}
-                        onBlur={titleSave}
-                        type='text'
-                    />
-                    {showDelete ?
-                        <div className='note-buttons'>
-                            <span>Are you sure you want to delete this note?</span>
-                            <button type='button' onClick={remove}>Yup</button>
-                            <button type='button' onClick={cancelDelete}>Nope</button>
-                        </div> :
-                        <div className='note-buttons'>
-                            <button type='button' onClick={contentSave}>Save Content</button>
-                            <button type='button' onClick={autoSave}>Auto Save Test</button>
-                            <button type='button' onClick={deleteToggle}>Delete</button>
-                        </div>}
+        <div className='note-display'>
+            <input
+                value={title}
+                className='note-title'
+                onChange={(e) => setTitle(e.target.value)}
+                onBlur={titleSave}
+                type='text'
+            />
+            {showDelete ?
+                <div className='note-buttons'>
+                    <span>Are you sure you want to delete this note?</span>
+                    <button type='button' onClick={remove}>Yup</button>
+                    <button type='button' onClick={cancelDelete}>Nope</button>
+                </div> :
+                <div className='note-buttons'>
+                    <button type='button' onClick={contentSave}>Save Content</button>
+                    <button type='button' onClick={autoSave}>Auto Save Test</button>
+                    <button type='button' onClick={deleteToggle}>Delete</button>
+                </div>}
 
-                    <textarea
-                        value={content}
-                        className='note-content'
-                        onChange={contentChange}
-                        id='content'
-                    />
-                </div>
-            </>
-        </>
+            <textarea
+                value={content}
+                className='note-content'
+                onChange={contentChange}
+                id='content'
+            />
+        </div>
     )
 }
 

@@ -58,3 +58,39 @@ ul, ol, li {
 .active {
     font-weight: bold;
 }
+
+.limsa {
+    background-image: url('./images/limsa.jpg');
+}
+
+.uldah {
+    background-image: url('./images/uldah.jpg');
+}
+
+.grid {
+    background-image: url('./images/grid.jpg');
+}
+
+div[class*='list-img'][class*='limsa'] {
+    background-position: 40% 50%;
+}
+
+div[class*='list-img'][class*='uldah'] {
+    background-position: 45% 50%;
+}
+
+div[class*='list-img'][class*='grid'] {
+    background-position: 72.5% 50%;
+}
+
+div[class*='login-banner'][class*='limsa'] {
+    background-position: 50% 32.5%;
+}
+
+div[class*='login-banner'][class*='uldah'] {
+    background-position: 50% 75%;
+}
+
+div[class*='login-banner'][class*='grid'] {
+    background-position: 50% 50%;
+}
