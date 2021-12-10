@@ -3,28 +3,49 @@
     flex-direction: column;
     background-color: rgb(51, 48, 47);
     min-width: 100%;
-    min-height: 100%;
-    overflow: auto;
+    max-height: 95vh;
 }
 
-.book-create-div {
+.side-top {
+    height: 5vh;
+    background-color: rgb(107, 95, 92);
     display: flex;
-    align-items: center;
     justify-content: center;
 }
 
-.book-create-div > * {
-    border: 0;
+.book-create {
+    display: flex;
+    width: 15vw;
     background-color: transparent;
-    color: whitesmoke;
 }
 
-.book-create-div > input {
+#create-note-field {
+    opacity: .5;
+    transition: opacity .35s;
+    background-color: transparent;
+    font-family: 'Cormorant', serif;
     color: whitesmoke;
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-align: center;
+    width: 100%;
+}
+
+#create-note-field:hover {
+    opacity: 1;
+}
+
+#create-note-field:focus {
+    opacity: 1;
+}
+
+.book-create > button {
+    display: none;
 }
 
 .books-list {
     display: flex;
     flex-direction: column;
     padding: 1rem;
+    overflow-y: auto;
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { createBook } from '../../store/notebooks';
@@ -8,7 +8,7 @@ import './SideNav.css'
 const SideNav = () => {
     const dispatch = useDispatch();
 
-    const [newBookName, setNewBookName] = useState('');
+    const [newBookName, setNewBookName] = useState('Create Notebook');
 
     const books = useSelector(state => state.books);
 
@@ -20,10 +20,19 @@ const SideNav = () => {
         })
     };
 
+    const handleBlur = () => {
+        setNewBookName('Create Notebook');
+    }
+
+    const handleFocus = () => {
+        setNewBookName('');
+    }
+
     const unsorted = Object.keys(books);
     const sorted = sortByName(unsorted)
 
-    const handleCreate = async () => {
+    const handleCreate = async (e) => {
+        e.preventDefault();
         const response = await dispatch(createBook(newBookName));
         if ('errors' in response) {
             console.log(response.errors);
@@ -35,10 +44,16 @@ const SideNav = () => {
 
     return (
         <div className='side-nav'>
-            {/* Let's try this input with a post request onBlur */}
-            <div className='book-create-div display-banner'>
-                <input type='text' placeholder='Create a notebook' value={newBookName} onChange={(e) => setNewBookName(e.target.value)} />
-                <button type='button' onClick={handleCreate}>Submit</button>
+            <div className='side-top'>
+                <form className="book-create"
+                    onSubmit={handleCreate}>
+                    <input type='text' value={newBookName}
+                        onChange={(e) => setNewBookName(e.target.value)}
+                        onBlur={handleBlur}
+                        onFocus={handleFocus}
+                        id='create-note-field' />
+                    <button>Submit</button>
+                </form>
             </div>
             <div className='books-list'>
                 <NavLink exact to='/'>Home</NavLink>

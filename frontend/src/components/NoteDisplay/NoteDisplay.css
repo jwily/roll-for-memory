@@ -7,14 +7,6 @@
     height: auto;
 }
 
-.note-display > * {
-    border: none;
-}
-
-.note-display > *:focus {
-    outline: none;
-}
-
 .note-display > input {
     height: 10%;
     padding: 1.5rem;
