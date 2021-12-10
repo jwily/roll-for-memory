@@ -34,7 +34,7 @@ router.get(
 );
 
 router.delete(
-    '/:id{\\d+)',
+    '/:id(\\d+)',
     requireAuth,
     asyncHandler(async (req, res) => {
         const bookId = req.params.id;
