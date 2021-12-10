@@ -11,4 +11,6 @@
     min-width: 100%;
     min-height: 100%;
     background-size: cover;
+    max-height: 95vh;
+    overflow: auto;
 }

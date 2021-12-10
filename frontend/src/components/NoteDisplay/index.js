@@ -127,7 +127,7 @@ const NoteDisplay = () => {
                 <div className='note-buttons'>
                     <button type='button' onClick={contentSave}>Save Content</button>
                     <button type='button' onClick={autoSave}>Auto Save Test</button>
-                    <button type='button' onClick={deleteToggle}>Delete</button>
+                    <button type='button' onClick={remove}>Delete</button>
                 </div>}
 
             <textarea

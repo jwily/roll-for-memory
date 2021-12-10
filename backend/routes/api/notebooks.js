@@ -9,6 +9,11 @@ const { Notebook } = require('../../db/models');
 
 const router = express.Router();
 
+const validateNotebook = [
+    check('name')
+        .exists({ checkFalsy: true })
+]
+
 router.get(
     '/:id(\\d+)',
     requireAuth,
