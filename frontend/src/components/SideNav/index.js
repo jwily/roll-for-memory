@@ -51,22 +51,25 @@ const SideNav = () => {
                         onChange={(e) => setNewBookName(e.target.value)}
                         onBlur={handleBlur}
                         onFocus={handleFocus}
-                        id='create-note-field' />
+                        id='create-note-field'
+                        autoComplete='off' />
                     <button>Submit</button>
                 </form>
             </div>
             <div className='books-list'>
-                <NavLink exact to='/'>Home</NavLink>
+                <div className='book-link-div'>
+                    <NavLink exact to='/'>ALL NOTES</NavLink>
+                </div>
                 {
                     sorted.map((id, idx) => {
                         return (
-                            <div className='book-link-div'>
+                            <div key={`book-${idx}-div`} className='book-link-div'>
                                 <NavLink key={idx} to={`/notebooks/${id}`}>
                                     {books[id].name.length < 20 ? books[id].name : books[id].name.slice(0, 20) + '...'}
                                 </NavLink>
-                                <div className='book-link-btns'>
-                                    <button type='button'>Edit</button>
-                                    <button type='button'>Delete</button>
+                                <div key={`book-${id}-btns`} className='book-link-btns'>
+                                    <button key={`book-${id}-edit`} type='button'>Edit</button>
+                                    <button key={`book-${id}-del`} type='button'>Del</button>
                                 </div>
                             </div>
                         )

@@ -2,7 +2,8 @@ import { csrfFetch } from "./csrf";
 
 const LOAD = 'notes/LOAD';
 const ADD_ONE = 'notes/ADD_ONE';
-const REMOVE = 'notes/REMOVE'
+const REMOVE = 'notes/REMOVE';
+const REMOVE_BOOK = 'notes/REMOVE_BOOK';
 
 const load = list => ({
     type: LOAD,
@@ -17,6 +18,11 @@ const addOne = note => ({
 const remove = noteId => ({
     type: REMOVE,
     noteId
+})
+
+const removeBook = bookId => ({
+    type: REMOVE_BOOK,
+    bookId
 })
 
 export const getNotes = () => async (dispatch) => {
@@ -97,10 +103,20 @@ const notesReducer = (state = initialState, action) => {
                     ...action.note
                 }
             };
-        case REMOVE:
+        case REMOVE: {
             const newState = { ...state };
             delete newState[action.noteId];
             return newState;
+        }
+        case REMOVE_BOOK: {
+            const newState = { ...state };
+            for (let id in newState) {
+                if (newState[id].notebookId === action.bookId) {
+                    delete newState[id];
+                }
+            }
+            return newState;
+        }
         default:
             return state;
     }

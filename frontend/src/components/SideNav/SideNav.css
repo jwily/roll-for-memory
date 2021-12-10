@@ -27,13 +27,15 @@
 
 .book-link-div > a {
     width: 100%;
+    height: 2rem;
 }
 
 .book-link-btns {
     display: flex;
     align-items: center;
     cursor: pointer;
-    opacity: 0;
+    opacity: .05;
+    transition: opacity .15s;
 }
 
 .book-link-div:hover > .book-link-btns {
