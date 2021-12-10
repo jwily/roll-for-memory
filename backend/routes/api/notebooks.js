@@ -12,6 +12,8 @@ const router = express.Router();
 const validateNotebook = [
     check('name')
         .exists({ checkFalsy: true })
+        .withMessage('Your new notebook needs a name.'),
+    handleValidationErrors
 ]
 
 router.get(
@@ -31,5 +33,16 @@ router.get(
         return res.json(books);
     })
 );
+
+router.delete(
+    '/:id{\\d+)',
+    requireAuth,
+    asyncHandler(async (req, res) => {
+        const bookId = req.params.id;
+        const book = await Notebook.findByPk(bookId);
+        await book.destroy();
+        res.json({ message: 'Notebook successfully deleted.' })
+    })
+)
 
 module.exports = router;
