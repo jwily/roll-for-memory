@@ -61,7 +61,9 @@ const SideNav = () => {
                     sorted.map((id, idx) => {
                         return (
                             <div className='book-link-div'>
-                                <NavLink key={idx} to={`/notebooks/${id}`}>{books[id].name}</NavLink>
+                                <NavLink key={idx} to={`/notebooks/${id}`}>
+                                    {books[id].name.length < 20 ? books[id].name : books[id].name.slice(0, 20) + '...'}
+                                </NavLink>
                                 <div className='book-link-btns'>
                                     <button type='button'>Edit</button>
                                     <button type='button'>Delete</button>

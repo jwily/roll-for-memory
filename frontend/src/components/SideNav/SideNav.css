@@ -25,9 +25,19 @@
     justify-content: space-between;
 }
 
+.book-link-div > a {
+    width: 100%;
+}
+
 .book-link-btns {
     display: flex;
     align-items: center;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.book-link-div:hover > .book-link-btns {
+    opacity: 1;
 }
 
 .book-link-btns > button {
