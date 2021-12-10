@@ -13,7 +13,7 @@ router.get(
     '/:id(\\d+)',
     requireAuth,
     asyncHandler(async (req, res) => {
-        const book = await Notebook.findByPk(parseInt(req.params.id, 10));
+        const book = await Notebook.findByPk(req.params.id);
         return res.json(book);
     })
 );
