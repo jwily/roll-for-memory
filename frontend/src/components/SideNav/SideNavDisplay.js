@@ -17,9 +17,11 @@ const SideNavDisplay = () => {
     }
 
     return (
-        <div>
-            <button type='button' onClick={clickHandler}>Create New Note</button>
-        </div>
+        <div className='display'>
+            <div className='display-banner'></div>
+            <div className='display-body'>
+            </div>
+        </div >
     )
 }
 

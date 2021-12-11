@@ -40,8 +40,8 @@ const NotesList = () => {
     // Make the NavLink in here its own component
     return (
         <div className={`list-img ${images[bookId % 3]}`} >
+            <button type='button' className='note-create-btn' onClick={clickHandler}><span>Create Note</span></button>
             <div className='notes-list'>
-                <button type='button' onClick={clickHandler}>Create New Note</button>
                 {order.map((id, idx) => {
                     return <NavLink key={idx} to={`/notebooks/${bookId}/notes/${id}`}>{notes[id].name || `Untitled`}</NavLink>
                 })}

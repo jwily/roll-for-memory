@@ -15,6 +15,25 @@
     max-width: 20%;
 }
 
+.display {
+    direction: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100%;
+}
+
+.display-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
+
+.display-banner {
+    height: 5vh;
+    background-color: rgb(107, 95, 92);
+}
+
 /* .centered {
     position: absolute;
     left: 50%;

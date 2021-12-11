@@ -4,15 +4,16 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getNotes } from '../../store/notes';
 import { getNotebooks } from '../../store/notebooks';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { useState } from 'react';
 
 import SideNav from '../SideNav';
 import SideNavDisplay from '../SideNav/SideNavDisplay';
-import NotesList from '../NotesList';
 import HomeNotesList from '../HomeNotesList';
-import NoteDisplay from '../NoteDisplay';
+import HomeDisplay from './HomeDisplay';
 import Navigation from '../Navigation';
+import NoteDisplay from '../NoteDisplay';
+import NotesList from '../NotesList';
 
 const HomePage = ({ isLoaded }) => {
 
@@ -56,9 +57,7 @@ const HomePage = ({ isLoaded }) => {
                         <SideNavDisplay />
                     </Route>
                     <Route path='/'>
-                        <div className='note-display'>
-                            <span>Home</span>
-                        </div>
+                        <HomeDisplay />
                     </Route>
                 </Switch>
             </div>

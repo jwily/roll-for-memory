@@ -17,21 +17,35 @@ const NoteDisplay = () => {
     const note = notes[noteId];
 
     const [title, setTitle] = useState('');
+    const [savedTitle, setSavedTitle] = useState('');
     const [content, setContent] = useState('');
+    const [savedContent, setSavedContent] = useState('');
     const [saving, setSaving] = useState(false);
     const [showDelete, setShowDelete] = useState(false);
 
     useEffect(() => {
         if (note) {
-            if (note.name) setTitle(note.name);
-            else setTitle('Untitled');
+            if (note.name) {
+                setTitle(note.name);
+                setSavedTitle(note.name);
+            }
+            else {
+                setTitle('Untitled');
+                setSavedTitle('Untitled');
+            }
         }
     }, [note])
 
     useEffect(() => {
         if (note) {
-            if (note.content) setContent(note.content);
-            else setContent('Let your thoughts flow...');
+            if (note.content) {
+                setContent(note.content);
+                setSavedContent(note.content);
+            }
+            else {
+                setContent('Let your thoughts flow...');
+                setSavedContent('Let your thoughts flow...');
+            }
         }
     }, [note])
 
@@ -52,13 +66,28 @@ const NoteDisplay = () => {
     // }, [content])
 
     const titleSave = () => {
-        const payload = { noteId: note.id, name: title };
-        dispatch(editNote(payload))
+        if (title && title !== savedTitle) {
+            setSavedTitle(title);
+            const payload = { noteId: note.id, name: title };
+            dispatch(editNote(payload))
+        }
     }
 
     const contentSave = () => {
         const payload = { noteId: note.id, content };
         dispatch(editNote(payload))
+    }
+
+    const titleFocus = () => {
+        if (title === 'Untitled') {
+            setTitle('');
+        }
+    }
+
+    const contentFocus = () => {
+        if (content === 'Let your thoughts flow...') {
+            setContent('');
+        }
     }
 
     const delay = (ms) => {
@@ -117,6 +146,7 @@ const NoteDisplay = () => {
                 onChange={(e) => setTitle(e.target.value)}
                 onBlur={titleSave}
                 type='text'
+                onFocus={titleFocus}
             />
             {showDelete ?
                 <div className='note-buttons'>
@@ -127,7 +157,7 @@ const NoteDisplay = () => {
                 <div className='note-buttons'>
                     <button type='button' onClick={contentSave}>Save Content</button>
                     <button type='button' onClick={autoSave}>Auto Save Test</button>
-                    <button type='button' onClick={deleteToggle}>Delete</button>
+                    <button type='button' onClick={remove}>Delete</button>
                 </div>}
 
             <textarea
@@ -135,6 +165,7 @@ const NoteDisplay = () => {
                 className='note-content'
                 onChange={contentChange}
                 id='content'
+                onFocus={contentFocus}
             />
         </div>
     )

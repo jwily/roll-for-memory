@@ -2,7 +2,8 @@ import { csrfFetch } from "./csrf";
 
 const LOAD = 'notes/LOAD';
 const ADD_ONE = 'notes/ADD_ONE';
-const REMOVE = 'notes/REMOVE'
+const REMOVE = 'notes/REMOVE';
+const REMOVE_BOOK = 'notes/REMOVE_BOOK';
 
 const load = list => ({
     type: LOAD,
@@ -17,6 +18,11 @@ const addOne = note => ({
 const remove = noteId => ({
     type: REMOVE,
     noteId
+})
+
+export const removeBookNotes = bookId => ({
+    type: REMOVE_BOOK,
+    bookId
 })
 
 export const getNotes = () => async (dispatch) => {
@@ -63,9 +69,20 @@ export const removeNote = (noteId) => async (dispatch) => {
     });
 
     if (response.ok) {
-        dispatch(remove(noteId))
+        dispatch(remove(noteId));
     }
 }
+
+// export const removeBookNotes = (bookId) => async (dispatch) => {
+
+//     const response = await csrfFetch(`/api/notebooks/${bookId}`, {
+//         method: 'DELETE',
+//     })
+
+//     if (response.ok) {
+//         dispatch(removeBook(bookId));
+//     }
+// }
 
 const initialState = {};
 
@@ -97,9 +114,17 @@ const notesReducer = (state = initialState, action) => {
                 }
             };
         case REMOVE:
-            const newState = { ...state };
-            delete newState[action.noteId];
-            return newState;
+            const removeOne = { ...state };
+            delete removeOne[action.noteId];
+            return removeOne;
+        case REMOVE_BOOK:
+            const removeMany = { ...state };
+            for (let id in removeMany) {
+                if (removeMany[id].notebookId === parseInt(action.bookId, 10)) {
+                    delete removeMany[id];
+                }
+            }
+            return removeMany;
         default:
             return state;
     }

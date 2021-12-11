@@ -14,6 +14,7 @@ function LoginFormPage() {
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState([]);
     const [imgNum, setImgNum] = useState(0);
+    const [subtitle, setSubtitle] = useState(true);
     // const [errorsLoaded, setErrorsLoaded] = useState(false)
 
     useEffect(() => {
@@ -32,7 +33,10 @@ function LoginFormPage() {
         dispatch(sessionActions.login({ credential, password }))
             .catch(async (res) => {
                 const data = await res.json();
-                if (data && data.errors) setErrors(data.errors);
+                if (data && data.errors) {
+                    setErrors(data.errors);
+                    setSubtitle(false);
+                }
             });
     }
 
@@ -44,7 +48,7 @@ function LoginFormPage() {
         <div className='login-main centered'>
             <h2 className='title'>roll for memory</h2>
             <div className='sub-holder'>
-                {!errors.length ?
+                {subtitle ?
                     <span className='sub-title'>Dream your world. Plan your sessions. Roll for initiative.</span> :
                     <span className='sub-title sub-error'>The provided credentials were invalid.</span>
                 }
