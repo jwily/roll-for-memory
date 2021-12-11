@@ -20,7 +20,6 @@ const SideNavDisplay = () => {
         <div className='display'>
             <div className='display-banner'></div>
             <div className='display-body'>
-                <button type='button' onClick={clickHandler}>Create New Note</button>
             </div>
         </div >
     )
