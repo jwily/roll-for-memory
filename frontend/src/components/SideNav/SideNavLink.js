@@ -6,7 +6,7 @@ const SideNavLink = ({ id, idx, handleDelete, books }) => {
     return (
         <div key={`book-${idx}-div`} className='book-link-div'>
             <NavLink key={idx} to={`/notebooks/${id}`}>
-                {books[id].name.length < 20 ? books[id].name : books[id].name.slice(0, 20) + '...'}
+                {books[id].name}
             </NavLink>
             <div key={`book-${id}-btns`} className='book-link-btns'>
                 <button key={`book-${id}-edit`} type='button'>Edit</button>
