@@ -76,4 +76,5 @@
     flex-direction: column;
     padding: 1rem;
     overflow-y: auto;
+    overflow-x: hidden;
 }

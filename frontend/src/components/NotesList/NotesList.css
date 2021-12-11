@@ -6,6 +6,7 @@
     max-height: 90vh;
     padding: 1rem;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .note-create-btn {

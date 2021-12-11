@@ -120,7 +120,7 @@ const notesReducer = (state = initialState, action) => {
         case REMOVE_BOOK:
             const removeMany = { ...state };
             for (let id in removeMany) {
-                if (removeMany[id].notebookId === action.bookId) {
+                if (removeMany[id].notebookId === parseInt(action.bookId, 10)) {
                     delete removeMany[id];
                 }
             }
