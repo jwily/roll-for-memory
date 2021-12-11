@@ -10,9 +10,9 @@
 }
 
 .login-text {
-    color: rgb(196, 196, 196);
+    color: rgb(200, 200, 200);
     margin-bottom: .5rem;
-    font-weight: bold;
+    font-weight: 500;
 }
 
 .login-input {
@@ -37,8 +37,15 @@
     width: 25%;
 }
 
+.login-buttons {
+    display: flex;
+    justify-content: space-around;
+    min-width: 12.5rem;
+}
+
 .sub-title {
     font-family: 'Merriweather', serif;
+    font-weight: 300;
     /* font-size: 1rem; */
 }
 
@@ -54,7 +61,8 @@
     height: 20rem;
     width: 100%;
     /* background-image: url('./images/limsa.jpg'); */
-    background-position: 50% 40%;
+    /* background-position: 50% 45%; */
+    background-size: cover;
     margin-top: 2.5rem;
     margin-bottom: 2rem;
 }
@@ -81,14 +89,16 @@
     cursor: pointer;
 }
 
-.limsa {
-    background-image: url('./images/limsa.jpg');
+.sign-up-link {
+    margin-top: 1.5rem;
+    font-size: 1.1rem;
+    color: rgb(200, 200, 200);
+    font-family: 'Merriweather', serif;
+    transition: all .15s;
 }
 
-.uldah {
-    background-image: url('./images/grid.jpg');
-}
-
-.grid {
-    background-image: url('./images/uldah.jpg');
+.sign-up-link:hover {
+    /* text-decoration: underline; */
+    color: whitesmoke;
+    text-shadow: 0px 0px 10px rgb(233, 225, 189);
 }

@@ -1,6 +1,11 @@
 /* TODO Add site wide styles */
 
-@import url('https://fonts.googleapis.com/css2?family=Amita&family=Cabin&family=Cormorant:wght@300&family=Karla:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=M+PLUS+1:wght@100;200;300;400;500;600;700;800;900&family=M+PLUS+2:wght@100;200;300;400;500;600;700;800;900&family=Merriweather:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=M+PLUS+2:wght@100;200;300;400;500;600;700;800;900&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+
+html, body {
+    margin: 0px;
+    height: 100%;
+}
 
 body {
     font-family: 'M PLUS 2', sans-serif;
@@ -11,6 +16,17 @@ body {
 
 * {
     box-sizing: border-box;
+}
+
+button, input, textarea {
+    padding: 0;
+    outline: 0;
+    margin: 0;
+    border: 0;
+}
+
+button {
+    vertical-align: top;
 }
 
 h1, h2, h3, h4, h5, h6, a, ol, li, ul, div, span,
@@ -57,4 +73,45 @@ ul, ol, li {
 
 .active {
     font-weight: bold;
+}
+
+.limsa {
+    background-image: url('./images/limsa.jpg');
+}
+
+.uldah {
+    background-image: url('./images/uldah.jpg');
+}
+
+.grid {
+    background-image: url('./images/grid.jpg');
+}
+
+div[class*='list-img'][class*='limsa'] {
+    background-position: 42% 50%;
+}
+
+div[class*='list-img'][class*='uldah'] {
+    background-position: 47% 50%;
+}
+
+div[class*='list-img'][class*='grid'] {
+    background-position: 71% 50%;
+}
+
+div[class*='login-banner'][class*='limsa'] {
+    background-position: 50% 32.5%;
+}
+
+div[class*='login-banner'][class*='uldah'] {
+    background-position: 50% 75%;
+}
+
+div[class*='login-banner'][class*='grid'] {
+    background-position: 50% 50%;
+}
+
+.home-img {
+    background-image: url('./images/home.jpg');
+    background-position: 50% 50%;
 }

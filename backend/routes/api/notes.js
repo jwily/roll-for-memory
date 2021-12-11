@@ -13,7 +13,7 @@ router.get(
     '/:id(\\d+)',
     requireAuth,
     asyncHandler(async (req, res) => {
-        const note = await Note.findByPk(parseInt(req.params.id, 10));
+        const note = await Note.findByPk(req.params.id);
         return res.json(note);
     })
 );
@@ -64,7 +64,7 @@ router.delete(
     '/:id(\\d+)',
     requireAuth,
     asyncHandler(async (req, res) => {
-        const noteId = parseInt(req.params.id, 10);
+        const noteId = req.params.id;
         const note = await Note.findByPk(noteId);
         await note.destroy();
         res.json({ message: 'Note successfully deleted.' })

@@ -4,15 +4,16 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getNotes } from '../../store/notes';
 import { getNotebooks } from '../../store/notebooks';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { useState } from 'react';
 
 import SideNav from '../SideNav';
 import SideNavDisplay from '../SideNav/SideNavDisplay';
-import NotesList from '../NotesList';
 import HomeNotesList from '../HomeNotesList';
-import NoteDisplay from '../NoteDisplay';
+import HomeDisplay from './HomeDisplay';
 import Navigation from '../Navigation';
+import NoteDisplay from '../NoteDisplay';
+import NotesList from '../NotesList';
 
 const HomePage = ({ isLoaded }) => {
 
@@ -32,33 +33,31 @@ const HomePage = ({ isLoaded }) => {
     return (
         <>
             <Navigation isLoaded={isLoaded} />
-            <div className='home-page centered'>
-                <div className='hold-width'>
-                    {booksLoaded && <SideNav booksLoaded={booksLoaded} />}
+            <div className='home-page'>
+                <div className='books-width'>
+                    {booksLoaded && <SideNav />}
                 </div>
                 <Switch>
                     <Route path='/notebooks/:bookId'>
-                        <div className='hold-width'>
-                            {booksLoaded && notesLoaded && <NotesList notesLoaded={notesLoaded} />}
+                        <div className='notes-width'>
+                            {notesLoaded && <NotesList />}
                         </div>
                     </Route>
                     <Route path='/'>
-                        <div className='hold-width'>
-                            {notesLoaded && <HomeNotesList notesLoaded={notesLoaded} />}
+                        <div className='notes-width'>
+                            {notesLoaded && <HomeNotesList />}
                         </div>
                     </Route>
                 </Switch>
                 <Switch>
                     <Route path='/notebooks/:bookId/notes/:noteId'>
-                        {notesLoaded && <NoteDisplay notesLoaded={notesLoaded} />}
+                        {notesLoaded && <NoteDisplay />}
                     </Route>
                     <Route path='/notebooks/:bookId/'>
-                        {booksLoaded && <SideNavDisplay />}
+                        <SideNavDisplay />
                     </Route>
                     <Route path='/'>
-                        <div className='note-display'>
-                            <span>Home</span>
-                        </div>
+                        <HomeDisplay />
                     </Route>
                 </Switch>
             </div>

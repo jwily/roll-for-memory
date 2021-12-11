@@ -1,13 +1,37 @@
 .home-page {
     display: flex;
     flex-direction: row;
-    height: 90%;
-    width: 95%;
-    background-color: grey;
+    /* background-color: grey; */
+    height: 95vh;
 }
 
-.hold-width {
+.books-width{
     min-width: 15%;
+    max-width: 15%;
+}
+
+.notes-width {
+    min-width: 20%;
+    max-width: 20%;
+}
+
+.display {
+    direction: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100%;
+}
+
+.display-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
+
+.display-banner {
+    height: 5vh;
+    background-color: rgb(107, 95, 92);
 }
 
 /* .centered {
