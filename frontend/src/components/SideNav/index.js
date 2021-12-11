@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
 import { createBook, removeBook } from '../../store/notebooks';
 import { removeBookNotes } from '../../store/notes';
+import SideNavLink from './SideNavLink';
 
 import './SideNav.css'
 
@@ -71,17 +72,7 @@ const SideNav = () => {
                 </div>
                 {
                     order.map((id, idx) => {
-                        return (
-                            <div key={`book-${idx}-div`} className='book-link-div'>
-                                <NavLink key={idx} to={`/notebooks/${id}`}>
-                                    {books[id].name.length < 20 ? books[id].name : books[id].name.slice(0, 20) + '...'}
-                                </NavLink>
-                                <div key={`book-${id}-btns`} className='book-link-btns'>
-                                    <button key={`book-${id}-edit`} type='button'>Edit</button>
-                                    <button key={`book-${id}-del`} type='button' onClick={(e) => handleDelete(id)}>Del</button>
-                                </div>
-                            </div>
-                        )
+                        return <SideNavLink books={books} id={id} idx={idx} handleDelete={handleDelete} />
                     })
                 }
             </div>
