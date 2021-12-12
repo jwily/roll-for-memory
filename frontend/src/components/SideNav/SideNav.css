@@ -30,6 +30,23 @@
     height: 2rem;
 }
 
+.book-link-div > form >  input {
+    padding: 0;
+    outline: 0;
+    margin: 0;
+    border: 0;
+    width: 100%;
+    height: 2rem;
+    background-color: transparent;
+    color: whitesmoke;
+    font-family: 'M PLUS 2', sans-serif;
+    font-size: 1rem;
+}
+
+.book-link-div > form > button {
+    display: none;
+}
+
 .book-link-btns {
     display: flex;
     align-items: center;
