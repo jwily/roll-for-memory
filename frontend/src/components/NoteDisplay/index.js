@@ -31,7 +31,7 @@ const NoteDisplay = () => {
             }
             else {
                 setTitle('Untitled');
-                setSavedTitle('');
+                setSavedTitle('Untitled');
             }
         }
     }, [note])
@@ -42,30 +42,22 @@ const NoteDisplay = () => {
         }
     }, [note])
 
-    // useEffect(() => {
-    //     if (content && (content !== savedContent)) {
-    //         setSaving(true);
-    //         console.log('Saving...')
-    //         if (!saving) {
-    //             delay(500).then(() => {
-    //                 setSaving(false);
-    //                 // const text = document.getElementById('content').value;
-    //                 // contentSave(text);
-    //                 console.log('Saved!');
-    //             })
-    //         }
-    //     }
-    // }, [content])
-
     if (!(noteId in notes)
         || notes[noteId].notebookId.toString() !== bookId
     ) return <Redirect to='/' />
 
-    const titleSave = () => {
+    const titleSave = async () => {
         if (title === savedTitle) return;
-        setSavedTitle(title);
         const payload = { noteId: note.id, name: title };
-        dispatch(editNote(payload))
+        const response = await dispatch(editNote(payload));
+        if ('errors' in response) {
+            dispatch(msg(response.errors[0], 'error', 'yes'))
+        } else {
+            setSavedTitle(title);
+            dispatch(msg('Saved!', 'normal', 'yes'))
+            delay(500).then(() => dispatch(msg(null, null, 'no')))
+            return response;
+        }
     }
 
     const contentSave = (toSave) => {
@@ -77,7 +69,7 @@ const NoteDisplay = () => {
         if (title === 'Untitled') {
             setTitle('');
         }
-        dispatch(msg("Press 'Return' or click away to save", 'normal', 'yes'))
+        dispatch(msg("Press 'Return' to save", 'normal', 'yes'))
     }
 
     const contentFocus = () => {
@@ -93,55 +85,6 @@ const NoteDisplay = () => {
             setTimeout(resolve, ms);
         })
     };
-
-    // const onChangeSave = () => {
-    //     if (content && content !== savedContent) {
-    //         setSaving(true);
-    //         console.log('Saving...');
-    //         if (!saving) {
-    //             delay(1000).then(() => {
-    //                 setSaving(false);
-    //                 const text = document.getElementById('content').value;
-    //                 contentSave(text);
-    //                 setSavedContent(text);
-    //                 console.log('Saved!');
-    //             })
-    //         }
-    //     }
-    // }
-
-    // const autoSave = (e) => {
-    //     setSaving(true);
-    //     console.log('Saving...')
-    //     if (!saving) {
-    //         delay(3000).then(() => {
-    //             setSaving(false)
-    //             const saved = contentSave()
-    //             setSavedContent(saved)
-    //             console.log('Saved!')
-    //         })
-    //     }
-    // }
-
-    // // const contentChange = (e) => {
-    //     setContent(e.target.value);
-    //     if (content !== savedContent) {
-    //         setSaving(true);
-    //         console.log('Saving')
-    //         if (!saving) {
-    //             delay(1000).then(() => {
-
-    //                 console.log('Saved!');
-    //             })
-    //         }
-    //     }
-    // }
-
-    // const handleContentChange = (e) => {
-    //     setContent(e.target.value);
-    //     autoSave(e);
-    //     return;
-    // }
 
     const keyDownSave = (e) => {
         let charCode = String.fromCharCode(e.which).toLowerCase();
@@ -172,17 +115,14 @@ const NoteDisplay = () => {
                 onSubmit={(e) => {
                     e.preventDefault();
                     titleSave();
-                    dispatch(msg('Saved!', 'normal', 'yes'))
-                    delay(500).then(() => dispatch(msg(null, null, 'no')))
                 }}>
                 <input
                     value={title}
                     className='note-title'
                     onChange={(e) => setTitle(e.target.value)}
                     onBlur={(e) => {
-                        titleSave();
                         dispatch(msg(null, null, 'no'));
-                        if (!title) setTitle('Untitled');
+                        if (!title) setTitle('Untitled')
                     }}
                     type='text'
                     onFocus={titleFocus}

@@ -56,9 +56,10 @@ export const editNote = (payload) => async (dispatch) => {
     });
 
     if (response.ok) {
-        const note = await response.json();
-        dispatch(addOne(note));
-        return note;
+        const bundle = await response.json();
+        if (bundle.errors) return bundle;
+        dispatch(addOne(bundle));
+        return bundle;
     }
 }
 
