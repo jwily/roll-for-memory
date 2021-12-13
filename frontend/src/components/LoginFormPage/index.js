@@ -50,7 +50,7 @@ function LoginFormPage() {
             <div className='sub-holder'>
                 {subtitle ?
                     <span className='sub-title'>Dream your world. Plan your sessions. Roll for initiative.</span> :
-                    <span className='sub-title sub-error'>The provided credentials were invalid.</span>
+                    <span className='sub-title sub-error'>The provided credentials were invalid</span>
                 }
             </div>
             <div className={`login-banner ${images[imgNum]}`}></div>

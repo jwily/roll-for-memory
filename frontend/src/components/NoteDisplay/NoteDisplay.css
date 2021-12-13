@@ -15,13 +15,18 @@
     outline: none;
 }
 
-.note-display > input {
-    height: 10%;
+.title-form > input {
+    min-height: 10vh;
+    min-width: 65vw;
     padding: 1.5rem;
     font-size: 2rem;
     font-family: 'Cormorant', serif;
     background-color: rgb(51, 48, 47);
     color: whitesmoke;
+}
+
+.title-form > button {
+    display: none;
 }
 
 .note-buttons {
