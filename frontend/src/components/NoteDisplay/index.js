@@ -50,6 +50,22 @@ const NoteDisplay = () => {
         }
     }, [note])
 
+    useEffect(() => {
+        if (content && (content !== savedContent)) {
+            setSaving(true);
+            console.log('Saving...')
+            if (!saving) {
+                setTimeout(() => {
+                    setSaving(false);
+                    const toSave = document.getElementById('content').value;
+                    contentSave(toSave);
+                    setSavedContent(toSave);
+                    console.log('Saved!');
+                }, 1000)
+            }
+        }
+    }, [content])
+
     if (!(noteId in notes)
         || notes[noteId].notebookId.toString() !== bookId
     ) return <Redirect to='/' />
@@ -74,8 +90,8 @@ const NoteDisplay = () => {
         }
     }
 
-    const contentSave = () => {
-        const payload = { noteId: note.id, content };
+    const contentSave = (toSave) => {
+        const payload = { noteId: note.id, content: toSave };
         dispatch(editNote(payload))
     }
 
@@ -98,21 +114,32 @@ const NoteDisplay = () => {
         })
     };
 
-    const autoSave = (e) => {
-        setSaving(true);
-        console.log('Saving...')
-        if (!saving) {
-            delay(3000).then(() => {
-                setSaving(false)
-                contentSave(e)
-                console.log('Saved!')
-            })
-        }
-    }
+    // const autoSave = (e) => {
+    //     setSaving(true);
+    //     console.log('Saving...')
+    //     if (!saving) {
+    //         delay(3000).then(() => {
+    //             setSaving(false)
+    //             const saved = contentSave()
+    //             setSavedContent(saved)
+    //             console.log('Saved!')
+    //         })
+    //     }
+    // }
 
-    const contentChange = (e) => {
-        setContent(e.target.value);
-    }
+    // // const contentChange = (e) => {
+    //     setContent(e.target.value);
+    //     if (content !== savedContent) {
+    //         setSaving(true);
+    //         console.log('Saving')
+    //         if (!saving) {
+    //             delay(1000).then(() => {
+
+    //                 console.log('Saved!');
+    //             })
+    //         }
+    //     }
+    // }
 
     // const handleContentChange = (e) => {
     //     setContent(e.target.value);
@@ -168,8 +195,8 @@ const NoteDisplay = () => {
                         <button type='button' onClick={cancelDelete}>Nope</button>
                     </div> :
                     <div className='note-buttons'>
-                        <button type='button' onClick={contentSave}>Save Content</button>
-                        <button type='button' onClick={autoSave}>Auto Save Test</button>
+                        <button type='button' onClick={(e) => { contentSave(content) }}>Save Content</button>
+                        {/* <button type='button' onClick={autoSave}>Auto Save Test</button> */}
                         <button type='button' onClick={remove}>Delete</button>
                     </div>
             }
@@ -177,7 +204,7 @@ const NoteDisplay = () => {
             <textarea
                 value={content}
                 className='note-content'
-                onChange={contentChange}
+                onChange={(e) => setContent(e.target.value)}
                 id='content'
                 onFocus={contentFocus}
             />
