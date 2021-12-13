@@ -7,16 +7,16 @@ export const msg = (content, style, vis) => ({
     vis
 })
 
-const initialState = { content: 'Test', style: '', vis: false }
+const initialState = { content: '', style: 'normal', vis: 'no' }
 
 const messageReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD:
-            return {
-                content: action.content,
-                style: action.style,
-                vis: action.vis
-            }
+            const newState = { ...state };
+            if (action.content) newState.content = action.content;
+            if (action.style) newState.style = action.style;
+            if (action.vis) newState.vis = action.vis;
+            return newState;
         default:
             return state;
     }

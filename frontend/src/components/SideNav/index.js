@@ -4,6 +4,7 @@ import { NavLink, useHistory } from 'react-router-dom';
 import { createBook, removeBook } from '../../store/notebooks';
 import { removeBookNotes } from '../../store/notes';
 import SideNavLink from './SideNavLink';
+import { msg } from '../../store/message';
 
 import './SideNav.css'
 
@@ -26,10 +27,12 @@ const SideNav = () => {
 
     const handleBlur = () => {
         setNewBookName('Create Notebook');
+        dispatch(msg(null, null, 'no'))
     }
 
     const handleFocus = () => {
         setNewBookName('');
+        dispatch(msg("Press 'Return' to create", 'normal', 'yes'))
     }
 
     const order = Object.keys(books);
@@ -39,9 +42,10 @@ const SideNav = () => {
         e.preventDefault();
         const response = await dispatch(createBook(newBookName));
         if ('errors' in response) {
-            console.log(response.errors);
+            dispatch(msg(response.errors[0], 'error', null))
         } else {
             setNewBookName('');
+            dispatch(msg("Press 'Return' to create", 'normal', null))
             return response;
         }
     }

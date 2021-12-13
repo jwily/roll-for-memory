@@ -78,4 +78,21 @@
 .nav-msg {
     font-weight: 300;
     font-family: 'Merriweather', serif;
+    transition: opacity .5s;
+}
+
+.msg-normal {
+    color: whitesmoke;
+}
+
+.msg-error {
+    color: rgb(236, 52, 19);
+}
+
+.msg-yes {
+    opacity: 1;
+}
+
+.msg-no {
+    opacity: 0;
 }
