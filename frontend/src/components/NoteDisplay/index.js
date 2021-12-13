@@ -21,17 +21,17 @@ const NoteDisplay = () => {
     const [title, setTitle] = useState('');
     const [savedTitle, setSavedTitle] = useState('');
     const [content, setContent] = useState('');
-    const [savedContent, setSavedContent] = useState('');
-    const [saving, setSaving] = useState(false);
     const [showDelete, setShowDelete] = useState(false);
 
     useEffect(() => {
         if (note) {
             if (note.name) {
                 setTitle(note.name);
+                setSavedTitle(note.name);
             }
             else {
                 setTitle('Untitled');
+                setSavedTitle('');
             }
         }
     }, [note])
@@ -62,6 +62,7 @@ const NoteDisplay = () => {
     ) return <Redirect to='/' />
 
     const titleSave = () => {
+        if (title === savedTitle) return;
         setSavedTitle(title);
         const payload = { noteId: note.id, name: title };
         dispatch(editNote(payload))
