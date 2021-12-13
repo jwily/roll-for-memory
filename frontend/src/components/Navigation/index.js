@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
@@ -25,7 +25,7 @@ function Navigation({ isLoaded }) {
 
     return (
         <div className='navigation'>
-            <span className='logo-top nav-side'>roll for memory</span>
+            <span className='logo-top nav-side' id='nav-logo'>roll for memory</span>
             <span className={`nav-msg msg-${style} msg-${vis}`}>{content}</span>
             {isLoaded && (
                 sessionUser &&
