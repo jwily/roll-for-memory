@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink, useParams, useHistory, Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { createNote } from '../../store/notes';
+import NoteCard from '../NoteCard';
 // import { useEffect } from 'react';
 
 import './NotesList.css';
@@ -43,7 +44,7 @@ const NotesList = () => {
             <button type='button' className='note-create-btn' onClick={clickHandler}><span>Create Note</span></button>
             <div className='notes-list'>
                 {order.map((id, idx) => {
-                    return <NavLink key={idx} to={`/notebooks/${bookId}/notes/${id}`}>{notes[id].name || `Untitled`}</NavLink>
+                    return <NoteCard key={idx} note={notes[id]} />
                 })}
             </div>
         </div >

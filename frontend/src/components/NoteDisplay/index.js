@@ -29,12 +29,16 @@ const NoteDisplay = () => {
         if (note) {
             if (note.name) {
                 setTitle(note.name);
-                setSavedTitle(note.name);
             }
             else {
                 setTitle('Untitled');
-                setSavedTitle('Untitled');
             }
+        }
+    }, [note])
+
+    useEffect(() => {
+        if (note) {
+            setContent(note.content);
         }
     }, [note])
 
@@ -169,6 +173,8 @@ const NoteDisplay = () => {
                 onSubmit={(e) => {
                     e.preventDefault();
                     titleSave();
+                    dispatch(msg('Saved!', 'normal', 'yes'))
+                    delay(500).then(() => dispatch(msg(null, null, 'no')))
                 }}>
                 <input
                     value={title}
