@@ -61,7 +61,7 @@ const NoteDisplay = () => {
                     contentSave(toSave);
                     setSavedContent(toSave);
                     console.log('Saved!');
-                }, 1000)
+                }, 500)
             }
         }
     }, [content])
