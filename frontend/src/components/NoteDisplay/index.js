@@ -47,7 +47,6 @@ const NoteDisplay = () => {
     ) return <Redirect to='/' />
 
     const titleSave = async () => {
-        if (title === savedTitle) return;
         const payload = { noteId: note.id, name: title };
         const response = await dispatch(editNote(payload));
         if ('errors' in response) {
