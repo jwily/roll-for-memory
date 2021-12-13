@@ -76,7 +76,7 @@ const SideNav = () => {
                 </div>
                 {
                     order.map((id, idx) => {
-                        return <SideNavLink books={books} id={id} key={idx} handleDelete={handleDelete} />
+                        return <SideNavLink book={books[id]} key={idx} handleDelete={handleDelete} />
                     })
                 }
             </div>
