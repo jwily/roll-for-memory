@@ -7,7 +7,7 @@ export const msg = (content, style, vis) => ({
     vis
 })
 
-const initialState = { content: 'Test', style: '', vis: false }
+const initialState = { content: 'Test', style: 'normal', vis: false }
 
 const messageReducer = (state = initialState, action) => {
     switch (action.type) {

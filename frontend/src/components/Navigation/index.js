@@ -26,7 +26,7 @@ function Navigation({ isLoaded }) {
     return (
         <div className='navigation'>
             <span className='logo-top nav-side'>roll for memory</span>
-            <span className='nav-msg'>{content}</span>
+            <span className={`nav-msg msg-${style} msg-${vis}`}>{content}</span>
             {isLoaded && (
                 sessionUser &&
                 <span className='nav-side nav-right'>
