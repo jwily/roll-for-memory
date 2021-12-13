@@ -113,7 +113,7 @@ const NoteDisplay = () => {
 
     const deleteToggle = (e) => {
         setShowDelete(true);
-        dispatch(msg(`Are you sure you want to delete '${title.length < 25 ? title : title.slice(0, 25)} (...) '?`, 'normal', 'yes'))
+        dispatch(msg(`Are you sure you want to delete '${title.length < 25 ? title : title.slice(0, 25) + " ..."}' ? `, 'normal', 'yes'))
     }
 
     const cancelDelete = (e) => {
@@ -123,7 +123,7 @@ const NoteDisplay = () => {
 
     const remove = (e) => {
         dispatch(removeNote(note.id))
-        history.push(`/notebooks/${bookId}`)
+        history.push(`/ notebooks / ${bookId}`)
     }
 
     return (
@@ -150,7 +150,7 @@ const NoteDisplay = () => {
                 showDelete ?
                     <div className='note-buttons'>
                         <button type='button' onClick={remove}>Yes</button>
-                        <button type='button' onClick={cancelDelete}>No, Keep '{`${title.length < 50 ? title : title.slice(0, 50)} (...) `}'</button>
+                        <button type='button' onClick={cancelDelete}>No, keep '{title.length < 50 ? title : title.slice(0, 50) + ' ...'}'</button>
                     </div> :
                     <div className='note-buttons'>
                         <button type='button' onClick={(e) => {
