@@ -1,13 +1,19 @@
 const express = require('express')
 const asyncHandler = require('express-async-handler');
 
-const { check } = require('express-validator');
+const { check, validationResult } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { requireAuth } = require('../../utils/auth');
 
 const { Note } = require('../../db/models');
 
 const router = express.Router();
+
+const validateNote = [
+    check('name')
+        .isLength({ max: 255 })
+        .withMessage('Notebook names must be less than 255 characters')
+]
 
 router.get(
     '/:id(\\d+)',
@@ -30,14 +36,22 @@ router.get(
 router.put(
     '/:id(\\d+)',
     requireAuth,
+    validateNote,
     asyncHandler(async (req, res) => {
         const {
             noteId, content, name
         } = req.body;
 
-        const note = await Note.findByPk(noteId);
-        await note.update({ content, name });
-        return res.json(note);
+        const valErrors = validationResult(req);
+
+        if (valErrors.isEmpty()) {
+            const note = await Note.findByPk(noteId);
+            await note.update({ content, name });
+            return res.json(note);
+        } else {
+            const errors = valErrors.array().map(error => error.msg);
+            return res.json({ errors })
+        }
     })
 );
 
