@@ -123,7 +123,7 @@ const NoteDisplay = () => {
 
     const remove = (e) => {
         dispatch(removeNote(note.id))
-        history.push(`/ notebooks / ${bookId}`)
+        history.push(`/notebooks/${bookId}`)
     }
 
     return (
