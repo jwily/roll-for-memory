@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import NoteCard from '../NoteCard';
 import { useSelector } from 'react-redux';
 
 const HomeNotesList = () => {
@@ -18,8 +18,7 @@ const HomeNotesList = () => {
             </div>
             <div className='notes-list'>
                 {order.map((id, idx) => {
-                    const note = notes[id];
-                    return <NavLink key={idx} to={`/notebooks/${note.notebookId}/notes/${id}`}>{note.name || `Untitled`}</NavLink>
+                    return <NoteCard key={idx} note={notes[id]} />
                 })}
             </div>
         </div>
