@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { editBook } from '../../store/notebooks';
+import { msg } from '../../store/message';
 
 const SideNavLink = ({ id, idx, handleDelete, books }) => {
 
@@ -24,7 +25,7 @@ const SideNavLink = ({ id, idx, handleDelete, books }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (e.target.value === books[id].name) return;
+        if (editText === books[id].name) return;
 
         const payload = {
             bookId: id,
@@ -34,9 +35,10 @@ const SideNavLink = ({ id, idx, handleDelete, books }) => {
         const response = await dispatch(editBook(payload));
 
         if ('errors' in response) {
-            console.log(response.errors);
+            dispatch(msg(response.errors[0], 'error', null))
         } else {
             setEdit(false);
+            dispatch(msg(null, null, 'no'))
             return response;
         }
     }
@@ -47,16 +49,23 @@ const SideNavLink = ({ id, idx, handleDelete, books }) => {
                 <NavLink to={`/notebooks/${id}`}>
                     {books[id].name}
                 </NavLink> :
-                <form onSubmit={handleSubmit} >
+                <form onSubmit={handleSubmit} className='edit-form'>
                     <input
                         value={editText}
                         onChange={(e) => setEditText(e.target.value)}
                         onBlur={(e) => {
                             setEdit(false)
+                            setEditText(books[id].name)
+                            dispatch(msg(null, null, 'no'))
                         }}
                         id={`${id}-edit-field`}
+                        onFocus={(e) => {
+                            dispatch(msg("Press 'Return' to save", 'normal', 'yes'))
+                        }}
+                        autoComplete='off'
+                        type='text'
                     />
-                    <button >Submit</button>
+                    <button>Submit</button>
                 </form>
             }
 

@@ -45,7 +45,7 @@ const SideNav = () => {
             dispatch(msg(response.errors[0], 'error', null))
         } else {
             setNewBookName('');
-            dispatch(msg("Press 'Return' to create", 'normal', null))
+            dispatch(msg("Press 'Return' to create", 'normal', 'yes'))
             return response;
         }
     }
