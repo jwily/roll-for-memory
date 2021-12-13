@@ -95,7 +95,6 @@ const notesReducer = (state = initialState, action) => {
             })
             return {
                 ...allNotes,
-                ...state,
             };
         case ADD_ONE:
             if (!state[action.note.id]) {

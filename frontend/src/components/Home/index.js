@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getNotes } from '../../store/notes';
 import { getNotebooks } from '../../store/notebooks';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import { useState } from 'react';
 
 import SideNav from '../SideNav';

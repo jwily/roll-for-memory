@@ -86,7 +86,6 @@ const notebooksReducer = (state = initialState, action) => {
             })
             return {
                 ...allBooks,
-                ...state
             }
         case ADD_ONE:
             if (!state[action.book.id]) {
