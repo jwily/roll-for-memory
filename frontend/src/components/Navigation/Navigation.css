@@ -78,7 +78,7 @@
 .nav-msg {
     font-weight: 300;
     font-family: 'Merriweather', serif;
-    transition: opacity .5s;
+    transition: opacity .35s;
 }
 
 .msg-normal {

@@ -12,7 +12,7 @@ const router = express.Router();
 const validateNotebook = [
     check('name')
         .exists({ checkFalsy: true })
-        .withMessage('Your new notebook needs a name.')
+        .withMessage('Your new notebook needs a name')
 ]
 
 router.get(
@@ -61,7 +61,7 @@ router.put(
         });
 
         if (dupCheck) {
-            valErrors.errors.push({ msg: 'Another notebook already has that name.' })
+            valErrors.errors.push({ msg: 'Another notebook already has that name' })
         }
 
         if (valErrors.isEmpty()) {
@@ -92,7 +92,7 @@ router.post(
         });
 
         if (dupCheck) {
-            valErrors.errors.push({ msg: 'Another notebook already has that name.' })
+            valErrors.errors.push({ msg: 'Another notebook already has that name' })
         }
 
         if (valErrors.isEmpty()) {
