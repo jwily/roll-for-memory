@@ -78,3 +78,7 @@
     overflow-y: auto;
     overflow-x: hidden;
 }
+
+.edit-form > button {
+    display: none;
+}

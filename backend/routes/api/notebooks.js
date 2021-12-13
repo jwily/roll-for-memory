@@ -13,6 +13,8 @@ const validateNotebook = [
     check('name')
         .exists({ checkFalsy: true })
         .withMessage('Your new notebook needs a name')
+        .isLength({ max: 255 })
+        .withMessage('Notebook names must be less than 255 characters')
 ]
 
 router.get(
