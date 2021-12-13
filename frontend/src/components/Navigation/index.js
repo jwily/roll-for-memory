@@ -22,10 +22,12 @@ function Navigation({ isLoaded }) {
 
     return (
         <div className='navigation'>
-            <span className='logo-top'>roll for memory</span>
-            {isLoaded && (
-                sessionUser && <ProfileButton user={sessionUser} />
-            )}
+            <span className='logo-top nav-side'>roll for memory</span>
+            <span className='nav-side nav-left'>
+                {isLoaded && (
+                    sessionUser && <ProfileButton user={sessionUser} />
+                )}
+            </span>
         </div>
     );
 }

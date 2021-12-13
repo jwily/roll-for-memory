@@ -65,3 +65,12 @@
     filter: invert(.75);
     cursor: pointer;
 }
+
+.nav-side {
+    min-width: 15vw;
+}
+
+.nav-left {
+    display: flex;
+    justify-content: right;
+}
