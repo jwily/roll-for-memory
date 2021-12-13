@@ -81,3 +81,8 @@
     font-family: 'Merriweather', sans-serif;
     font-weight: 300;
 }
+
+.error-msg {
+    color: rgb(236, 52, 19);
+    opacity: 1;
+}

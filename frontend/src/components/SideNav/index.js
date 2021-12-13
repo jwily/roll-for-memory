@@ -41,10 +41,10 @@ const SideNav = ({ setMessage, setError }) => {
         e.preventDefault();
         const response = await dispatch(createBook(newBookName));
         if ('errors' in response) {
-            setMessage('error');
-            setError(response.errors[0]);
+            setMessage(response.errors[0]);
         } else {
             setNewBookName('');
+            setMessage('create-book')
             return response;
         }
     }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
-import { Yes, No, Error, CreateBook } from './messages'
+import { Yes, No, CreateBook, EmptyName, DupName } from './messages'
 
 import './Navigation.css';
 
@@ -30,9 +30,10 @@ function Navigation({ isLoaded, message, error, setMessage }) {
             {message === 'Yes' && <Yes />}
             {message === 'No' && <No />}
             {message === 'create-book' && <CreateBook />}
-            {message === 'error' && <Error error={error} />}
-            <button type='button' onClick={(e) => setMessage('Yes')}>Yes</button>
-            <button type='button' onClick={(e) => setMessage('No')}>No</button>
+            {message === 'empty' && <EmptyName />}
+            {message === 'dup' && <DupName />}
+            {/* <button type='button' onClick={(e) => setMessage('Yes')}>Yes</button> */}
+            {/* <button type='button' onClick={(e) => setMessage('No')}>No</button> */}
             <span className='nav-side nav-left'>
                 {isLoaded && (
                     sessionUser && <ProfileButton user={sessionUser} />

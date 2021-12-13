@@ -33,13 +33,16 @@ export const CreateBook = () => {
     )
 }
 
-export const Error = ({ error }) => {
-
-    useEffect(() => {
-        document.getElementById('error').style.opacity = 1;
-    }, [])
+export const EmptyName = () => {
 
     return (
-        <span className='nav-msg' id='error'>{error}</span>
+        <span className='nav-msg error-msg'>Your new notebook needs a name</span>
+    )
+}
+
+export const DupName = () => {
+
+    return (
+        <span className='nav-msg error-msg'>Another notebook already has that name</span>
     )
 }
