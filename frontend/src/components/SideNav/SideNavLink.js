@@ -54,6 +54,7 @@ const SideNavLink = ({ book, handleDelete }) => {
                 </NavLink> :
                 <form onSubmit={handleSubmit} className='edit-form'>
                     <input
+                        spellcheck="false"
                         value={editText}
                         onChange={(e) => setEditText(e.target.value)}
                         onBlur={(e) => {

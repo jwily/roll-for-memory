@@ -34,7 +34,6 @@
 
 .active .book-name {
     color: whitesmoke;
-    font-weight: bold;
 }
 
 .edit-form > input {
@@ -48,11 +47,13 @@
     color: whitesmoke;
     width: 100%;
     margin-top: .75rem;
+    min-height: 1.75rem;
 }
 
 .book-name-holder {
     overflow: hidden;
-    max-height: 1.5rem;
+    min-height: 1.75rem;
+    max-height: 1.75rem;
     max-width: 20rem;
     margin-top: .75rem;
 }
