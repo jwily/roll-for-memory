@@ -94,6 +94,11 @@ const NoteDisplay = () => {
         if (content === 'Let your thoughts flow...') {
             setContent('');
         }
+        dispatch(msg("Press 'CTRL+S' or 'Command+S' to save", 'normal', 'yes'))
+    }
+
+    const contentBlur = () => {
+        dispatch(msg(null, null, 'no'));
     }
 
     // const delay = (ms) => {
@@ -213,8 +218,9 @@ const NoteDisplay = () => {
                     setContent(e.target.value);
                 }}
                 onKeyDown={keyDownSave}
-                id='content'
+                onBlur={contentBlur}
                 onFocus={contentFocus}
+                id='content'
             />
         </div >
     )
