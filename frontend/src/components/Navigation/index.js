@@ -5,6 +5,9 @@ import './Navigation.css';
 
 function Navigation({ isLoaded }) {
     const sessionUser = useSelector(state => state.session.user);
+    const content = useSelector(state => state.message.content);
+    const style = useSelector(state => state.message.style);
+    const vis = useSelector(state => state.message.vis);
 
     // let sessionLinks;
     // if (sessionUser) {
@@ -22,9 +25,13 @@ function Navigation({ isLoaded }) {
 
     return (
         <div className='navigation'>
-            <span className='logo-top'>roll for memory</span>
+            <span className='logo-top nav-side'>roll for memory</span>
+            <span className='nav-msg'>{content}</span>
             {isLoaded && (
-                sessionUser && <ProfileButton user={sessionUser} />
+                sessionUser &&
+                <span className='nav-side nav-right'>
+                    <ProfileButton user={sessionUser} />
+                </span>
             )}
         </div>
     );

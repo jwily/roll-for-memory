@@ -1,19 +1,19 @@
 const LOAD = 'message/LOAD'
 
-export const msg = (message, style, vis) => ({
+export const msg = (content, style, vis) => ({
     type: LOAD,
-    message,
+    content,
     style,
     vis
 })
 
-const initialState = { message: '', style: '', vis: false }
+const initialState = { content: 'Test', style: '', vis: false }
 
 const messageReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD:
             return {
-                message: action.message,
+                content: action.content,
                 style: action.style,
                 vis: action.vis
             }

@@ -65,3 +65,17 @@
     filter: invert(.75);
     cursor: pointer;
 }
+
+.nav-side {
+    min-width: 15vw;
+}
+
+.nav-right {
+    display: flex;
+    justify-content: right;
+}
+
+.nav-msg {
+    font-weight: 300;
+    font-family: 'Merriweather', serif;
+}
