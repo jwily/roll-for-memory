@@ -101,11 +101,11 @@ const NoteDisplay = () => {
         dispatch(msg(null, null, 'no'));
     }
 
-    // const delay = (ms) => {
-    //     return new Promise((resolve, reject) => {
-    //         setTimeout(resolve, ms);
-    //     })
-    // };
+    const delay = (ms) => {
+        return new Promise((resolve, reject) => {
+            setTimeout(resolve, ms);
+        })
+    };
 
     // const onChangeSave = () => {
     //     if (content && content !== savedContent) {
@@ -160,6 +160,8 @@ const NoteDisplay = () => {
         let charCode = String.fromCharCode(e.which).toLowerCase();
         if ((e.ctrlKey || e.metaKey) && charCode === 's') {
             e.preventDefault();
+            dispatch(msg('Saved!', 'normal', 'yes'))
+            delay(500).then(() => dispatch(msg(null, null, 'no')))
             contentSave(content);
         }
     }
