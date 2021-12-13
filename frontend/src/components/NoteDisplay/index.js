@@ -3,6 +3,7 @@ import { useParams, useHistory, Redirect } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { editNote, removeNote } from '../../store/notes';
+import { msg } from '../../store/message';
 
 import './NoteDisplay.css';
 
@@ -82,6 +83,7 @@ const NoteDisplay = () => {
         if (title === 'Untitled') {
             setTitle('');
         }
+        dispatch(msg("Press 'Return' or click away to save", 'normal', 'yes'))
     }
 
     const contentFocus = () => {
@@ -140,25 +142,37 @@ const NoteDisplay = () => {
 
     return (
         <div className='note-display'>
-            <input
-                value={title}
-                className='note-title'
-                onChange={(e) => setTitle(e.target.value)}
-                onBlur={titleSave}
-                type='text'
-                onFocus={titleFocus}
-            />
-            {showDelete ?
-                <div className='note-buttons'>
-                    <span>Are you sure you want to delete this note?</span>
-                    <button type='button' onClick={remove}>Yup</button>
-                    <button type='button' onClick={cancelDelete}>Nope</button>
-                </div> :
-                <div className='note-buttons'>
-                    <button type='button' onClick={contentSave}>Save Content</button>
-                    <button type='button' onClick={autoSave}>Auto Save Test</button>
-                    <button type='button' onClick={remove}>Delete</button>
-                </div>}
+            <form className='title-form'
+                onSubmit={(e) => {
+                    e.preventDefault();
+                    titleSave();
+                }}>
+                <input
+                    value={title}
+                    className='note-title'
+                    onChange={(e) => setTitle(e.target.value)}
+                    onBlur={(e) => {
+                        titleSave();
+                        dispatch(msg(null, null, 'no'));
+                    }}
+                    type='text'
+                    onFocus={titleFocus}
+                />
+                <button>Submit</button>
+            </form>
+            {
+                showDelete ?
+                    <div className='note-buttons'>
+                        <span>Are you sure you want to delete this note?</span>
+                        <button type='button' onClick={remove}>Yup</button>
+                        <button type='button' onClick={cancelDelete}>Nope</button>
+                    </div> :
+                    <div className='note-buttons'>
+                        <button type='button' onClick={contentSave}>Save Content</button>
+                        <button type='button' onClick={autoSave}>Auto Save Test</button>
+                        <button type='button' onClick={remove}>Delete</button>
+                    </div>
+            }
 
             <textarea
                 value={content}
@@ -167,7 +181,7 @@ const NoteDisplay = () => {
                 id='content'
                 onFocus={contentFocus}
             />
-        </div>
+        </div >
     )
 }
 
