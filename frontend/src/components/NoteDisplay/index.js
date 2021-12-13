@@ -61,7 +61,7 @@ const NoteDisplay = () => {
     ) return <Redirect to='/' />
 
     const titleSave = async () => {
-        const payload = { noteId: note.id, name: title };
+        const payload = { noteId: note.id, name: title, content };
         const response = await dispatch(editNote(payload));
         if ('errors' in response) {
             dispatch(msg(response.errors[0], 'error', 'yes'))
@@ -74,7 +74,7 @@ const NoteDisplay = () => {
     }
 
     const contentSave = (toSave) => {
-        const payload = { noteId: note.id, content: toSave };
+        const payload = { noteId: note.id, content: toSave, title };
         dispatch(editNote(payload))
     }
 
@@ -157,7 +157,7 @@ const NoteDisplay = () => {
                             dispatch(msg('Saved!', 'normal', 'yes'))
                             delay(500).then(() => dispatch(msg(null, null, 'no')))
                             contentSave(content);
-                        }}>Save Content</button>
+                        }}>Save</button>
                         {/* <button type='button' onClick={autoSave}>Auto Save Test</button> */}
                         <button type='button' onClick={deleteToggle}>Delete</button>
                     </div>
