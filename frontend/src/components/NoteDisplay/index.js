@@ -19,19 +19,33 @@ const NoteDisplay = () => {
     const note = notes[noteId];
 
     const [title, setTitle] = useState('');
-    const [savedTitle, setSavedTitle] = useState('');
+    // const [savedTitle, setSavedTitle] = useState('');
     const [content, setContent] = useState('');
     const [showDelete, setShowDelete] = useState(false);
+
+    useEffect(() => {
+        if (!showDelete) return;
+
+        const hideMessage = () => {
+            dispatch(msg(null, null, 'no'));
+            setShowDelete(false);
+        };
+
+        document.addEventListener('click', hideMessage);
+
+        return () => document.removeEventListener('click', hideMessage);
+
+    }, [showDelete, dispatch])
 
     useEffect(() => {
         if (note) {
             if (note.name) {
                 setTitle(note.name);
-                setSavedTitle(note.name);
+                // setSavedTitle(note.name);
             }
             else {
                 setTitle('Untitled');
-                setSavedTitle('Untitled');
+                // setSavedTitle('Untitled');
             }
         }
     }, [note])
@@ -52,7 +66,7 @@ const NoteDisplay = () => {
         if ('errors' in response) {
             dispatch(msg(response.errors[0], 'error', 'yes'))
         } else {
-            setSavedTitle(title);
+            // setSavedTitle(title);
             dispatch(msg('Saved!', 'normal', 'yes'))
             delay(500).then(() => dispatch(msg(null, null, 'no')))
             return response;
@@ -69,10 +83,12 @@ const NoteDisplay = () => {
             setTitle('');
         }
         dispatch(msg("Press 'Return' to save", 'normal', 'yes'))
+        setShowDelete(false);
     }
 
     const contentFocus = () => {
         dispatch(msg("Press 'CTRL+S' or 'Command+S' to save", 'normal', 'yes'))
+        setShowDelete(false);
     }
 
     const contentBlur = () => {
@@ -97,10 +113,12 @@ const NoteDisplay = () => {
 
     const deleteToggle = (e) => {
         setShowDelete(true);
+        dispatch(msg(`Are you sure you want to delete '${title.length < 25 ? title : title.slice(0, 25)} (...) '?`, 'normal', 'yes'))
     }
 
     const cancelDelete = (e) => {
         setShowDelete(false);
+        dispatch(msg(null, null, 'no'))
     }
 
     const remove = (e) => {
@@ -131,14 +149,17 @@ const NoteDisplay = () => {
             {
                 showDelete ?
                     <div className='note-buttons'>
-                        <span>Are you sure you want to delete this note?</span>
-                        <button type='button' onClick={remove}>Yup</button>
-                        <button type='button' onClick={cancelDelete}>Nope</button>
+                        <button type='button' onClick={remove}>Yes</button>
+                        <button type='button' onClick={cancelDelete}>No, Keep '{`${title.length < 50 ? title : title.slice(0, 50)} (...) `}'</button>
                     </div> :
                     <div className='note-buttons'>
-                        <button type='button' onClick={(e) => { contentSave(content) }}>Save Content</button>
+                        <button type='button' onClick={(e) => {
+                            dispatch(msg('Saved!', 'normal', 'yes'))
+                            delay(500).then(() => dispatch(msg(null, null, 'no')))
+                            contentSave(content);
+                        }}>Save Content</button>
                         {/* <button type='button' onClick={autoSave}>Auto Save Test</button> */}
-                        <button type='button' onClick={remove}>Delete</button>
+                        <button type='button' onClick={deleteToggle}>Delete</button>
                     </div>
             }
 
