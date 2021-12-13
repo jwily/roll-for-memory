@@ -4,6 +4,8 @@ import { useDispatch } from 'react-redux';
 import { editBook } from '../../store/notebooks';
 import { msg } from '../../store/message';
 
+import './SideLink.css'
+
 const SideNavLink = ({ book, handleDelete }) => {
 
     useEffect(() => {
@@ -44,7 +46,7 @@ const SideNavLink = ({ book, handleDelete }) => {
     }
 
     return (
-        <div className='book-link-div'>
+        <>
             {!edit ?
                 <NavLink to={`/notebooks/${book.id}`}
                     className='book-link'>
@@ -78,7 +80,7 @@ const SideNavLink = ({ book, handleDelete }) => {
                 }}>Edit</button>
                 <button type='button' onClick={(e) => handleDelete(book.id)}>Delete</button>
             </div>
-        </div >
+        </>
     )
 }
 
