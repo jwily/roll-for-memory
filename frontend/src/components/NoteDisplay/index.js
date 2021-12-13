@@ -19,19 +19,33 @@ const NoteDisplay = () => {
     const note = notes[noteId];
 
     const [title, setTitle] = useState('');
-    const [savedTitle, setSavedTitle] = useState('');
+    // const [savedTitle, setSavedTitle] = useState('');
     const [content, setContent] = useState('');
     const [showDelete, setShowDelete] = useState(false);
+
+    useEffect(() => {
+        if (!showDelete) return;
+
+        const hideMessage = () => {
+            dispatch(msg(null, null, 'no'));
+            setShowDelete(false);
+        };
+
+        document.addEventListener('click', hideMessage);
+
+        return () => document.removeEventListener('click', hideMessage);
+
+    }, [showDelete, dispatch])
 
     useEffect(() => {
         if (note) {
             if (note.name) {
                 setTitle(note.name);
-                setSavedTitle(note.name);
+                // setSavedTitle(note.name);
             }
             else {
                 setTitle('Untitled');
-                setSavedTitle('Untitled');
+                // setSavedTitle('Untitled');
             }
         }
     }, [note])
@@ -47,13 +61,12 @@ const NoteDisplay = () => {
     ) return <Redirect to='/' />
 
     const titleSave = async () => {
-        if (title === savedTitle) return;
-        const payload = { noteId: note.id, name: title };
+        const payload = { noteId: note.id, name: title, content };
         const response = await dispatch(editNote(payload));
         if ('errors' in response) {
             dispatch(msg(response.errors[0], 'error', 'yes'))
         } else {
-            setSavedTitle(title);
+            // setSavedTitle(title);
             dispatch(msg('Saved!', 'normal', 'yes'))
             delay(500).then(() => dispatch(msg(null, null, 'no')))
             return response;
@@ -61,7 +74,7 @@ const NoteDisplay = () => {
     }
 
     const contentSave = (toSave) => {
-        const payload = { noteId: note.id, content: toSave };
+        const payload = { noteId: note.id, content: toSave, title };
         dispatch(editNote(payload))
     }
 
@@ -70,10 +83,12 @@ const NoteDisplay = () => {
             setTitle('');
         }
         dispatch(msg("Press 'Return' to save", 'normal', 'yes'))
+        setShowDelete(false);
     }
 
     const contentFocus = () => {
         dispatch(msg("Press 'CTRL+S' or 'Command+S' to save", 'normal', 'yes'))
+        setShowDelete(false);
     }
 
     const contentBlur = () => {
@@ -98,15 +113,17 @@ const NoteDisplay = () => {
 
     const deleteToggle = (e) => {
         setShowDelete(true);
+        dispatch(msg(`Are you sure you want to delete '${title.length < 25 ? title : title.slice(0, 25) + " ..."}' ? `, 'normal', 'yes'))
     }
 
     const cancelDelete = (e) => {
         setShowDelete(false);
+        dispatch(msg(null, null, 'no'))
     }
 
     const remove = (e) => {
         dispatch(removeNote(note.id))
-        history.push(`/notebooks/${bookId}`)
+        history.push(`/ notebooks / ${bookId}`)
     }
 
     return (
@@ -132,14 +149,17 @@ const NoteDisplay = () => {
             {
                 showDelete ?
                     <div className='note-buttons'>
-                        <span>Are you sure you want to delete this note?</span>
-                        <button type='button' onClick={remove}>Yup</button>
-                        <button type='button' onClick={cancelDelete}>Nope</button>
+                        <button type='button' onClick={remove}>Yes</button>
+                        <button type='button' onClick={cancelDelete}>No, keep '{title.length < 50 ? title : title.slice(0, 50) + ' ...'}'</button>
                     </div> :
                     <div className='note-buttons'>
-                        <button type='button' onClick={(e) => { contentSave(content) }}>Save Content</button>
+                        <button type='button' onClick={(e) => {
+                            dispatch(msg('Saved!', 'normal', 'yes'))
+                            delay(500).then(() => dispatch(msg(null, null, 'no')))
+                            contentSave(content);
+                        }}>Save</button>
                         {/* <button type='button' onClick={autoSave}>Auto Save Test</button> */}
-                        <button type='button' onClick={remove}>Delete</button>
+                        <button type='button' onClick={deleteToggle}>Delete</button>
                     </div>
             }
 

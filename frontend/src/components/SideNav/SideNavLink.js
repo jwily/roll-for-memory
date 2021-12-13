@@ -4,6 +4,8 @@ import { useDispatch } from 'react-redux';
 import { editBook } from '../../store/notebooks';
 import { msg } from '../../store/message';
 
+import './SideLink.css'
+
 const SideNavLink = ({ book, handleDelete }) => {
 
     useEffect(() => {
@@ -25,7 +27,7 @@ const SideNavLink = ({ book, handleDelete }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (editText === book.name) return;
+        if (editText === book.name) return setEdit(false);
 
         const payload = {
             bookId: book.id,
@@ -44,42 +46,41 @@ const SideNavLink = ({ book, handleDelete }) => {
     }
 
     return (
-        <div className='book-link-div'>
-            {
-                !edit ?
-                    <NavLink to={`/notebooks/${book.id}`}
-                        className='book-link'>
-                        {book.name}
-                    </NavLink> :
-                    <form onSubmit={handleSubmit} className='edit-form'>
-                        <input
-                            value={editText}
-                            onChange={(e) => setEditText(e.target.value)}
-                            onBlur={(e) => {
-                                setEdit(false)
-                                dispatch(msg(null, null, 'no'))
-                            }}
-                            id={`${book.id}-edit-field`}
-                            onFocus={(e) => {
-                                dispatch(msg("Press 'Return' to save", 'normal', 'yes'))
-                            }}
-                            autoComplete='off'
-                            type='text'
-                        />
-                        <button>Submit</button>
-                    </form>
+        <>
+            {!edit ?
+                <NavLink to={`/notebooks/${book.id}`}
+                    className='book-link'>
+                    <div className='book-name-holder'>
+                        <span className='book-name'>{book.name}</span>
+                    </div>
+                </NavLink> :
+                <form onSubmit={handleSubmit} className='edit-form'>
+                    <input
+                        spellcheck="false"
+                        value={editText}
+                        onChange={(e) => setEditText(e.target.value)}
+                        onBlur={(e) => {
+                            setEdit(false)
+                            dispatch(msg(null, null, 'no'))
+                        }}
+                        id={`${book.id}-edit-field`}
+                        onFocus={(e) => {
+                            dispatch(msg("Press 'Return' to save", 'normal', 'yes'))
+                        }}
+                        autoComplete='off'
+                        type='text'
+                    />
+                    <button>Submit</button>
+                </form>
             }
-
             <div className='book-link-btns'>
-
                 <button type='button' onClick={(e) => {
+                    setEdit((!edit))
                     setEditText(book.name)
-                    setEdit(!edit)
                 }}>Edit</button>
-
-                <button type='button' onClick={(e) => handleDelete(book.id)}>Del</button>
+                <button type='button' onClick={(e) => handleDelete(book.id)}>Delete</button>
             </div>
-        </div >
+        </>
     )
 }
 

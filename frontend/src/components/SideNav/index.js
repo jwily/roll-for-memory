@@ -71,9 +71,7 @@ const SideNav = () => {
                 </form>
             </div>
             <div className='books-list'>
-                <div className='book-link-div'>
-                    <NavLink exact to='/'>ALL NOTES</NavLink>
-                </div>
+                <NavLink exact to='/' className='side-title'>Home</NavLink>
                 {
                     order.map((id, idx) => {
                         return <SideNavLink book={books[id]} key={idx} handleDelete={handleDelete} />
