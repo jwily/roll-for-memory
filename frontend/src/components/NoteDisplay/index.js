@@ -38,19 +38,6 @@ const NoteDisplay = () => {
         }
     }, [note])
 
-    useEffect(() => {
-        if (note) {
-            if (note.content) {
-                setContent(note.content);
-                setSavedContent(note.content);
-            }
-            else {
-                setContent('Let your thoughts flow...');
-                setSavedContent('Let your thoughts flow...');
-            }
-        }
-    }, [note])
-
     // useEffect(() => {
     //     if (content && (content !== savedContent)) {
     //         setSaving(true);
@@ -91,9 +78,6 @@ const NoteDisplay = () => {
     }
 
     const contentFocus = () => {
-        if (content === 'Let your thoughts flow...') {
-            setContent('');
-        }
         dispatch(msg("Press 'CTRL+S' or 'Command+S' to save", 'normal', 'yes'))
     }
 
@@ -193,6 +177,7 @@ const NoteDisplay = () => {
                     onBlur={(e) => {
                         titleSave();
                         dispatch(msg(null, null, 'no'));
+                        if (!title) setTitle('Untitled');
                     }}
                     type='text'
                     onFocus={titleFocus}
