@@ -1,4 +1,49 @@
 .signup-form {
     display: flex;
     flex-direction: column;
+    align-items: center;
+}
+
+.signup-form > div {
+    display: flex;
+    justify-content: space-between;
+    min-width: 20vw;
+}
+
+.signup-form input {
+    border: none;
+    text-align: center;
+    height: 2rem;
+    width: 12.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.signup-button {
+    background-color: rgb(51, 48, 47);
+    border: 2px solid rgb(200, 200, 200);
+    border-radius: 5px;
+    color: rgb(200, 200, 200);
+    height: 2.5rem;
+    margin-top: 1rem;
+    width: 5rem;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.signup-button:hover {
+    filter: invert(.25);
+    cursor: pointer;
+}
+
+.signup-button:active {
+    filter: invert(.75);
+    cursor: pointer;
+}
+
+.signup-error {
+    color: rgb(236, 52, 19)
+}
+
+.signup-form > ul {
+    margin-bottom: 2rem;
 }
