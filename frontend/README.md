@@ -9,6 +9,6 @@ Full Create, Read, Update, and Delete functions are available for both the notes
 
 ## Features to Come
 
-* Note templates build around game session preperation.
+* Note templates build around game session preperation
 * Searching through notebooks and titles
 * Re-assigning notes to new notebooks
