@@ -12,19 +12,22 @@ const validateSignup = [
     check('email')
         .exists({ checkFalsy: true })
         .isEmail()
-        .withMessage('Please provide a valid email.'),
+        .withMessage('Please provide a valid email')
+        .isLength(''),
     check('username')
         .exists({ checkFalsy: true })
         .isLength({ min: 3 })
-        .withMessage('Please provide a username with at least 3 characters.'),
+        .withMessage('Please provide a username with at least 3 characters')
+        .isLength({ max: 30 })
+        .withMessage('Please provide a username with less than 30 character'),
     check('username')
         .not()
         .isEmail()
-        .withMessage('Username cannot be an email.'),
+        .withMessage('Username cannot be an email'),
     check('password')
         .exists({ checkFalsy: true })
         .isLength({ min: 6 })
-        .withMessage('Password must be 6 characters or more.'),
+        .withMessage('Password must be 6 characters or more'),
     handleValidationErrors
 ];
 
