@@ -4,11 +4,13 @@ import thunk from 'redux-thunk';
 import sessionReducer from './session';
 import notesReducer from './notes';
 import notebooksReducer from './notebooks';
+import messageReducer from './message';
 
 const rootReducer = combineReducers({
     session: sessionReducer,
     notes: notesReducer,
-    books: notebooksReducer
+    books: notebooksReducer,
+    message: messageReducer
 });
 
 let enhancer;
