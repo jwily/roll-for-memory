@@ -85,10 +85,14 @@
     color: whitesmoke;
 }
 
-.msg-true {
+.msg-error {
+    color: rgb(236, 52, 19);
+}
+
+.msg-yes {
     opacity: 1;
 }
 
-.msg-false {
+.msg-no {
     opacity: 0;
 }
