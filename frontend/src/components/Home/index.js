@@ -21,6 +21,8 @@ const HomePage = ({ isLoaded }) => {
 
     const [notesLoaded, setNotesLoaded] = useState(false);
     const [booksLoaded, setBooksLoaded] = useState(false);
+    const [message, setMessage] = useState('');
+    const [error, setError] = useState('');
 
     useEffect(() => {
         dispatch(getNotebooks()).then(() => setBooksLoaded(true));
@@ -32,10 +34,10 @@ const HomePage = ({ isLoaded }) => {
 
     return (
         <>
-            <Navigation isLoaded={isLoaded} />
+            <Navigation isLoaded={isLoaded} message={message} error={error} setMessage={setMessage} />
             <div className='home-page'>
                 <div className='books-width'>
-                    {booksLoaded && <SideNav />}
+                    {booksLoaded && <SideNav setMessage={setMessage} setError={setError} />}
                 </div>
                 <Switch>
                     <Route path='/notebooks/:bookId'>

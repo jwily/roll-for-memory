@@ -7,7 +7,7 @@ import SideNavLink from './SideNavLink';
 
 import './SideNav.css'
 
-const SideNav = () => {
+const SideNav = ({ setMessage, setError }) => {
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -26,10 +26,12 @@ const SideNav = () => {
 
     const handleBlur = () => {
         setNewBookName('Create Notebook');
+        setMessage('')
     }
 
     const handleFocus = () => {
         setNewBookName('');
+        setMessage('create-book')
     }
 
     const order = Object.keys(books);
@@ -39,7 +41,8 @@ const SideNav = () => {
         e.preventDefault();
         const response = await dispatch(createBook(newBookName));
         if ('errors' in response) {
-            console.log(response.errors);
+            setMessage('error');
+            setError(response.errors[0]);
         } else {
             setNewBookName('');
             return response;

@@ -1,15 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
-import { loadMsg } from '../../store/message';
-import Yes from './messages/Yes';
-import No from './messages/No';
+import { Yes, No, Error, CreateBook } from './messages'
 
 import './Navigation.css';
 
-function Navigation({ isLoaded }) {
-
-    const [message, setMessage] = useState('');
+function Navigation({ isLoaded, message, error, setMessage }) {
 
     // const dispatch = useDispatch();
 
@@ -33,6 +29,8 @@ function Navigation({ isLoaded }) {
             <span className='logo-top nav-side'>roll for memory</span>
             {message === 'Yes' && <Yes />}
             {message === 'No' && <No />}
+            {message === 'create-book' && <CreateBook />}
+            {message === 'error' && <Error error={error} />}
             <button type='button' onClick={(e) => setMessage('Yes')}>Yes</button>
             <button type='button' onClick={(e) => setMessage('No')}>No</button>
             <span className='nav-side nav-left'>

@@ -75,12 +75,9 @@
     justify-content: right;
 }
 
-#yes {
+.nav-msg {
     opacity: 0;
-    transition: opacity 1s;
-}
-
-#no {
-    opacity: 0;
-    transition: opacity 1s;
+    transition: opacity .5s;
+    font-family: 'Merriweather', sans-serif;
+    font-weight: 300;
 }
