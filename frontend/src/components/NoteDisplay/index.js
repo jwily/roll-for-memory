@@ -8,6 +8,7 @@ import { msg } from '../../store/message';
 import './NoteDisplay.css';
 
 const NoteDisplay = () => {
+
     const history = useHistory();
     const dispatch = useDispatch();
 
@@ -50,37 +51,24 @@ const NoteDisplay = () => {
         }
     }, [note])
 
-    useEffect(() => {
-        if (content && (content !== savedContent)) {
-            setSaving(true);
-            console.log('Saving...')
-            if (!saving) {
-                setTimeout(() => {
-                    setSaving(false);
-                    const toSave = document.getElementById('content').value;
-                    contentSave(toSave);
-                    setSavedContent(toSave);
-                    console.log('Saved!');
-                }, 1000)
-            }
-        }
-    }, [content])
+    // useEffect(() => {
+    //     if (content && (content !== savedContent)) {
+    //         setSaving(true);
+    //         console.log('Saving...')
+    //         if (!saving) {
+    //             delay(500).then(() => {
+    //                 setSaving(false);
+    //                 // const text = document.getElementById('content').value;
+    //                 // contentSave(text);
+    //                 console.log('Saved!');
+    //             })
+    //         }
+    //     }
+    // }, [content])
 
     if (!(noteId in notes)
         || notes[noteId].notebookId.toString() !== bookId
     ) return <Redirect to='/' />
-
-    // useEffect(() => {
-    //     setSaving(true);
-    //     console.log('Saving...')
-    //     if (!saving) {
-    //         setTimeout(() => {
-    //             setSaving(false);
-    //             const text = document.getElementById('content').value
-    //             contentSave(text);
-    //         }, 500)
-    //     }
-    // }, [content])
 
     const titleSave = () => {
         if (title && title !== savedTitle) {
@@ -108,11 +96,27 @@ const NoteDisplay = () => {
         }
     }
 
-    const delay = (ms) => {
-        return new Promise((resolve, reject) => {
-            setTimeout(resolve, ms);
-        })
-    };
+    // const delay = (ms) => {
+    //     return new Promise((resolve, reject) => {
+    //         setTimeout(resolve, ms);
+    //     })
+    // };
+
+    // const onChangeSave = () => {
+    //     if (content && content !== savedContent) {
+    //         setSaving(true);
+    //         console.log('Saving...');
+    //         if (!saving) {
+    //             delay(1000).then(() => {
+    //                 setSaving(false);
+    //                 const text = document.getElementById('content').value;
+    //                 contentSave(text);
+    //                 setSavedContent(text);
+    //                 console.log('Saved!');
+    //             })
+    //         }
+    //     }
+    // }
 
     // const autoSave = (e) => {
     //     setSaving(true);
@@ -147,12 +151,13 @@ const NoteDisplay = () => {
     //     return;
     // }
 
-    // const keySave = (e) => {
-    //     if (e.ctrlKey && e.key === 83) {
-    //         e.preventDefault();
-    //         console.log('Saved!');
-    //     }
-    // }
+    const keyDownSave = (e) => {
+        let charCode = String.fromCharCode(e.which).toLowerCase();
+        if ((e.ctrlKey || e.metaKey) && charCode === 's') {
+            e.preventDefault();
+            contentSave(content);
+        }
+    }
 
     const deleteToggle = (e) => {
         setShowDelete(true);
@@ -204,7 +209,10 @@ const NoteDisplay = () => {
             <textarea
                 value={content}
                 className='note-content'
-                onChange={(e) => setContent(e.target.value)}
+                onChange={(e) => {
+                    setContent(e.target.value);
+                }}
+                onKeyDown={keyDownSave}
                 id='content'
                 onFocus={contentFocus}
             />
