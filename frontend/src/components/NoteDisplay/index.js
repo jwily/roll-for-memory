@@ -62,11 +62,9 @@ const NoteDisplay = () => {
     ) return <Redirect to='/' />
 
     const titleSave = () => {
-        if (title && title !== savedTitle) {
-            setSavedTitle(title);
-            const payload = { noteId: note.id, name: title };
-            dispatch(editNote(payload))
-        }
+        setSavedTitle(title);
+        const payload = { noteId: note.id, name: title };
+        dispatch(editNote(payload))
     }
 
     const contentSave = (toSave) => {

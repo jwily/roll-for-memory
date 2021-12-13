@@ -4,7 +4,7 @@
 
 .note-card {
     opacity: 1;
-    margin-bottom: .5rem;
+    margin-top: .5rem;
     padding: .5rem;
     background-color: rgb(51, 48, 47);
     border-radius: 5px;
@@ -30,4 +30,14 @@
 .content-holder {
     max-height: 3.75rem;
     overflow: hidden;
+}
+
+.name-holder {
+    overflow: hidden;
+    min-width: 1.5rem;
+    max-height: 1.5rem;
+}
+
+.blur {
+    box-shadow: 10px 5px 5px red;
 }

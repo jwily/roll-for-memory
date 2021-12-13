@@ -4,7 +4,7 @@
     /* background-color: darkslategrey; */
     min-width: 100%;
     max-height: 90vh;
-    padding: 1rem;
+    padding: .5rem 1rem;
     overflow-y: auto;
     overflow-x: hidden;
 }
