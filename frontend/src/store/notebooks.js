@@ -75,37 +75,35 @@ export const removeBook = (bookId) => async (dispatch) => {
 //     }).map((book) => book.id);
 // }
 
-const initialState = {};
+const sortByName = (obj, arr) => {
+    return arr.sort((idA, idB) => {
+        if (obj[idA].name < obj[idB].name) return -1;
+        if (obj[idA].name > obj[idB].name) return 1;
+        return 0;
+    })
+};
+
+const initialState = { entities: {}, ids: [] };
 
 const notebooksReducer = (state = initialState, action) => {
+    const newState = { ...state };
     switch (action.type) {
         case LOAD:
-            const allBooks = {};
             action.list.forEach(book => {
-                allBooks[book.id] = book;
+                newState.entities[book.id] = book;
             })
-            return {
-                ...allBooks,
-            }
+            newState.ids = Object.keys(newState.entities);
+            sortByName(newState.entities, newState.ids);
+            return newState;
         case ADD_ONE:
-            if (!state[action.book.id]) {
-                const newState = {
-                    ...state,
-                    [action.book.id]: {
-                        ...action.book
-                    }
-                }
-                return newState;
-            }
-            return {
-                ...state,
-                [action.book.id]: {
-                    ...action.book
-                }
-            }
+            newState.entities[action.book.id] = action.book;
+            newState.ids = Object.keys(newState.entities);
+            sortByName(newState.entities, newState.ids);
+            return newState;
         case REMOVE:
-            const newState = { ...state };
-            delete newState[action.bookId];
+            delete newState.entities[action.bookId];
+            newState.ids = Object.keys(newState.entities);
+            sortByName(newState.entities, newState.ids);
             return newState;
         default:
             return state;

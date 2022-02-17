@@ -12,8 +12,8 @@ const NotesList = () => {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const notes = useSelector(state => state.notes);
-    const books = useSelector(state => state.books);
+    const notes = useSelector(state => state.notes.entities);
+    const books = useSelector(state => state.books.entities);
 
     const { bookId } = useParams();
     const images = ['grid', 'uldah', 'limsa'];

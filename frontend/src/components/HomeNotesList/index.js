@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 const HomeNotesList = () => {
 
-    const notes = useSelector(state => state.notes);
+    const notes = useSelector(state => state.notes.entities);
 
     const order = Object.values(notes).sort((noteA, noteB) => {
         return new Date(noteB.updatedAt) - new Date(noteA.updatedAt);

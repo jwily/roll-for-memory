@@ -94,7 +94,13 @@ export const removeNote = (noteId) => async (dispatch) => {
 //     }
 // }
 
-const initialState = {};
+const sortByUpdate = (obj, arr) => {
+    arr.sort((a, b) => {
+        return new Date(obj[b].updatedAt) - new Date(obj[a].updatedAt)
+    })
+}
+
+const initialState = { entities: {}, ids: [] };
 
 const notesReducer = (state = initialState, action) => {
     const newState = { ...state };
@@ -103,12 +109,18 @@ const notesReducer = (state = initialState, action) => {
             action.list.forEach(note => {
                 newState.entities[note.id] = note;
             })
+            newState.ids = Object.keys(newState.entities);
+            sortByUpdate(newState.entities, newState.ids);
             return newState;
         case ADD_ONE:
-            newState.entitites[action.note.id] = action.note;
+            newState.entities[action.note.id] = action.note;
+            newState.ids = Object.keys(newState.entities);
+            sortByUpdate(newState.entities, newState.ids);
             return newState;
         case REMOVE:
             delete newState.entities[action.noteId];
+            newState.ids = Object.keys(newState.entities);
+            sortByUpdate(newState.entities, newState.ids);
             return newState;
         case REMOVE_BOOK:
             for (let id in newState) {
@@ -116,6 +128,8 @@ const notesReducer = (state = initialState, action) => {
                     delete newState[id];
                 }
             }
+            newState.ids = Object.keys(newState.entities);
+            sortByUpdate(newState.entities, newState.ids);
             return newState;
         default:
             return state;

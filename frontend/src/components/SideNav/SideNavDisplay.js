@@ -9,7 +9,7 @@ const SideNavDisplay = () => {
     const dispatch = useDispatch();
 
     const { bookId } = useParams();
-    const book = useSelector((state) => state.books)[bookId];
+    const book = useSelector((state) => state.books.entities)[bookId];
 
     const clickHandler = async () => {
         const note = await dispatch(createNote(book.id));

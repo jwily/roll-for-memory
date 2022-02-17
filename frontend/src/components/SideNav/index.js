@@ -15,7 +15,7 @@ const SideNav = () => {
 
     const [newBookName, setNewBookName] = useState('Create Notebook');
 
-    const books = useSelector(state => state.books);
+    const books = useSelector(state => state.books.entities);
 
     const sortByName = (array) => {
         return array.sort((idA, idB) => {
