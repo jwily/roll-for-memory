@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
 import { createBook, removeBook } from '../../store/notebooks';
@@ -15,15 +15,7 @@ const SideNav = () => {
 
     const [newBookName, setNewBookName] = useState('Create Notebook');
 
-    const books = useSelector(state => state.books.entities);
-
-    const sortByName = (array) => {
-        return array.sort((idA, idB) => {
-            if (books[idA].name < books[idB].name) return -1;
-            if (books[idA].name > books[idB].name) return 1;
-            return 0;
-        })
-    };
+    const data = useSelector(state => state.books);
 
     const handleBlur = () => {
         setNewBookName('Create Notebook');
@@ -34,9 +26,6 @@ const SideNav = () => {
         setNewBookName('');
         dispatch(msg("Press 'Return' to create", 'normal', 'yes'))
     }
-
-    const order = Object.keys(books);
-    sortByName(order);
 
     const handleCreate = async (e) => {
         e.preventDefault();
@@ -50,11 +39,19 @@ const SideNav = () => {
         }
     }
 
-    const handleDelete = async (bookId) => {
-        dispatch(removeBook(bookId));
-        dispatch(removeBookNotes(bookId));
-        history.push('/');
-    }
+    const booksList = useMemo(() => {
+
+        const handleDelete = async (bookId) => {
+            dispatch(removeBook(bookId));
+            dispatch(removeBookNotes(bookId));
+            history.push('/');
+        }
+
+        return data.ids.map((id) => {
+            const book = data.entities[id];
+            return <SideNavLink book={book} key={id} handleDelete={handleDelete} />
+        })
+    }, [data.entities, data.ids, dispatch, history])
 
     return (
         <div className='side-nav'>
@@ -72,11 +69,7 @@ const SideNav = () => {
             </div>
             <div className='books-list'>
                 <NavLink exact to='/' className='side-title'>Home</NavLink>
-                {
-                    order.map((id, idx) => {
-                        return <SideNavLink book={books[id]} key={idx} handleDelete={handleDelete} />
-                    })
-                }
+                {booksList}
             </div>
         </div >
     )

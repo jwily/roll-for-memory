@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, useParams, useHistory, Redirect } from 'react-router-dom';
+import { useParams, useHistory, Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { createNote } from '../../store/notes';
 import NoteCard from '../NoteCard';
