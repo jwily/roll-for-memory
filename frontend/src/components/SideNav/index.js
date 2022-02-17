@@ -1,8 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { NavLink, useHistory } from 'react-router-dom';
-import { createBook, removeBook } from '../../store/notebooks';
-import { removeBookNotes } from '../../store/notes';
+import { NavLink } from 'react-router-dom';
+import { createBook } from '../../store/notebooks';
 import SideNavLink from './SideNavLink';
 import { msg } from '../../store/message';
 
@@ -11,7 +10,6 @@ import './SideNav.css'
 const SideNav = () => {
 
     const dispatch = useDispatch();
-    const history = useHistory();
 
     const [newBookName, setNewBookName] = useState('Create Notebook');
 
