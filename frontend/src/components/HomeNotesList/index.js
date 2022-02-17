@@ -14,7 +14,7 @@ const HomeNotesList = () => {
     return (
         <div className='list-img home-img'>
             <div className='home-banner'>
-                <span>Search</span>
+                <span>All Notes</span>
             </div>
             <div className='notes-list'>
                 {order.map((id, idx) => {
