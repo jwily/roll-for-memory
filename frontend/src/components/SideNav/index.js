@@ -40,7 +40,6 @@ const SideNav = () => {
     }
 
     const booksList = useMemo(() => {
-
         const handleDelete = async (bookId) => {
             dispatch(removeBook(bookId));
             dispatch(removeBookNotes(bookId));

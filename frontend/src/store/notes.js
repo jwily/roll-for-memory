@@ -39,6 +39,7 @@ export const getBookNotes = (bookId) => async (dispatch) => {
 
     if (response.ok) {
         const list = await response.json();
+        console.log(list);
         dispatch(load(list));
     }
 }
@@ -106,12 +107,13 @@ const notesReducer = (state = initialState, action) => {
     const newState = { ...state };
     switch (action.type) {
         case LOAD:
+            const newList = { entities: {}, ids: [] }
             action.list.forEach(note => {
-                newState.entities[note.id] = note;
+                newList.entities[note.id] = note;
             })
-            newState.ids = Object.keys(newState.entities);
-            sortByUpdate(newState.entities, newState.ids);
-            return newState;
+            newList.ids = Object.keys(newList.entities);
+            sortByUpdate(newList.entities, newList.ids);
+            return newList;
         case ADD_ONE:
             newState.entities[action.note.id] = action.note;
             newState.ids = Object.keys(newState.entities);
