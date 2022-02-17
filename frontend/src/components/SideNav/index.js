@@ -40,17 +40,11 @@ const SideNav = () => {
     }
 
     const booksList = useMemo(() => {
-        const handleDelete = async (bookId) => {
-            dispatch(removeBook(bookId));
-            dispatch(removeBookNotes(bookId));
-            history.push('/');
-        }
-
         return data.ids.map((id) => {
             const book = data.entities[id];
-            return <SideNavLink book={book} key={id} handleDelete={handleDelete} />
+            return <SideNavLink book={book} key={id} />
         })
-    }, [data.entities, data.ids, dispatch, history])
+    }, [data.entities, data.ids])
 
     return (
         <div className='side-nav'>

@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { editBook } from '../../store/notebooks';
 import { msg } from '../../store/message';
 
+import { removeBook } from "../../store/notebooks";
+import { removeBookNotes } from "../../store/notes";
+
 import './SideLink.css'
 
-const SideNavLink = ({ book, handleDelete }) => {
+const SideNavLink = ({ book }) => {
+
+    const history = useHistory();
 
     useEffect(() => {
         const field = document.getElementById(`${book.id}-edit-field`);
@@ -23,6 +28,12 @@ const SideNavLink = ({ book, handleDelete }) => {
     // useEffect(() => {
     //     console.log(edit);
     // }, [edit])
+
+    const handleDelete = async () => {
+        dispatch(removeBook(book.id));
+        dispatch(removeBookNotes(book.id));
+        history.push('/');
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -78,7 +89,7 @@ const SideNavLink = ({ book, handleDelete }) => {
                     setEdit((!edit))
                     setEditText(book.name)
                 }}>Edit</button>
-                <button type='button' onClick={(e) => handleDelete(book.id)}>Delete</button>
+                <button type='button' onClick={(e) => handleDelete()}>Delete</button>
             </div>
         </>
     )

@@ -39,7 +39,6 @@ export const getBookNotes = (bookId) => async (dispatch) => {
 
     if (response.ok) {
         const list = await response.json();
-        console.log(list);
         dispatch(load(list));
     }
 }
@@ -125,9 +124,10 @@ const notesReducer = (state = initialState, action) => {
             sortByUpdate(newState.entities, newState.ids);
             return newState;
         case REMOVE_BOOK:
-            for (let id in newState) {
-                if (newState[id].notebookId === parseInt(action.bookId, 10)) {
-                    delete newState[id];
+            for (let id in newState.entities) {
+                console.log(newState.entities[id]);
+                if (newState.entities[id].notebookId === parseInt(action.bookId, 10)) {
+                    delete newState.entities[id];
                 }
             }
             newState.ids = Object.keys(newState.entities);
