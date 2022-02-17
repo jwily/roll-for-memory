@@ -35,7 +35,7 @@ export const getNotes = () => async (dispatch) => {
 }
 
 export const getBookNotes = (bookId) => async (dispatch) => {
-    const response = await csrfFetch(`/api/notebooks/${bookId}`);
+    const response = await csrfFetch(`/api/notebooks/${bookId}/notes`);
 
     if (response.ok) {
         const list = await response.json();
@@ -97,43 +97,26 @@ export const removeNote = (noteId) => async (dispatch) => {
 const initialState = {};
 
 const notesReducer = (state = initialState, action) => {
+    const newState = { ...state };
     switch (action.type) {
         case LOAD:
-            const allNotes = {};
             action.list.forEach(note => {
-                allNotes[note.id] = note;
+                newState.entities[note.id] = note;
             })
-            return {
-                ...allNotes,
-            };
+            return newState;
         case ADD_ONE:
-            if (!state[action.note.id]) {
-                const newState = {
-                    ...state,
-                    [action.note.id]: {
-                        ...action.note
-                    }
-                }
-                return newState;
-            }
-            return {
-                ...state,
-                [action.note.id]: {
-                    ...action.note
-                }
-            };
+            newState.entitites[action.note.id] = action.note;
+            return newState;
         case REMOVE:
-            const removeOne = { ...state };
-            delete removeOne[action.noteId];
-            return removeOne;
+            delete newState.entities[action.noteId];
+            return newState;
         case REMOVE_BOOK:
-            const removeMany = { ...state };
-            for (let id in removeMany) {
-                if (removeMany[id].notebookId === parseInt(action.bookId, 10)) {
-                    delete removeMany[id];
+            for (let id in newState) {
+                if (newState[id].notebookId === parseInt(action.bookId, 10)) {
+                    delete newState[id];
                 }
             }
-            return removeMany;
+            return newState;
         default:
             return state;
     }
