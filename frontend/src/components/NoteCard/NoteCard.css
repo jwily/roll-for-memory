@@ -1,18 +1,18 @@
 .active.note-card {
-    opacity: .85;
+    /* opacity: .85; */
+    background-color: rgba(51, 48, 47, .85);
 }
 
 .note-card {
     margin-top: .5rem;
     padding: .5rem;
-    background-color: rgb(51, 48, 47);
+    background-color: rgba(51, 48, 47, .35);
     border-radius: 5px;
-    opacity: 0.5;
-    transition: opacity .35s;
+    transition: background-color .35s;
 }
 
 .note-card:hover {
-    opacity: .85;
+    background-color: rgba(51, 48, 47, .85);
 }
 
 .card-name {

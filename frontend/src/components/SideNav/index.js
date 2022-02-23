@@ -5,6 +5,11 @@ import { createBook } from '../../store/notebooks';
 import SideNavLink from './SideNavLink';
 import { msg } from '../../store/message';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+    faHouse
+} from '@fortawesome/free-solid-svg-icons';
+
 import './SideNav.css'
 
 const SideNav = () => {
@@ -59,7 +64,7 @@ const SideNav = () => {
                 </form>
             </div>
             <div className='books-list'>
-                <NavLink exact to='/' className='side-title'>Home</NavLink>
+                <NavLink exact to='/' className='side-title'>Home <FontAwesomeIcon icon={faHouse} /></NavLink>
                 {booksList}
             </div>
         </div >
