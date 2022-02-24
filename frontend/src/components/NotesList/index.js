@@ -10,7 +10,7 @@ import './NotesList.css';
 const NotesList = () => {
 
     const dispatch = useDispatch();
-    const history = useHistory();
+    // const history = useHistory();
 
     const [notesLoaded, setNotesLoaded] = useState(false);
 
@@ -38,7 +38,7 @@ const NotesList = () => {
     const clickHandler = async () => {
         // Careful here, grabbing from params
         const note = await dispatch(createNote(bookId));
-        history.push(`/notebooks/${bookId}/notes/${note.id}`);
+        // history.push(`/notebooks/${bookId}/notes/${note.id}`);
     }
 
     // ${images[bookId % 3]}
