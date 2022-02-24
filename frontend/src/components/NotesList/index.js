@@ -27,9 +27,9 @@ const NotesList = () => {
     }, [dispatch, bookId])
 
     const notesList = useMemo(() => {
-        return data.ids.map((id) => {
+        return data.ids.map((id, idx) => {
             const note = data.entities[id];
-            return <NoteCard key={id} note={note} />;
+            return <NoteCard key={id} note={note} idx={idx} />;
         })
     }, [data.entities, data.ids])
 

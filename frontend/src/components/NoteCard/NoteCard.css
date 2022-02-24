@@ -6,9 +6,10 @@
 .note-card {
     margin-top: .5rem;
     padding: .5rem;
-    background-color: rgba(51, 48, 47, .35);
+    background-color: rgba(51, 48, 47, .5);
     border-radius: 5px;
     transition: background-color .35s;
+    opacity: 0;
 }
 
 .note-card:hover {
@@ -23,7 +24,7 @@
 
 .card-content {
     font-size: .85rem;
-    color: rgb(200, 200, 200);
+    color: rgb(225, 225, 225);
 }
 
 .content-holder {

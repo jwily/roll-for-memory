@@ -24,6 +24,7 @@ const SideNavLink = ({ book }) => {
 
     const [edit, setEdit] = useState(false);
     const [editText, setEditText] = useState(book.name)
+    const [del, setDel] = useState(false);
 
     // useEffect(() => {
     //     console.log(edit);
@@ -85,11 +86,17 @@ const SideNavLink = ({ book }) => {
                 </form>
             }
             <div className='book-link-btns'>
-                <button type='button' onClick={(e) => {
-                    setEdit((!edit))
-                    setEditText(book.name)
-                }}>Edit</button>
-                <button type='button' onClick={(e) => handleDelete()}>Delete</button>
+                {!del && <>
+                    <button type='button' onClick={(e) => {
+                        setEdit((!edit))
+                        setEditText(book.name)
+                    }}>Edit</button>
+                    <button type='button' onClick={(e) => setDel(true)}>Delete</button>
+                </>}
+                {del && <>
+                    <button type='button' onClick={(e) => setDel(false)}>Cancel Delete</button>
+                    <button type='button' onClick={handleDelete}>Confirm</button>
+                </>}
             </div>
         </>
     )
