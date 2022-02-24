@@ -31,8 +31,8 @@ const SideNavLink = ({ book }) => {
     // }, [edit])
 
     const handleDelete = async () => {
-        dispatch(removeBook(book.id));
-        dispatch(removeBookNotes(book.id));
+        await dispatch(removeBook(book.id));
+        // dispatch(removeBookNotes(book.id));
         history.push('/');
     }
 
