@@ -1,7 +1,7 @@
-import React from 'react';
-import { NavLink, useParams, useHistory, Redirect } from 'react-router-dom';
+import React, { useEffect, useMemo, useState } from 'react';
+import { useParams, useHistory, Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { createNote } from '../../store/notes';
+import { createNote, getBookNotes } from '../../store/notes';
 import NoteCard from '../NoteCard';
 // import { useEffect } from 'react';
 
@@ -10,31 +10,35 @@ import './NotesList.css';
 const NotesList = () => {
 
     const dispatch = useDispatch();
-    const history = useHistory();
+    // const history = useHistory();
 
-    const notes = useSelector(state => state.notes);
-    const books = useSelector(state => state.books);
+    const [notesLoaded, setNotesLoaded] = useState(false);
+
+    const books = useSelector(state => state.books.entities);
+    const data = useSelector(state => state.notes);
 
     const { bookId } = useParams();
     const images = ['grid', 'uldah', 'limsa'];
     // const bookName = books[bookId].name;
 
+    useEffect(() => {
+        setNotesLoaded(false);
+        dispatch(getBookNotes(bookId)).then(() => setNotesLoaded(true));
+    }, [dispatch, bookId])
+
+    const notesList = useMemo(() => {
+        return data.ids.map((id, idx) => {
+            const note = data.entities[id];
+            return <NoteCard key={id} note={note} idx={idx} />;
+        })
+    }, [data.entities, data.ids])
+
     if (!(bookId in books)) return <Redirect to='/' />
-
-    const notesArray = Object.values(notes).sort((noteA, noteB) => {
-        return new Date(noteB.updatedAt) - new Date(noteA.updatedAt);
-    })
-
-    const filtered = notesArray.filter((note) => {
-        return note.notebookId === parseInt(bookId, 10);
-    })
-
-    const order = filtered.map(note => note.id)
 
     const clickHandler = async () => {
         // Careful here, grabbing from params
         const note = await dispatch(createNote(bookId));
-        history.push(`/notebooks/${bookId}/notes/${note.id}`);
+        // history.push(`/notebooks/${bookId}/notes/${note.id}`);
     }
 
     // ${images[bookId % 3]}
@@ -43,9 +47,7 @@ const NotesList = () => {
         <div className={`list-img ${images[bookId % 3]}`} >
             <button type='button' className='note-create-btn' onClick={clickHandler}><span>Create Note</span></button>
             <div className='notes-list'>
-                {order.map((id, idx) => {
-                    return <NoteCard key={idx} note={notes[id]} />
-                })}
+                {notesLoaded && notesList}
             </div>
         </div >
     )

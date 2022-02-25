@@ -12,10 +12,10 @@ const NoteDisplay = () => {
     const history = useHistory();
     const dispatch = useDispatch();
 
-    const notes = useSelector(state => state.notes);
+    const notes = useSelector(state => state.notes.entities);
 
     // Will this be a problem for bad urls?
-    const { bookId, noteId } = useParams('');
+    const { bookId, noteId } = useParams();
     const note = notes[noteId];
 
     const [title, setTitle] = useState('');

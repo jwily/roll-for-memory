@@ -1,25 +1,36 @@
-import React from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import NoteCard from '../NoteCard';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { getNotes } from '../../store/notes';
 
 const HomeNotesList = () => {
 
-    const notes = useSelector(state => state.notes);
+    const dispatch = useDispatch();
 
-    const order = Object.values(notes).sort((noteA, noteB) => {
-        return new Date(noteB.updatedAt) - new Date(noteA.updatedAt);
-    }).map((note) => note.id);
+    const [notesLoaded, setNotesLoaded] = useState(false);
+
+    useEffect(() => {
+        dispatch(getNotes()).then(() => setNotesLoaded(true));
+    }, [dispatch])
+
+    const data = useSelector(state => state.notes);
+
+    const notesList = useMemo(() => {
+        return data.ids.map((id, idx) => {
+            const note = data.entities[id];
+            return <NoteCard key={id} note={note} idx={idx} />;
+        })
+    }, [data.entities, data.ids])
 
     // Make the NavLink in here its own component
     return (
         <div className='list-img home-img'>
             <div className='home-banner'>
-                <span>Search</span>
+                <span>All Notes</span>
             </div>
             <div className='notes-list'>
-                {order.map((id, idx) => {
-                    return <NoteCard key={idx} note={notes[id]} />
-                })}
+                {notesLoaded && notesList}
             </div>
         </div>
     )
