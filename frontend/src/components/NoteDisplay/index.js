@@ -121,8 +121,8 @@ const NoteDisplay = () => {
         dispatch(msg(null, null, 'no'))
     }
 
-    const remove = (e) => {
-        dispatch(removeNote(note.id))
+    const remove = async (e) => {
+        await dispatch(removeNote(note.id))
         history.push(`/notebooks/${bookId}`)
     }
 
