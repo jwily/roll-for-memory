@@ -23,8 +23,22 @@ function App() {
   const sessionUser = useSelector(state => state.session.user);
 
   useEffect(() => {
-    dispatch(getNotebooks()).then(() => dispatch(getNotes())).then(() => setDataLoaded(true))
+    setDataLoaded(false);
+    (async () => {
+      if (sessionUser) {
+        dispatch(getNotebooks())
+        dispatch(getNotes());
+        setDataLoaded(true);
+      }
+      else {
+        setDataLoaded(true);
+      }
+    })();
   }, [dispatch, sessionUser])
+
+  // useEffect(() => {
+  //   dispatch(getNotebooks()).then(() => dispatch(getNotes())).then(() => setDataLoaded(true))
+  // }, [dispatch, sessionUser])
 
   return (
     <>
