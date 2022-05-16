@@ -34,6 +34,15 @@ export const getNotes = () => async (dispatch) => {
     }
 }
 
+export const getBookNotes = (bookId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/notebooks/${bookId}/notes`);
+
+    if (response.ok) {
+        const list = await response.json();
+        dispatch(load(list));
+    }
+}
+
 export const createNote = (bookId) => async (dispatch) => {
 
     const response = await csrfFetch(`/api/notes`, {
@@ -85,46 +94,45 @@ export const removeNote = (noteId) => async (dispatch) => {
 //     }
 // }
 
-const initialState = {};
+const sortByUpdate = (obj, arr) => {
+    arr.sort((a, b) => {
+        return new Date(obj[b].updatedAt) - new Date(obj[a].updatedAt)
+    })
+}
+
+const initialState = { entities: {}, ids: [] };
 
 const notesReducer = (state = initialState, action) => {
+    const newState = { entities: { ...state.entities }, ids: [...state.ids] };
     switch (action.type) {
         case LOAD:
-            const allNotes = {};
+            const newList = { entities: {}, ids: [] }
             action.list.forEach(note => {
-                allNotes[note.id] = note;
+                newList.entities[note.id] = note;
             })
-            return {
-                ...allNotes,
-            };
+            newList.ids = Object.keys(newList.entities);
+            sortByUpdate(newList.entities, newList.ids);
+            return newList;
         case ADD_ONE:
-            if (!state[action.note.id]) {
-                const newState = {
-                    ...state,
-                    [action.note.id]: {
-                        ...action.note
-                    }
-                }
-                return newState;
-            }
-            return {
-                ...state,
-                [action.note.id]: {
-                    ...action.note
-                }
-            };
+            newState.entities[action.note.id] = action.note;
+            newState.ids = Object.keys(newState.entities);
+            sortByUpdate(newState.entities, newState.ids);
+            return newState;
         case REMOVE:
-            const removeOne = { ...state };
-            delete removeOne[action.noteId];
-            return removeOne;
+            delete newState.entities[action.noteId];
+            newState.ids = Object.keys(newState.entities);
+            sortByUpdate(newState.entities, newState.ids);
+            return newState;
         case REMOVE_BOOK:
-            const removeMany = { ...state };
-            for (let id in removeMany) {
-                if (removeMany[id].notebookId === parseInt(action.bookId, 10)) {
-                    delete removeMany[id];
+            for (let id in newState.entities) {
+                console.log(newState.entities[id]);
+                if (newState.entities[id].notebookId === parseInt(action.bookId, 10)) {
+                    delete newState.entities[id];
                 }
             }
-            return removeMany;
+            newState.ids = Object.keys(newState.entities);
+            sortByUpdate(newState.entities, newState.ids);
+            return newState;
         default:
             return state;
     }

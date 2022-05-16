@@ -1,5 +1,5 @@
-import React from 'react';
-import { NavLink, useParams, useHistory, Redirect } from 'react-router-dom';
+import React, { useMemo } from 'react';
+import { useParams, Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { createNote } from '../../store/notes';
 import NoteCard from '../NoteCard';
@@ -10,31 +10,30 @@ import './NotesList.css';
 const NotesList = () => {
 
     const dispatch = useDispatch();
-    const history = useHistory();
 
-    const notes = useSelector(state => state.notes);
-    const books = useSelector(state => state.books);
+    const books = useSelector(state => state.books.entities);
+    const data = useSelector(state => state.notes);
 
     const { bookId } = useParams();
     const images = ['grid', 'uldah', 'limsa'];
-    // const bookName = books[bookId].name;
+
+    const notesList = useMemo(() => {
+        return data.ids.map((id, idx) => {
+            const note = data.entities[id];
+            if (note.notebookId === parseInt(bookId, 10)) {
+                return <NoteCard key={id} note={note} idx={idx} />;
+            } else {
+                return null;
+            }
+        })
+    }, [data.entities, data.ids, bookId])
 
     if (!(bookId in books)) return <Redirect to='/' />
-
-    const notesArray = Object.values(notes).sort((noteA, noteB) => {
-        return new Date(noteB.updatedAt) - new Date(noteA.updatedAt);
-    })
-
-    const filtered = notesArray.filter((note) => {
-        return note.notebookId === parseInt(bookId, 10);
-    })
-
-    const order = filtered.map(note => note.id)
 
     const clickHandler = async () => {
         // Careful here, grabbing from params
         const note = await dispatch(createNote(bookId));
-        history.push(`/notebooks/${bookId}/notes/${note.id}`);
+        // history.push(`/notebooks/${bookId}/notes/${note.id}`);
     }
 
     // ${images[bookId % 3]}
@@ -43,9 +42,7 @@ const NotesList = () => {
         <div className={`list-img ${images[bookId % 3]}`} >
             <button type='button' className='note-create-btn' onClick={clickHandler}><span>Create Note</span></button>
             <div className='notes-list'>
-                {order.map((id, idx) => {
-                    return <NoteCard key={idx} note={notes[id]} />
-                })}
+                {notesList}
             </div>
         </div >
     )

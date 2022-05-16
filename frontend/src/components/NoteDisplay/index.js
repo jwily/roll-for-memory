@@ -12,10 +12,10 @@ const NoteDisplay = () => {
     const history = useHistory();
     const dispatch = useDispatch();
 
-    const notes = useSelector(state => state.notes);
+    const notes = useSelector(state => state.notes.entities);
 
     // Will this be a problem for bad urls?
-    const { bookId, noteId } = useParams('');
+    const { bookId, noteId } = useParams();
     const note = notes[noteId];
 
     const [title, setTitle] = useState('');
@@ -68,13 +68,12 @@ const NoteDisplay = () => {
         } else {
             // setSavedTitle(title);
             dispatch(msg('Saved!', 'normal', 'yes'))
-            delay(500).then(() => dispatch(msg(null, null, 'no')))
             return response;
         }
     }
 
-    const contentSave = (toSave) => {
-        const payload = { noteId: note.id, content: toSave, title };
+    const contentSave = (content) => {
+        const payload = { noteId: note.id, content, name: title };
         dispatch(editNote(payload))
     }
 
@@ -113,17 +112,17 @@ const NoteDisplay = () => {
 
     const deleteToggle = (e) => {
         setShowDelete(true);
-        dispatch(msg(`Are you sure you want to delete '${title.length < 25 ? title : title.slice(0, 25) + " ..."}' ? `, 'normal', 'yes'))
+        dispatch(msg(`Are you sure you want to delete '${title.length < 25 ? title : title.slice(0, 25) + " ..."}' ? `, 'normal', 'yes'));
     }
 
     const cancelDelete = (e) => {
         setShowDelete(false);
-        dispatch(msg(null, null, 'no'))
+        dispatch(msg(null, null, 'no'));
     }
 
-    const remove = (e) => {
-        dispatch(removeNote(note.id))
-        history.push(`/notebooks/${bookId}`)
+    const remove = async (e) => {
+        await dispatch(removeNote(note.id));
+        history.push(`/notebooks/${bookId}`);
     }
 
     return (
@@ -139,7 +138,7 @@ const NoteDisplay = () => {
                     onChange={(e) => setTitle(e.target.value)}
                     onBlur={(e) => {
                         dispatch(msg(null, null, 'no'));
-                        if (!title) setTitle('Untitled')
+                        if (!title) setTitle('Untitled');
                     }}
                     type='text'
                     onFocus={titleFocus}
@@ -154,8 +153,7 @@ const NoteDisplay = () => {
                     </div> :
                     <div className='note-buttons'>
                         <button type='button' onClick={(e) => {
-                            dispatch(msg('Saved!', 'normal', 'yes'))
-                            delay(500).then(() => dispatch(msg(null, null, 'no')))
+                            dispatch(msg('Saved!', 'normal', 'yes'));
                             contentSave(content);
                         }}>Save</button>
                         {/* <button type='button' onClick={autoSave}>Auto Save Test</button> */}

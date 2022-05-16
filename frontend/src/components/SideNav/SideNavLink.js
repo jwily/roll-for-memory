@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { editBook } from '../../store/notebooks';
 import { msg } from '../../store/message';
 
+import { removeBook } from "../../store/notebooks";
+import { removeBookNotes } from "../../store/notes";
+
 import './SideLink.css'
 
-const SideNavLink = ({ book, handleDelete }) => {
+const SideNavLink = ({ book }) => {
+
+    const history = useHistory();
 
     useEffect(() => {
         const field = document.getElementById(`${book.id}-edit-field`);
@@ -19,10 +24,17 @@ const SideNavLink = ({ book, handleDelete }) => {
 
     const [edit, setEdit] = useState(false);
     const [editText, setEditText] = useState(book.name)
+    const [del, setDel] = useState(false);
 
     // useEffect(() => {
     //     console.log(edit);
     // }, [edit])
+
+    const handleDelete = async () => {
+        await dispatch(removeBook(book.id));
+        dispatch(removeBookNotes(book.id));
+        history.push('/');
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -74,11 +86,17 @@ const SideNavLink = ({ book, handleDelete }) => {
                 </form>
             }
             <div className='book-link-btns'>
-                <button type='button' onClick={(e) => {
-                    setEdit((!edit))
-                    setEditText(book.name)
-                }}>Edit</button>
-                <button type='button' onClick={(e) => handleDelete(book.id)}>Delete</button>
+                {!del && <>
+                    <button type='button' onClick={(e) => {
+                        setEdit((!edit))
+                        setEditText(book.name)
+                    }}>Edit</button>
+                    <button type='button' onClick={(e) => setDel(true)}>Delete</button>
+                </>}
+                {del && <>
+                    <button type='button' onClick={(e) => setDel(false)}>Cancel Delete</button>
+                    <button type='button' onClick={handleDelete}>Confirm</button>
+                </>}
             </div>
         </>
     )

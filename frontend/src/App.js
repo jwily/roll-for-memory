@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import LoginFormPage from "./components/LoginFormPage";
 import SignupFormPage from "./components/SignupFormPage";
 import HomePage from './components/Home';
 import * as sessionActions from "./store/session";
+
+import { getNotebooks } from './store/notebooks';
+import { getNotes } from './store/notes';
 
 function App() {
   const dispatch = useDispatch();
 
   // This checks to see if a user was checked for at all
   const [isLoaded, setIsLoaded] = useState(false);
+  const [dataLoaded, setDataLoaded] = useState(false);
 
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
@@ -18,9 +22,27 @@ function App() {
 
   const sessionUser = useSelector(state => state.session.user);
 
+  useEffect(() => {
+    setDataLoaded(false);
+    (async () => {
+      if (sessionUser) {
+        dispatch(getNotebooks())
+        dispatch(getNotes());
+        setDataLoaded(true);
+      }
+      else {
+        setDataLoaded(true);
+      }
+    })();
+  }, [dispatch, sessionUser])
+
+  // useEffect(() => {
+  //   dispatch(getNotebooks()).then(() => dispatch(getNotes())).then(() => setDataLoaded(true))
+  // }, [dispatch, sessionUser])
+
   return (
     <>
-      {isLoaded && (
+      {isLoaded && dataLoaded && (
         <Switch>
           <Route path="/signup">
             <SignupFormPage />

@@ -5,6 +5,7 @@
 .book-link{
     opacity: .5;
     transition: opacity .35s;
+    border-bottom: 1px solid transparent;
 }
 
 .book-link:hover {
@@ -13,6 +14,7 @@
 
 .active.book-link {
     opacity: 1;
+    border-bottom: 1px solid whitesmoke;
 }
 
 .book-link-btns > button {
@@ -26,7 +28,7 @@
     background-color: transparent;
     cursor: pointer;
     color:rgb(200, 200, 200);
-    opacity: .15;
+    opacity: .35;
     transition: opacity .35s;
 }
 

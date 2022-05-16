@@ -5,7 +5,7 @@ const { check, validationResult } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { requireAuth } = require('../../utils/auth');
 
-const { Notebook } = require('../../db/models');
+const { Notebook, Note } = require('../../db/models');
 
 const router = express.Router();
 
@@ -16,6 +16,15 @@ const validateNotebook = [
         .isLength({ max: 255 })
         .withMessage('Notebook names must be less than 255 characters')
 ]
+
+router.get(
+    '/:id(\\d+)/notes',
+    requireAuth,
+    asyncHandler(async (req, res) => {
+        const notes = await Note.findAll({ where: { notebookId: req.params.id } });
+        return res.json(notes);
+    })
+)
 
 router.get(
     '/:id(\\d+)',
@@ -30,7 +39,10 @@ router.get(
     '/',
     requireAuth,
     asyncHandler(async (req, res) => {
-        const books = await Notebook.findAll({ where: { userId: req.user.id } });
+        const books = await Notebook.findAll({
+            where: { userId: req.user.id },
+            include: Note
+        });
         return res.json(books);
     })
 );
