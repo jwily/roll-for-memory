@@ -83,10 +83,16 @@ const sortByName = (obj, arr) => {
     })
 };
 
+const notesByUpdate = (arr) => {
+    arr.sort((a, b) => {
+        return new Date(b.updatedAt) - new Date(a.updatedAt)
+    })
+}
+
 const initialState = { entities: {}, ids: [] };
 
 const notebooksReducer = (state = initialState, action) => {
-    const newState = { ...state };
+    const newState = { entities: { ...state.entities }, ids: [...state.ids] };
     switch (action.type) {
         case LOAD:
             action.list.forEach(book => {
@@ -94,6 +100,16 @@ const notebooksReducer = (state = initialState, action) => {
             })
             newState.ids = Object.keys(newState.entities);
             sortByName(newState.entities, newState.ids);
+            for (let id in newState.entities) {
+                const book = newState.entities[id];
+                // const bookNotes = book.Notes;
+                // console.log(book);
+                notesByUpdate(book.Notes);
+                // delete book.Notes;
+                book.noteIds = book.Notes.map(note => {
+                    return note.id
+                })
+            }
             return newState;
         case ADD_ONE:
             newState.entities[action.book.id] = action.book;

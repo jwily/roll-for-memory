@@ -1,10 +1,6 @@
 import React from 'react';
 import './HomePage.css'
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { getNotebooks } from '../../store/notebooks';
 import { Switch, Route } from 'react-router-dom';
-import { useState } from 'react';
 
 import SideNav from '../SideNav';
 import SideNavDisplay from '../SideNav/SideNavDisplay';
@@ -15,14 +11,6 @@ import NoteDisplay from '../NoteDisplay';
 import NotesList from '../NotesList';
 
 const HomePage = ({ isLoaded }) => {
-
-    const dispatch = useDispatch();
-
-    const [booksLoaded, setBooksLoaded] = useState(false);
-
-    // useEffect(() => {
-    //     dispatch(getNotebooks()).then(() => setBooksLoaded(true));
-    // }, [dispatch])
 
     return (
         <>

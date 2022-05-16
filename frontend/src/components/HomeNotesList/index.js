@@ -1,18 +1,8 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import NoteCard from '../NoteCard';
-import { useSelector, useDispatch } from 'react-redux';
-
-import { getNotes } from '../../store/notes';
+import { useSelector } from 'react-redux';
 
 const HomeNotesList = () => {
-
-    const dispatch = useDispatch();
-
-    const [notesLoaded, setNotesLoaded] = useState(false);
-
-    // useEffect(() => {
-    //     dispatch(getNotes()).then(() => setNotesLoaded(true));
-    // }, [dispatch])
 
     const data = useSelector(state => state.notes);
 

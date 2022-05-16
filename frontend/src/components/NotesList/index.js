@@ -1,7 +1,7 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { useParams, useHistory, Redirect } from 'react-router-dom';
+import React, { useMemo } from 'react';
+import { useParams, Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { createNote, getBookNotes } from '../../store/notes';
+import { createNote } from '../../store/notes';
 import NoteCard from '../NoteCard';
 // import { useEffect } from 'react';
 
@@ -10,21 +10,12 @@ import './NotesList.css';
 const NotesList = () => {
 
     const dispatch = useDispatch();
-    // const history = useHistory();
-
-    const [notesLoaded, setNotesLoaded] = useState(false);
 
     const books = useSelector(state => state.books.entities);
     const data = useSelector(state => state.notes);
 
     const { bookId } = useParams();
     const images = ['grid', 'uldah', 'limsa'];
-    // const bookName = books[bookId].name;
-
-    // useEffect(() => {
-    //     setNotesLoaded(false);
-    //     dispatch(getBookNotes(bookId)).then(() => setNotesLoaded(true));
-    // }, [dispatch, bookId])
 
     const notesList = useMemo(() => {
         return data.ids.map((id, idx) => {

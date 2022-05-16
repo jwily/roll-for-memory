@@ -103,7 +103,7 @@ const sortByUpdate = (obj, arr) => {
 const initialState = { entities: {}, ids: [] };
 
 const notesReducer = (state = initialState, action) => {
-    const newState = { ...state };
+    const newState = { entities: { ...state.entities }, ids: [...state.ids] };
     switch (action.type) {
         case LOAD:
             const newList = { entities: {}, ids: [] }
