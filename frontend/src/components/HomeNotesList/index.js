@@ -10,9 +10,9 @@ const HomeNotesList = () => {
 
     const [notesLoaded, setNotesLoaded] = useState(false);
 
-    useEffect(() => {
-        dispatch(getNotes()).then(() => setNotesLoaded(true));
-    }, [dispatch])
+    // useEffect(() => {
+    //     dispatch(getNotes()).then(() => setNotesLoaded(true));
+    // }, [dispatch])
 
     const data = useSelector(state => state.notes);
 
@@ -30,7 +30,7 @@ const HomeNotesList = () => {
                 <span>All Notes</span>
             </div>
             <div className='notes-list'>
-                {notesLoaded && notesList}
+                {notesList}
             </div>
         </div>
     )

@@ -20,16 +20,16 @@ const HomePage = ({ isLoaded }) => {
 
     const [booksLoaded, setBooksLoaded] = useState(false);
 
-    useEffect(() => {
-        dispatch(getNotebooks()).then(() => setBooksLoaded(true));
-    }, [dispatch])
+    // useEffect(() => {
+    //     dispatch(getNotebooks()).then(() => setBooksLoaded(true));
+    // }, [dispatch])
 
     return (
         <>
             <Navigation isLoaded={isLoaded} />
             <div className='home-page'>
                 <div className='books-width'>
-                    {booksLoaded && <SideNav />}
+                    <SideNav />
                 </div>
                 <Switch>
                     <Route path='/notebooks/:bookId'>

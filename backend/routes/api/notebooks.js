@@ -39,7 +39,10 @@ router.get(
     '/',
     requireAuth,
     asyncHandler(async (req, res) => {
-        const books = await Notebook.findAll({ where: { userId: req.user.id } });
+        const books = await Notebook.findAll({
+            where: { userId: req.user.id },
+            include: Note
+        });
         return res.json(books);
     })
 );

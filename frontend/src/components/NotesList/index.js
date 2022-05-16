@@ -21,17 +21,21 @@ const NotesList = () => {
     const images = ['grid', 'uldah', 'limsa'];
     // const bookName = books[bookId].name;
 
-    useEffect(() => {
-        setNotesLoaded(false);
-        dispatch(getBookNotes(bookId)).then(() => setNotesLoaded(true));
-    }, [dispatch, bookId])
+    // useEffect(() => {
+    //     setNotesLoaded(false);
+    //     dispatch(getBookNotes(bookId)).then(() => setNotesLoaded(true));
+    // }, [dispatch, bookId])
 
     const notesList = useMemo(() => {
         return data.ids.map((id, idx) => {
             const note = data.entities[id];
-            return <NoteCard key={id} note={note} idx={idx} />;
+            if (note.notebookId === parseInt(bookId, 10)) {
+                return <NoteCard key={id} note={note} idx={idx} />;
+            } else {
+                return null;
+            }
         })
-    }, [data.entities, data.ids])
+    }, [data.entities, data.ids, bookId])
 
     if (!(bookId in books)) return <Redirect to='/' />
 
@@ -47,7 +51,7 @@ const NotesList = () => {
         <div className={`list-img ${images[bookId % 3]}`} >
             <button type='button' className='note-create-btn' onClick={clickHandler}><span>Create Note</span></button>
             <div className='notes-list'>
-                {notesLoaded && notesList}
+                {notesList}
             </div>
         </div >
     )
